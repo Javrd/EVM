@@ -1,0 +1,15 @@
+Modelo relacional: casi automatico del conceptual.
+Cuidado con las jerarquias, usar la estrategia correcta (no tenemos..)
+
+Modelo tecnologico: plantar en el pdf todo el codigo de la aplicacion (de manera razonable)
+
+A diferencia del primer y segundo entregable hay que entregar el pdf + un zip del codigo de la aplicacion:
+Codigo en 4 scripts
+1- tablas secuencias trigers
+2- funciones y procedimientos
+3- triggers no asociados a secuencias
+4- PRUEBAS si no estan el trabajo esta suspenso automaticamente.
+
+Los scripts es muy importantes que esten bien hechos y que permitan realizar la base de datos en pocos clicks
+Es muy importante que sean reproducibles. Al principio se debe eliminar todo lo que exista y crear las cosas de 0. Si se ejecutan varias veces deben funcionar.
+Es mas importante la diversidad y la complejidad que la cantidad. 40 triggers que hacen lo mismo y son sencillos no tienen el mismo valor que 4 o 6 triggers 
