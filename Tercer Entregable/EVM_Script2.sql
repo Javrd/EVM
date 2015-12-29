@@ -97,12 +97,8 @@ END;
 /
 
 
---CREATE OR REPLACE FUNCTION obtener_salario
---(w_cod_emp IN usuarios.cod_emp%TYPE)
---RETURN NUMBER IS w_salario_bruto usuarios.salario%TYPE;
---BEGIN
---SELECT salario*(1+comision) INTO w_salario_bruto FROM usuarios
---WHERE cod_emp = w_cod_emp;
---RETURN(w_salario_bruto);
---END;
---/
+CREATE OR REPLACE PROCEDURE instrumentos_libres IS
+BEGIN
+SELECT * FROM INSTRUMENTOS WHERE LIBRE=1;
+END;
+/
