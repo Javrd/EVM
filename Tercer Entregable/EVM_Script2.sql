@@ -95,10 +95,3 @@ INSERT INTO pertenece_a (oid_m,oid_a)
 VALUES (oid_m2,oid_a2);
 END;
 /
-
-
-CREATE OR REPLACE PROCEDURE instrumentos_libres IS
-BEGIN
-SELECT * FROM INSTRUMENTOS WHERE LIBRE=1;
-END;
-/
