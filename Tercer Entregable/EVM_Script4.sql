@@ -125,7 +125,6 @@ END PRUEBAS_USUARIOS;
     /* Borrar contenido de la tabla */
      DELETE FROM usuarios;
      
-    NULL;
   END inicializar;
 
 /* PRUEBA PARA LA INSERCIÓN DE USUARIOS */
@@ -240,9 +239,8 @@ END PRUEBAS_MATRICULAS;
 
     /* Borrar contenido de la tabla */
      DELETE FROM matriculas;
-     DELETE FROM usuarios;
      
-     INSERT INTO usuarios VALUES (sec_u.nextval, 'Julian', 'Perez Muñoz', to_date('15/02/11','DD/MM/RR'), 'C\Ramon y cajal Nº4',null, null, 1);
+    
   END inicializar;
 
 /* PRUEBA PARA LA INSERCIÓN DE MATRICULAS */
@@ -301,7 +299,6 @@ END PRUEBAS_MATRICULAS;
           ROLLBACK;
   END actualizar;
 
-
 /* PRUEBA PARA LA ELIMINACIÓN DE MATRICULAS */
   PROCEDURE eliminar (nombre_prueba VARCHAR2,w_oid_m matriculas.oid_m%type, salidaEsperada BOOLEAN) AS
     salida BOOLEAN := true;
@@ -309,6 +306,7 @@ END PRUEBAS_MATRICULAS;
   BEGIN
     
     /* Eliminar matricula */
+    DELETE FROM pagos WHERE oid_m=w_oid_m;
     DELETE FROM matriculas WHERE oid_m=w_oid_m;
     
     /* Verificar que la matricula no se encuentra en la BD */
@@ -348,12 +346,7 @@ END PRUEBAS_FALTAS;
   BEGIN
 
     /* Borrar contenido de la tabla */
-     DELETE FROM usuarios;
-     DELETE FROM matriculas;
      DELETE FROM faltas;
-     
-     INSERT INTO usuarios VALUES (sec_u.nextval, 'Julian', 'Perez Muñoz', to_date('15/02/11','DD/MM/RR'), 'C\Ramon y cajal Nº4',null, null, 1);
-     INSERT INTO matriculas VALUES (sec_m.nextval, to_date('20/09/14','DD/MM/RR'),1,'i101',sec_u.currval);
      
   END inicializar;
 
@@ -465,8 +458,6 @@ END PRUEBAS_INSTRUMENTOS;
     /* Borrar contenido de la tabla */
      DELETE FROM instrumentos;
      
-     NULL;
-     
   END inicializar;
 
 /* PRUEBA PARA LA INSERCIÓN DE INSTRUMENTOS */
@@ -572,14 +563,7 @@ END PRUEBAS_PERTENECE_A;
   BEGIN
 
     /* Borrar contenido de la tabla */
-     DELETE FROM matriculas;
-     DELETE FROM usuarios;
-     DELETE FROM asignaturas;
      DELETE FROM pertenece_a;
-     
-     INSERT INTO asignaturas VALUES (sec_a.nextval, 'Expresion Corporal y Danza');
-     INSERT INTO usuarios VALUES (sec_u.nextval, 'Julian', 'Perez Muñoz', to_date('15/02/11','DD/MM/RR'), 'C\Ramon y cajal Nº4',null, null, 1);
-     INSERT INTO matriculas VALUES (sec_m.nextval, to_date('20/09/14','DD/MM/RR'),1,'i101',sec_u.currval);
      
   END inicializar;
 
@@ -684,14 +668,7 @@ END PRUEBAS_PRESTAMOS;
   BEGIN
 
     /* Borrar contenido de la tabla */
-     DELETE FROM matriculas;
-     DELETE FROM usuarios;
-     DELETE FROM instrumentos;
      DELETE FROM prestamos;
-     
-     INSERT INTO instrumentos VALUES (sec_i.nextval, 'Cuerda', 1, 'Violin','Usado');
-     INSERT INTO usuarios VALUES (sec_u.nextval, 'Julian', 'Perez Muñoz', to_date('15/02/11','DD/MM/RR'), 'C\Ramon y cajal Nº4',null, null, 1);
-     INSERT INTO matriculas VALUES (sec_m.nextval, to_date('20/09/14','DD/MM/RR'),1,'i101',sec_u.currval);
      
   END inicializar;
 
@@ -799,7 +776,6 @@ END PRUEBAS_RESPONSABLES;
     /* Borrar contenido de la tabla */
      DELETE FROM responsables;
      
-    NULL;
   END inicializar;
 
 /* PRUEBA PARA LA INSERCIÓN DE RESPONSABLES */
@@ -908,12 +884,7 @@ END PRUEBAS_PAGOS;
 
     /* Borrar contenido de la tabla */
      DELETE FROM pagos;
-     DELETE FROM matriculas;
-     DELETE FROM usuarios;
-     
-     INSERT INTO usuarios VALUES (sec_u.nextval, 'Julian', 'Perez Muñoz', to_date('15/02/11','DD/MM/RR'), 'C\Ramon y cajal Nº4',null, null, 1);
-     INSERT INTO matriculas VALUES (sec_m.nextval, to_date('20/09/14','DD/MM/RR'),1,'i101',sec_u.currval);
-     
+        
   END inicializar;
 
 /* PRUEBA PARA LA INSERCIÓN DE PAGOS */
@@ -1021,12 +992,7 @@ END PRUEBAS_RELACIONES;
 
     /* Borrar contenido de la tabla */
      DELETE FROM relaciones;
-     DELETE FROM responsables;
-     DELETE FROM usuarios;
-     
-     INSERT INTO usuarios VALUES (sec_u.nextval, 'Julian', 'Perez Muñoz', to_date('15/02/11','DD/MM/RR'), 'C\Ramon y cajal Nº4',null, null, 1);
-     INSERT INTO responsables VALUES (sec_r.nextval, 'Antonio', 'Perez Sanchez', 'AntPezSan4@gmail.com','555643421');
-     
+           
   END inicializar;
 
 /* PRUEBA PARA LA INSERCIÓN DE RELACIONES */
@@ -1119,16 +1085,38 @@ SET SERVEROUTPUT ON;
 
 DECLARE
   oid_u usuarios.oid_u%type;
-  oid_a asignaturas.oid_a%type;
+  oid_r responsables.oid_r%type;
+  oid_rel relaciones.oid_rel%type;
   oid_m matriculas.oid_m%type;
   oid_f faltas.oid_f%type;
+  oid_pa pagos.oid_pa%type;
   oid_i instrumentos.oid_i%type;
+  oid_i2 instrumentos.oid_i%type;
+  oid_p prestamos.oid_p%type;
+  oid_a asignaturas.oid_a%type;
+  oid_pe pertenece_a.oid_pe%type;
 BEGIN
 
   /*********************************************************************
-        PRUEBAS DE LAS OPERACIONES SOBRE LA TABLA USUARIOS 
+        PRUEBAS DE LAS OPERACIONES SOBRE LAS TABLAS
   **********************************************************************/
+  
+  /* INICIALIZACIÓN */
+  
+  PRUEBAS_PERTENECE_A.INICIALIZAR;
+  PRUEBAS_ASIGNATURAS.INICIALIZAR;
+  PRUEBAS_PRESTAMOS.INICIALIZAR;
+  PRUEBAS_INSTRUMENTOS.INICIALIZAR;
+  PRUEBAS_PAGOS.INICIALIZAR;
+  PRUEBAS_FALTAS.INICIALIZAR;
+  PRUEBAS_MATRICULAS.INICIALIZAR;
+  PRUEBAS_RELACIONES.INICIALIZAR;
+  PRUEBAS_RESPONSABLES.INICIALIZAR;
   PRUEBAS_USUARIOS.INICIALIZAR;
+  
+  /* INSERCIÓN */
+  
+      /* Usuarios */
   PRUEBAS_USUARIOS.INSERTAR('Prueba 1 - Inserción usuario','Julian', 'Perez Muñoz', to_date('15/02/11', 'DD/MM/RR'), 'C\ Ramon y Cajal Nº4', null, null, 1, true);  
   oid_u := sec_u.currval;
   PRUEBAS_USUARIOS.INSERTAR('Prueba 2 - Inserción usuario menor a 3 años','Julian', 'Perez Muñoz', to_date('15/02/15', 'dd/mm/rr'), 'C\ Ramon y Cajal Nº4', null, null, 1, false);
@@ -1137,59 +1125,113 @@ BEGIN
   PRUEBAS_USUARIOS.INSERTAR('Prueba 5 - Inserción usuario con fecha de nacimiento null','Julian', 'Perez Muñoz', null, 'C\ Ramon y Cajal Nº4', null, null, 1, false);
   PRUEBAS_USUARIOS.INSERTAR('Prueba 6 - Inserción usuario con direccion null','Julian', 'Perez Muñoz', to_date('15/02/11', 'dd/mm/rr'), null, null, null, 1, false);
   PRUEBAS_USUARIOS.INSERTAR('Prueba 7 - Inserción usuario con derechos de imagen null','Julian', 'Perez Muñoz', to_date('15/02/11', 'dd/mm/rr'), 'C\ Ramon y Cajal Nº4', null, null, null, false);
-  PRUEBAS_USUARIOS.ACTUALIZAR('Prueba 8 - Actualización nombre usuario', oid_u, 'Julio', 'Perez Muñoz', to_date('15/02/11', 'DD/MM/RR'), 'C\ Ramon y Cajal Nº4', null, null, 1, true);
-  PRUEBAS_USUARIOS.ACTUALIZAR('Prueba 9 - Actualización nombre usuario null', oid_u, null, 'Perez Muñoz', to_date('15/02/11', 'DD/MM/RR'), 'C\ Ramon y Cajal Nº4', null, null, 1, false);
-  PRUEBAS_USUARIOS.ACTUALIZAR('Prueba 10 - Actualización edad mayor a 3 años', oid_u, 'Julio', 'Perez Muñoz', to_date('15/02/07', 'DD/MM/RR'), 'C\ Ramon y Cajal Nº4', null, null, 1, true);
-  PRUEBAS_USUARIOS.ACTUALIZAR('Prueba 11 - Actualización edad menor a 3 años', oid_u, 'Julio', 'Perez Muñoz', to_date('15/02/15', 'DD/MM/RR'), 'C\ Ramon y Cajal Nº4', null, null, 1, false);
-  PRUEBAS_USUARIOS.ELIMINAR('Prueba 12 - Eliminación usuario', oid_u, true);
-
-  /*********************************************************************
-        PRUEBAS DE LAS OPERACIONES SOBRE LA TABLA ASIGNATURAS 
-  **********************************************************************/
-
-  PRUEBAS_ASIGNATURAS.INICIALIZAR;
-  PRUEBAS_ASIGNATURAS.INSERTAR('Prueba 13 - Inserción asignatura','Expresión corporal y danza', true);  
-  oid_a := sec_a.currval;
-  PRUEBAS_ASIGNATURAS.INSERTAR('Prueba 14 - Inserción asignatura con nombre null',null, false);
-  PRUEBAS_ASIGNATURAS.ACTUALIZAR('Prueba 15 - Actualización nombre asignatura', oid_a, 'Lenguaje musical', true);
-  PRUEBAS_ASIGNATURAS.ACTUALIZAR('Prueba 16 - Actualización asignatura con nombre null', oid_a, null, false);
-  PRUEBAS_ASIGNATURAS.ELIMINAR('Prueba 17 - Eliminación asignatura', oid_a, true);
-
-  /*********************************************************************
-        PRUEBAS DE LAS OPERACIONES SOBRE LA TABLA FALTAS 
-  **********************************************************************/
-
-  PRUEBAS_FALTAS.INICIALIZAR;
+ 
+        /* Responsables */
+  PRUEBAS_RESPONSABLES.INSERTAR('Prueba 8 - Inserción responsable','Antonio', 'Perez Sanchez', 'AntPezSan4@gmail.com', '555643421', true);
+  oid_r := sec_r.currval;
+  PRUEBAS_RESPONSABLES.INSERTAR('Prueba 9 - Inserción responsable con nombre a null',null, 'Perez Sanchez', 'AntPezSan4@gmail.com', '555643421', false);
+  PRUEBAS_RESPONSABLES.INSERTAR('Prueba 10 - Inserción responsable con telefono a null','Antonio', 'Perez Sanchez', 'AntPezSan4@gmail.com', null, false);
+  
+          /* Relaciones */
+  PRUEBAS_RELACIONES.INSERTAR('Prueba 11 - Inserción relación', oid_u, oid_r, 'Padre', true);
+  oid_rel := sec_rel.currval;
+  PRUEBAS_RELACIONES.INSERTAR('Prueba 12 - Inserción relación con tipo null',  oid_u, oid_r, null, false);
+  
+          /* Matriculas */
+  PRUEBAS_MATRICULAS.INSERTAR('Prueba 13 - Inserción matrícula', to_date('20/09/14','DD/MM/RR'),1,'i101',oid_u, true);
   oid_m := sec_m.currval;
-  PRUEBAS_FALTAS.INSERTAR('Prueba 18 - Inserción falta','Asistencia', to_date('03/04/15', 'dd/mm/rr'), 0, oid_m, true);
+  PRUEBAS_MATRICULAS.INSERTAR('Prueba 14 - Inserción matrícula con codigo null', to_date('20/09/14','DD/MM/RR'),1,null,oid_u, false);
+
+            /* Faltas */
+  PRUEBAS_FALTAS.INSERTAR('Prueba 15 - Inserción falta','Asistencia', to_date('03/04/15', 'dd/mm/rr'), 0, oid_m, true);
   oid_f := sec_f.currval;
-  PRUEBAS_FALTAS.INSERTAR('Prueba 19 - Inserción falta de tipo no enumerado','Modales', to_date('03/04/15', 'dd/mm/rr'), 0, oid_m, false);
-  PRUEBAS_FALTAS.ACTUALIZAR('Prueba 20 - Actualización justificacion falta', oid_f,'Asistencia', to_date('03/04/15', 'dd/mm/rr'), 1, oid_m, true);
-  PRUEBAS_FALTAS.ACTUALIZAR('Prueba 21 - Actualización falta con tipo no enumerado', oid_f,'Modales', to_date('03/04/15', 'dd/mm/rr'), 1, oid_m, false);
-  PRUEBAS_FALTAS.ELIMINAR('Prueba 22 - Eliminación falta', oid_f, true);
+  PRUEBAS_FALTAS.INSERTAR('Prueba 16 - Inserción falta de tipo no enumerado','Modales', to_date('03/04/15', 'dd/mm/rr'), 0, oid_m, false);
 
-  /*********************************************************************
-        PRUEBAS DE LAS OPERACIONES SOBRE LA TABLA INSTRUMENTOS 
-  **********************************************************************/
+              /* Pagos */
+  PRUEBAS_PAGOS.INSERTAR('Prueba 17 - Inserción pago', to_date('20/09/14','DD/MM/RR'), 25, 'Matricula', 'Pagado', oid_m, true);
+  oid_pa := sec_pa.currval;
+  PRUEBAS_PAGOS.INSERTAR('Prueba 18 - Inserción pago con cantidad null', to_date('20/09/14','DD/MM/RR'), null, 'Matricula', 'Pagado', oid_m, false);
+  PRUEBAS_PAGOS.INSERTAR('Prueba 19 - Inserción pago con concepto null', to_date('20/09/14','DD/MM/RR'), 25, null, 'Pagado', oid_m, false);
+  PRUEBAS_PAGOS.INSERTAR('Prueba 20 - Inserción pago con estado no enumerado', to_date('20/09/14','DD/MM/RR'), 25, 'Matricula', 'Perdonado', oid_m, false);
 
-  PRUEBAS_INSTRUMENTOS.INICIALIZAR;
-  PRUEBAS_INSTRUMENTOS.INSERTAR('Prueba 23 - Inserción instrumento', 'Cuerda', 1, 'Violin', 'Usado', true);
+              /* Instrumentos */
+  PRUEBAS_INSTRUMENTOS.INSERTAR('Prueba 21 - Inserción instrumento', 'Cuerda', 1, 'Violin', 'Usado', true);
   oid_i := sec_i.currval;
-  PRUEBAS_INSTRUMENTOS.INSERTAR('Prueba 24 - Inserción instrumento de tipo no enumerado', 'Cuerda', 1, 'Violin', 'Mojado', false);
-  PRUEBAS_INSTRUMENTOS.ACTUALIZAR('Prueba 25 - Actualización instrumento libre', oid_i, 'Cuerda', 1, 'Violin', 'Usado', true);
-  PRUEBAS_INSTRUMENTOS.ACTUALIZAR('Prueba 26 - Actualización estado instrumento', oid_i, 'Cuerda', 1, 'Violin', 'Deteriorado', true);
-  PRUEBAS_INSTRUMENTOS.ACTUALIZAR('Prueba 27 - Actualización estado instrumento de tipo no enumerado', oid_i, 'Cuerda', 1, 'Violin', 'Mojado', false);
-  PRUEBAS_INSTRUMENTOS.ELIMINAR('Prueba 28 - Eliminación instrumento',oid_i, true);
+  PRUEBAS_INSTRUMENTOS.INSERTAR('Prueba 22 - Inserción instrumento prestado', 'Cuerda', 0, 'Guitarra', 'Deteriorado', true);
+  oid_i2 := sec_i.currval;
+  PRUEBAS_INSTRUMENTOS.INSERTAR('Prueba 23 - Inserción instrumento de tipo no enumerado', 'Cuerda', 1, 'Violin', 'Mojado', false);
+  
+              /* Prestamos */
+  PRUEBAS_PRESTAMOS.INSERTAR('Prueba 24 - Inserción prestamo', to_date('03/04/15', 'dd/mm/rr'), oid_m, oid_i,true);
+  oid_p := sec_p.currval;
+  PRUEBAS_PRESTAMOS.INSERTAR('Prueba 25 - Inserción prestamo de un instrumento que no esta libre', to_date('03/04/15', 'dd/mm/rr'), oid_m, oid_i2,false);
+  
+              /* Asignaturas */
+  PRUEBAS_ASIGNATURAS.INSERTAR('Prueba 26 - Inserción asignatura','Expresión corporal y danza', true);  
+  oid_a := sec_a.currval;
+  PRUEBAS_ASIGNATURAS.INSERTAR('Prueba 27 - Inserción asignatura con nombre null',null, false);
+  
+              /* Pertenece_A */
+  PRUEBAS_PERTENECE_A.INSERTAR('Prueba 28 - Inserción pertenece a', oid_m, oid_a, true);
+  oid_pe := sec_pe.currval;
 
-  PRUEBAS_PRESTAMOS.INICIALIZAR;
-  oid_i := sec_i.currval;
-  oid_m := sec_m.currval;
-  PRUEBAS_PRESTAMOS.INSERTAR('Prueba  - Inserción prestamo', to_date('03/04/15', 'dd/mm/rr'), oid_m, oid_i,true);
-END;
+    /* ACTUALIZACIÓN */
+    
+          /* Usuarios */
+  PRUEBAS_USUARIOS.ACTUALIZAR('Prueba 29 - Actualización nombre usuario', oid_u, 'Julio', 'Perez Muñoz', to_date('15/02/11', 'DD/MM/RR'), 'C\ Ramon y Cajal Nº4', null, null, 1, true);
+  PRUEBAS_USUARIOS.ACTUALIZAR('Prueba 30 - Actualización nombre usuario null', oid_u, null, 'Perez Muñoz', to_date('15/02/11', 'DD/MM/RR'), 'C\ Ramon y Cajal Nº4', null, null, 1, false);
+  PRUEBAS_USUARIOS.ACTUALIZAR('Prueba 31 - Actualización edad mayor a 3 años', oid_u, 'Julio', 'Perez Muñoz', to_date('15/02/07', 'DD/MM/RR'), 'C\ Ramon y Cajal Nº4', null, null, 1, true);
+  PRUEBAS_USUARIOS.ACTUALIZAR('Prueba 32 - Actualización edad menor a 3 años', oid_u, 'Julio', 'Perez Muñoz', to_date('15/02/15', 'DD/MM/RR'), 'C\ Ramon y Cajal Nº4', null, null, 1, false);
+  
+ 
+        /* Responsables */
+  PRUEBAS_RESPONSABLES.ACTUALIZAR('Prueba 33 - Actualización nombre responsable', oid_r, 'Juan', 'Perez Sanchez', 'AntPezSan4@gmail.com', '555643421', true);
+  PRUEBAS_RESPONSABLES.ACTUALIZAR('Prueba 34 - Actualización responsable con nombre a null', oid_r, null, 'Perez Sanchez', 'AntPezSan4@gmail.com', '555643421', false);
+  PRUEBAS_RESPONSABLES.ACTUALIZAR('Prueba 35 - Actualización responsable con telefono a null', oid_r,'Antonio', 'Perez Sanchez', 'AntPezSan4@gmail.com', null, false);
+  
+          /* Relaciones */
+  PRUEBAS_RELACIONES.ACTUALIZAR('Prueba 36 - Actualización relación',oid_rel, oid_u, oid_r, 'Tio', true);
+  PRUEBAS_RELACIONES.ACTUALIZAR('Prueba 37 - Actualización relación con tipo null', oid_rel, oid_u, oid_r, null, false);
+  
+          /* Matriculas */
+  PRUEBAS_MATRICULAS.ACTUALIZAR('Prueba 38 - Actualización fecha matrícula', oid_m, to_date('21/09/14','DD/MM/RR'),1,'i101',oid_u, true);
+  PRUEBAS_MATRICULAS.ACTUALIZAR('Prueba 39 - Actualización matrícula con codigo null', oid_m, to_date('20/09/14','DD/MM/RR'),1,null,oid_u, false);
+  
+            /* Faltas */
+  PRUEBAS_FALTAS.ACTUALIZAR('Prueba 40 - Actualización justificacion falta', oid_f,'Asistencia', to_date('03/04/15', 'dd/mm/rr'), 1, oid_m, true);
+  PRUEBAS_FALTAS.ACTUALIZAR('Prueba 41 - Actualización falta con tipo no enumerado', oid_f,'Modales', to_date('03/04/15', 'dd/mm/rr'), 1, oid_m, false);
 
-BEGIN
-  INSERT INTO instrumentos VALUES (sec_i.nextval, 'Cuerda', 1, 'Violin','Usado');
-  INSERT INTO usuarios VALUES (sec_u.nextval, 'Julian', 'Perez Muñoz', to_date('15/02/11','DD/MM/RR'), 'C\Ramon y cajal Nº4',null, null, 1);
-  INSERT INTO matriculas VALUES (sec_m.nextval, to_date('20/09/14','DD/MM/RR'),0,'i101',sec_u.currval);
-  INSERT INTO prestamos VALUES (sec_p.nextval, to_date('03/04/15', 'dd/mm/rr'), sec_m.currval, sec_i.currval);
+            /* Pagos */
+  PRUEBAS_PAGOS.ACTUALIZAR('Prueba 42 - Actualización cantidad pago', oid_pa, to_date('20/09/14','DD/MM/RR'), 20, 'Matricula', 'Pagado', oid_m, true);
+  PRUEBAS_PAGOS.ACTUALIZAR('Prueba 43 - Actualización pago con cantidad null', oid_pa, to_date('20/09/14','DD/MM/RR'), null, 'Matricula', 'Pagado', oid_m, false);
+  PRUEBAS_PAGOS.ACTUALIZAR('Prueba 44 - Actualización pago con concepto null', oid_pa, to_date('20/09/14','DD/MM/RR'), 25, null, 'Pagado', oid_m, false);
+  PRUEBAS_PAGOS.ACTUALIZAR('Prueba 45 - Actualización pago con estado no enumerado', oid_pa, to_date('20/09/14','DD/MM/RR'), 25, 'Matricula', 'Perdonado', oid_m, false);
+
+            /* Instrumentos */
+  PRUEBAS_INSTRUMENTOS.ACTUALIZAR('Prueba 46 - Actualización instrumento libre', oid_i, 'Cuerda', 1, 'Violin', 'Usado', true);
+  PRUEBAS_INSTRUMENTOS.ACTUALIZAR('Prueba 47 - Actualización estado instrumento', oid_i, 'Cuerda', 1, 'Violin', 'Deteriorado', true);
+  PRUEBAS_INSTRUMENTOS.ACTUALIZAR('Prueba 48 - Actualización estado instrumento de tipo no enumerado', oid_i, 'Cuerda', 1, 'Violin', 'Mojado', false);
+  
+  
+            /* Prestamos */
+  PRUEBAS_PRESTAMOS.ACTUALIZAR('Prueba 49 - Actualización fecha prestamo', oid_p, to_date('04/04/15', 'dd/mm/rr'), oid_m, oid_i,true);
+  PRUEBAS_PRESTAMOS.ACTUALIZAR('Prueba 50 - Actualización prestamo de un instrumento que no esta libre', oid_p, to_date('03/04/15', 'dd/mm/rr'), oid_m, oid_i2,false);
+  
+            /* Asignaturas */
+  PRUEBAS_ASIGNATURAS.ACTUALIZAR('Prueba 51 - Actualización nombre asignatura', oid_a, 'Lenguaje musical', true);
+  PRUEBAS_ASIGNATURAS.ACTUALIZAR('Prueba 52 - Actualización asignatura con nombre null', oid_a, null, false);
+  
+    /* ELIMINACIÓN */
+  PRUEBAS_PERTENECE_A.ELIMINAR('Prueba 53 - Eliminación pertenece_a', oid_pe, true);
+  PRUEBAS_ASIGNATURAS.ELIMINAR('Prueba 54 - Eliminación asignatura', oid_a, true);
+  PRUEBAS_PRESTAMOS.ELIMINAR('Prueba 55 - Eliminación prestamo', oid_p, true);
+  PRUEBAS_INSTRUMENTOS.ELIMINAR('Prueba 56 - Eliminación instrumento', oid_i, true);
+  PRUEBAS_PAGOS.ELIMINAR('Prueba 57 - Eliminación pago', oid_pa, true);
+  PRUEBAS_FALTAS.ELIMINAR('Prueba 58 - Eliminación falta', oid_f, true);
+  PRUEBAS_MATRICULAS.ELIMINAR('Prueba 59 - Eliminación matricula', oid_m, true);
+  PRUEBAS_RELACIONES.ELIMINAR('Prueba 60 - Eliminación relacion', oid_rel, true);
+  PRUEBAS_RESPONSABLES.ELIMINAR('Prueba 61 - Eliminación responsable', oid_r, true);
+  PRUEBAS_USUARIOS.ELIMINAR('Prueba 62 - Eliminación usuario', oid_u, true);
+
+
 END;
