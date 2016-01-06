@@ -3,7 +3,7 @@ BEFORE INSERT OR UPDATE ON USUARIOS
 FOR EACH ROW
 BEGIN
 IF (SYSDATE-:NEW.FECHA_NACIMIENTO<1100)
-THEN raise_application_error(-20501,'Un usuario debe tener al menos 3 a�os');
+THEN raise_application_error(-20501,'Un usuario debe tener al menos 3 anos');
 END IF;
 END;
 /
