@@ -1,5 +1,6 @@
  /* PAQUETES */
 
+
  CREATE OR REPLACE PACKAGE PRUEBAS_ASIGNATURAS AS 
 
    PROCEDURE inicializar;
@@ -17,6 +18,7 @@ END PRUEBAS_ASIGNATURAS;
 
     /* Borrar contenido de la tabla */
     DELETE FROM asignaturas;     
+    /* CREAR_ASIGNATURA('Expresion Corporal y Danza'); */
   END inicializar;
 
 /* PRUEBA PARA LA INSERCIÓN DE ASIGNATURAS */
@@ -1117,7 +1119,7 @@ BEGIN
   /* INSERCIÓN */
   
       /* Usuarios */
-  PRUEBAS_USUARIOS.INSERTAR('Prueba 1 - Inserción usuario','Julian', 'Perez Muñoz', to_date('15/02/11', 'DD/MM/RR'), 'C\ Ramon y Cajal Nº4', null, null, 1, true);  
+  PRUEBAS_USUARIOS.INSERTAR('Prueba 1 - Inserción usuario','Julian', 'Perez Muñoz', to_date('15/02/05', 'DD/MM/RR'), 'C\ Ramon y Cajal Nº4', null, null, 1, true);  
   oid_u := sec_u.currval;
   PRUEBAS_USUARIOS.INSERTAR('Prueba 2 - Inserción usuario menor a 3 años','Julian', 'Perez Muñoz', to_date('15/02/15', 'dd/mm/rr'), 'C\ Ramon y Cajal Nº4', null, null, 1, false);
   PRUEBAS_USUARIOS.INSERTAR('Prueba 3 - Inserción usuario con nombre null', null, 'Perez Muñoz', to_date('15/02/11', 'dd/mm/rr'), 'C\ Ramon y Cajal Nº4', null, null, 1, false);
