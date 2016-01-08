@@ -7,21 +7,30 @@ THEN raise_application_error(-20501,'Un usuario debe tener al menos 3 anos');
 END IF;
 END;
 /
+CREATE OR REPLACE TRIGGER ASIGNATURAS_MENORES
+AFTER INSERT ON MATRICULAS
+FOR EACH ROW
+BEGIN
+IF(SYSDATE-:NEW.FECHA_NACIMIENTO>1100 AND SYSDATE-:NEW.FECHA_NACIMIENTO<2200)
+THEN CREAR_PERTENECE_A(:new.oid_m,buscar_oid_a('Expresion Corporal y Danza'));
+END IF;
+END;
+/
 
 CREATE OR REPLACE TRIGGER FACTURACION
 AFTER INSERT ON MATRICULAS 
 FOR EACH ROW
 BEGIN
-    INSERT INTO pagos VALUES(sec_p.nextval, null, 25, 'Matricula', 'Pendiente', :NEW.oid_m);
-    INSERT INTO pagos VALUES(sec_p.nextval, null, 35, 'Octubre', 'Pendiente', :NEW.oid_m);
-    INSERT INTO pagos VALUES(sec_p.nextval, null, 35, 'Noviembre', 'Pendiente', :NEW.oid_m);
-    INSERT INTO pagos VALUES(sec_p.nextval, null, 35, 'Diciembre', 'Pendiente', :NEW.oid_m);
-    INSERT INTO pagos VALUES(sec_p.nextval, null, 35, 'Enero', 'Pendiente', :NEW.oid_m);
-    INSERT INTO pagos VALUES(sec_p.nextval, null, 35, 'Febrero', 'Pendiente', :NEW.oid_m);
-    INSERT INTO pagos VALUES(sec_p.nextval, null, 35, 'Marzo', 'Pendiente', :NEW.oid_m);
-    INSERT INTO pagos VALUES(sec_p.nextval, null, 35, 'Abril', 'Pendiente', :NEW.oid_m);
-    INSERT INTO pagos VALUES(sec_p.nextval, null, 35, 'Mayo', 'Pendiente', :NEW.oid_m);
-    INSERT INTO pagos VALUES(sec_p.nextval, null, 35, 'Junio', 'Pendiente', :NEW.oid_m);
+    CREAR_PAGO(null, 25, 'Matricula', 'Pendiente', :NEW.oid_m);
+    CREAR_PAGO( null, 35, 'Octubre', 'Pendiente', :NEW.oid_m);
+    CREAR_PAGO(null, 35, 'Noviembre', 'Pendiente', :NEW.oid_m);
+    CREAR_PAGO(null, 35, 'Diciembre', 'Pendiente', :NEW.oid_m);
+    CREAR_PAGO(null, 35, 'Enero', 'Pendiente', :NEW.oid_m);
+    CREAR_PAGO(null, 35, 'Febrero', 'Pendiente', :NEW.oid_m);
+    CREAR_PAGO(null, 35, 'Marzo', 'Pendiente', :NEW.oid_m);
+    CREAR_PAGO(null, 35, 'Abril', 'Pendiente', :NEW.oid_m);
+    CREAR_PAGO(null, 35, 'Mayo', 'Pendiente', :NEW.oid_m);
+    CREAR_PAGO(null, 35, 'Junio', 'Pendiente', :NEW.oid_m);
     
 END;
 /

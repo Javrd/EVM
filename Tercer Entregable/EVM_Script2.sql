@@ -95,6 +95,14 @@ INSERT INTO pertenece_a (oid_m,oid_a)
 VALUES (oid_m2,oid_a2);
 END;
 /
+CREATE OR REPLACE FUNCTION buscar_oid_a
+(nombre2 asignaturas.nombre%TYPE) RETURN asignaturas.oid_a%TYPE AS
+oid_a2 asignaturas.oid_a%TYPE;
+BEGIN
+SELECT oid_a into oid_a2 from asignaturas where nombre=nombre2;
+return oid_a2;
+END;
+/
 
 create or replace FUNCTION ASSERT_EQUALS (salida BOOLEAN, salida_esperada BOOLEAN) RETURN VARCHAR2 AS 
 BEGIN
