@@ -27,7 +27,7 @@ END PRUEBAS_ASIGNATURAS;
   BEGIN
     
     /* Insertar asignatura */
-    INSERT INTO asignaturas VALUES(sec_a.nextval,w_nombre);
+    CREAR_ASIGNATURA(w_nombre); 
     
     /* Seleccionar asignatura y comprobar que los datos se insertaron correctamente */
     w_oid_a := sec_a.currval;
@@ -137,7 +137,7 @@ END PRUEBAS_USUARIOS;
   BEGIN
     
     /* Insertar usuario */
-    INSERT INTO usuarios VALUES(sec_u.nextval,w_nombre, w_apellidos,
+    CREAR_USUARIO(w_nombre, w_apellidos,
     w_fecha_nacimiento, w_direccion, w_email, w_telefono, w_derechos_imagen);
     
     /* Seleccionar usuario y comprobar que los datos se insertaron correctamente */
@@ -252,7 +252,7 @@ END PRUEBAS_MATRICULAS;
   BEGIN
     
     /* Insertar matricula */
-    INSERT INTO matriculas VALUES(sec_m.nextval, w_fecha_matriculacion, w_curso, w_codigo, w_oid_u);
+    CREAR_MATRICULA(w_fecha_matriculacion, w_curso, w_codigo, w_oid_u);
     
     /* Seleccionar matricula y comprobar que los datos se insertaron correctamente */
     w_oid_m := sec_m.currval;
@@ -360,7 +360,7 @@ END PRUEBAS_FALTAS;
   BEGIN
     
     /* Insertar falta */
-    INSERT INTO faltas VALUES(sec_f.nextval,w_tipo_falta, w_fecha_falta, w_justificada, w_oid_m);
+    CREAR_FALTA(w_tipo_falta, w_fecha_falta, w_justificada, w_oid_m);
     
     /* Seleccionar falta y comprobar que los datos se insertaron correctamente */
     w_oid_f := sec_f.currval;
@@ -469,7 +469,7 @@ END PRUEBAS_INSTRUMENTOS;
   BEGIN
     
     /* Insertar instrumento */
-    INSERT INTO instrumentos VALUES(sec_i.nextval, w_tipo, w_libre, w_nombre, w_estado_instrumento);
+    CREAR_INSTRUMENTO(w_tipo, w_libre, w_nombre, w_estado_instrumento);
     
     /* Seleccionar instrumento y comprobar que los datos se insertaron correctamente */
     w_oid_i := sec_i.currval;
@@ -575,7 +575,7 @@ END PRUEBAS_PERTENECE_A;
   BEGIN
     
     /* Insertar pertenece_a */
-    INSERT INTO pertenece_a VALUES(sec_pe.nextval, w_oid_m, w_oid_a);
+    CREAR_PERTENECE_A(w_oid_m, w_oid_a);
     
     /* Seleccionar pertenece_a y comprobar que los datos se insertaron correctamente */
     w_oid_pe := sec_pe.currval;
@@ -681,7 +681,7 @@ END PRUEBAS_PRESTAMOS;
   BEGIN
     
     /* Insertar prestamos */
-    INSERT INTO prestamos VALUES(sec_p.nextval, w_fecha_prestamo, w_oid_m, w_oid_i);
+    CREAR_PRESTAMO(w_fecha_prestamo, w_oid_m, w_oid_i);
     
     /* Seleccionar prestamos y comprobar que los datos se insertaron correctamente */
     w_oid_p := sec_p.currval;
@@ -787,7 +787,7 @@ END PRUEBAS_RESPONSABLES;
   BEGIN
     
     /* Insertar responsable */
-    INSERT INTO responsables VALUES(sec_r.nextval,w_nombre, w_apellidos, w_email, w_telefono);
+    CREAR_RESPONSABLE(w_nombre, w_apellidos, w_email, w_telefono);
     
     /* Seleccionar responsable y comprobar que los datos se insertaron correctamente */
     w_oid_r := sec_r.currval;
@@ -896,7 +896,7 @@ END PRUEBAS_PAGOS;
   BEGIN
     
     /* Insertar pago */
-    INSERT INTO pagos VALUES(sec_m.nextval, w_fecha_pago, w_cantidad, w_concepto, w_estado, w_oid_m);
+    CREAR_PAGO(w_fecha_pago, w_cantidad, w_concepto, w_estado, w_oid_m);
     
     /* Seleccionar pago y comprobar que los datos se insertaron correctamente */
     w_oid_pa := sec_pa.currval;
@@ -969,7 +969,7 @@ END PRUEBAS_PAGOS;
           ROLLBACK;
   END eliminar;
 
-END PRUEBAS_PAGOS;
+END;
 /
 
 CREATE OR REPLACE PACKAGE PRUEBAS_RELACIONES AS 
@@ -1004,7 +1004,7 @@ END PRUEBAS_RELACIONES;
   BEGIN
     
     /* Insertar relacion */
-    INSERT INTO relaciones VALUES(sec_rel.nextval, w_oid_u, w_oid_r, w_tipo_relacion);
+    CREAR_RELACION(w_oid_u, w_oid_r, w_tipo_relacion);
     
     /* Seleccionar relacion y comprobar que los datos se insertaron correctamente */
     w_oid_rel := sec_rel.currval;
@@ -1235,3 +1235,4 @@ BEGIN
 
 
 END;
+  
