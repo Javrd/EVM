@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;EVM/new_file.php&apos; to &apos;Usuarios.php&apos;" description="Rename resource &apos;new_file.php&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="new_file.php" name="Usuarios.php" stamp="1459337671571" updateReferences="true"/>
-</session>
