@@ -1,0 +1,198 @@
+<?php
+// (nombre2 IN usuarios.nombre%TYPE,
+// apellidos2 IN usuarios.apellidos%TYPE,
+// fecha_nacimiento2 IN usuarios.fecha_nacimiento%TYPE,
+// direccion2 IN usuarios.direccion%TYPE,
+// email2 IN usuarios.email%TYPE,
+// telefono2 IN usuarios.telefono%TYPE,
+// derechos_imagen2 IN usuarios.derechos_imagen%TYPE) IS
+
+ 	session_start();
+	if (!isset($_SESSION[usuario])){
+		$usuario["nombre"] = "";
+		$usuario["apellidos"] = "";
+		$usuario["fechaNacimiento"] = "";
+		$usuario["direccion"] = "";
+		$usuario["email"] = "";
+		$usuario["telefono"] = "";
+		$_SESSION["usuario"] = $usuario;
+	} else {
+		$usuario = $_SESSION[usuario];
+
+	}
+	
+	// Gestion de errores.
+	if (isset($_SESSION[error])){	
+		$error = $_SESSION[error];
+		unset($_SESSION[error]);
+		
+		// Definición de class error para css en campos que tengan error.
+		if (isset($error["nombre"])){
+			$class["nombre"] = "error";	
+		}
+		if (isset($error["apellidos"])){
+			$class["apellidos"] = "error";	
+		}
+		if (isset($error["fechaNacimiento"])){
+			$class["fechaNacimiento"] = "error";	
+		}
+		if (isset($error["direccion"])){
+			$class["direccion"] = "error";	
+		}
+		if (isset($error["email"])){
+			$class["email"] = "error";	
+		}
+		if (isset($error["telefono"])){
+			$class["telefono"] = "error";	
+		}
+	}	
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<?php 
+		if (isset($_SESSION[modificarUsuario])){
+			echo "<title>Modificar usuario</title>";	
+		} elseif(isset($_SESSION[modificarUsuario])){
+			echo "<tittle>Nuevo usuario</title>";
+		}
+		?>
+		<meta name="description" content="">
+		<meta name="author" content="Javi">
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	</head>
+	
+	<body>
+		
+		<?php include(header.html) ?>
+		
+		<div id="FormularioUsuarios">
+			    <form action="mostrarDatos.php" method="post">
+	  
+
+        <div id="datosAlumno">
+
+          <fieldset>
+
+            <legend>Datos del Alumno</legend>
+
+            <div id="div_nombre">  
+              <label id="label_nombre" for="nombre">Nombre:</label>
+              <input id="input_nombre" class="<?= $class['nombre']?>" name="nombre" value="<?php echo $formulario[nombre] ?>" type="text"/>
+            </div>
+
+            <div id="div_apellidos">  
+              <label id="label_apellidos" for="apellidos">Apellidos:</label>
+              <input id="input_apellidos <?= $class['apellidos']?>" name="apellidos" value="<?php echo $formulario[apellidos] ?>" type="text"/>
+            </div>
+
+			<div id="div_fechaNacimiento">
+				<label id
+            <div id="div_email">  
+              <label id="label_email" for="email">Email:</label>
+              <input id="input_email" name="email" value="<?php echo $formulario[email] ?>" type="text"/>
+            </div>
+
+          </fieldset>
+
+        </div>
+
+      <div id="div_direccion">
+
+        <fieldset>
+
+          <legend>Dirección</legend> $handle
+
+          <div id="div_calle">
+            <label id="label_calle" for="calle">Calle/Avda.:</label>
+            <input id="calle" name="calle" value="<?php echo $formulario[calle] ?>" type="text"/>   
+          </div>              
+              
+          <div id="div_poblacion">
+            <label id="label_poblacion" for="poblacion">Población:</label>
+            <input id="poblacion" name="poblacion" value="<?php echo $formulario[poblacion] ?>" type="text"/>
+          </div>
+              
+          <div id="div_provincia">
+            <label id="label_provincia" for="provincia">Provincia:</label>
+            <select id="provincia" name="provincia" value="<?php echo $formulario[provincia] ?>">
+              <optgroup label="Día">
+              	<?php
+              	for ($i=1; $i < 32 ; $i++) { 
+					echo "<option ";
+					if ($usuario[fechaNacimiento][Dia] == $i ) echo 'selected="selected"';
+					echo "$i <option/>";
+			  	}
+				?>
+              </optgroup>
+                <option <?php if ($formulario[provincia]=="Almería") echo 'selected="selected"'; ?> >Almería</option>
+                <option <?php if ($formulario[provincia]=="Cádiz") echo 'selected="selected"'; ?> >Cádiz</option>
+                <option <?php if ($formulario[provincia]=="Córdoba") echo 'selected="selected"'; ?> >Córdoba</option>
+                <option <?php if ($formulario[provincia]=="Granada") echo 'selected="selected"'; ?> >Granada</option>
+                <option <?php if ($formulario[provincia]=="Huelva") echo 'selected="selected"'; ?> >Huelva</option>
+                <option <?php if ($formulario[provincia]=="Jaén") echo 'selected="selected"'; ?> >Jaén</option>
+                <option <?php if ($formulario[provincia]=="Málaga") echo 'selected="selected"'; ?> >Málaga</option>
+                <option <?php if ($formulario[provincia]=="Sevilla") echo 'selected="selected"'; ?> >Sevilla</option>
+              </optgroup>
+            </select>
+          </div>
+
+        </fieldset>
+
+      </div>
+
+      <div id="div_practica">
+
+        <fieldset>
+
+          <legend>Práctica en grupo</legend>
+
+          <div id="div_archivo">
+            <label id="label_archivo" for="archivo">Archivo:</label>
+            <input id="archivo" name="archivo"type="file"/>
+          </div>
+
+          <div id="div_infoarchivo">
+            <div id="div_comprimido">
+              <input id="comprimido" name="comprimido" <?php if(isset($formulario[comprimido])) echo 'checked="checked"' ?> type="checkbox"/>
+              <label id="label_comprimido" for="comprimido">Archivo comprimido</label>
+            </div>
+            <div id="div_encriptado">
+              <input id="encriptado" name="encriptado" <?php if(isset($formulario[encriptado])) echo 'checked="checked"' ?> type="checkbox"/>
+              <label id="label_encriptado" for="encriptado">Archivo encriptado</label>
+            </div>
+          </div>
+
+          <div id="div_descripcion">       
+            <label id="label_descripcion" for="descripcion">Descripción de la práctica</label>
+            <textarea id="descripcion" name="descripcion"><?php echo $formulario[descripcion] ?></textarea>
+          </div>
+
+        </fieldset>
+
+        </div>
+
+        <div id="div_submit">
+          <button id="submit" >Enviar</button>
+	</div>
+
+      </form>
+			<?php //TODO Tabla de la consulta (por defecto "Todos") ?>
+		</div>
+
+		
+		<?php include(footer.html) ?>
+		</div>
+	</body>
+</html>

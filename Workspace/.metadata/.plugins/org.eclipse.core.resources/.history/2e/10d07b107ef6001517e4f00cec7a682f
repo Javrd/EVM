@@ -1,0 +1,51 @@
+<?php
+// (nombre2 IN usuarios.nombre%TYPE,
+// apellidos2 IN usuarios.apellidos%TYPE,
+// fecha_nacimiento2 IN usuarios.fecha_nacimiento%TYPE,
+// direccion2 IN usuarios.direccion%TYPE,
+// email2 IN usuarios.email%TYPE,
+// telefono2 IN usuarios.telefono%TYPE,
+// derechos_imagen2 IN usuarios.derechos_imagen%TYPE) IS
+
+ 	session_start();
+	if (!isset($_SESSION[usuario])){
+		$usuario["nombre"] = "";
+		$usuario["apellidos"] = "";
+		$usuario["fechaNacimiento"] = "";
+		$usuario["direccion"] = "";
+		$usuario["email"] = "";
+		$usuario["telefono"] = "";
+		$_SESSION["usuario"] = $usuario;
+	} else {
+		$usuario = $_SESSION[usuario];
+
+	}
+	
+	// Gestion de errores.
+	if (isset($_SESSION[error])){	
+		$error = $_SESSION[error];
+		unset($_SESSION[error]);
+		
+		// Definición de class error para css en campos que tengan error.
+		if (isset($error["nombre"])){
+			$class["nombre"] = "error";	
+		}
+		if (isset($error["apellidos"])){
+			$class["apellidos"] = "error";	
+		}
+		if (isset($error["fechaNacimiento"])){
+			$class["fechaNacimiento"] = "error";	
+		}
+		if (isset($error["direccion"])){
+			$class["direccion"] = "error";	
+		}
+		if (isset($error["email"])){
+			$class["email"] = "error";	
+		}
+		if (isset($error["telefono"])){
+			$class["telefono"] = "error";	
+		}
+	}
+	
+	
+?>
