@@ -20,6 +20,7 @@
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <link rel="stylesheet" type="text/css" href="evm.css">
 	</head>
 
 	<body>
@@ -28,9 +29,9 @@
 		
 		<nav id="UsuariosNavBar">
 			<ul>
-                <form action="registraUsuario.php" method="get">
 				<li>Todos</li>
 				<li>Usuarios con prestamos</li>
+                <form action="registraUsuario.php" method="post">
 				<li><button id = "button_nuevo" name="nuevo">Nuevo</button></li>
 				</form>
 			</ul>
@@ -39,9 +40,8 @@
 		<div id="ConsultaUsuarios">
 			<?php //TODO Tabla de la consulta (por defecto "Todos") ?>
 		</div>
-
 		
 		<?php include("footer.html") ?>
-		</div>
+
 	</body>
 </html>

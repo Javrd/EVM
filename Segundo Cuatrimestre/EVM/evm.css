@@ -1,0 +1,36 @@
+html, body {
+    min-height: 100%;
+}
+body {
+ 	background: rgb(240,240,240); /* For browsers that do not support gradients */
+  	background: -webkit-linear-gradient(left top, rgb(230,230,230), rgb(245,245,245)); /* For Safari 5.1 to 6.0 */
+  	background: -o-linear-gradient(bottom right, rgb(230,230,230), rgb(245,245,245)); /* For Opera 11.1 to 12.0 */
+  	background: -moz-linear-gradient(bottom right, rgb(230,230,230), rgb(245,245,245)); /* For Firefox 3.6 to 15 */
+  	background: linear-gradient(to bottom right, rgb(230,230,230), rgb(245,245,245)); /* Standard syntax */
+  	background-repeat: no-repeat;
+}
+
+ul{
+	list-style-type: none;
+	
+}
+
+li.button a {
+    background-color: #008CBA;
+	border-radius: 4px;
+    color: white;
+    display: block;
+    margin: auto;
+	margin-bottom: 5px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    width: 100px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.button a:hover {
+    background-color: white; /* Green */
+    color: #008CBA;
+}
