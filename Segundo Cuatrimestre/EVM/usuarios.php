@@ -24,14 +24,15 @@
 
 	<body>
 		
-		<?php include(header.html) ?>
+		<?php include("header.html") ?>
 		
 		<nav id="UsuariosNavBar">
 			<ul>
-				<?php //TODO ¿Enlaces, formularios? ?> 
+                <form action="registraUsuario.php" method="get">
 				<li>Todos</li>
 				<li>Usuarios con prestamos</li>
-				<li><a href="RegistraUsuario.php">Nuevo</a></li>
+				<li><button id = "button_nuevo" name="nuevo">Nuevo</button></li>
+				</form>
 			</ul>
 		</nav>
 
@@ -40,7 +41,7 @@
 		</div>
 
 		
-		<?php include(footer.html) ?>
+		<?php include("footer.html") ?>
 		</div>
 	</body>
 </html>
