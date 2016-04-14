@@ -30,14 +30,14 @@
 		<div id="div_inicio">
 			<ul class="menu">
 				<li class="button"><a href="usuarios.php">Usuarios</a></li>
-				<li class="button"><a href="matriculas.php">Matriculas</a</li>
-				<li class="button"><a href="prestamos.php">Prestamos</a</li>
+				<li class="button"><a href="matriculas.php">Matrículas</a</li>
+				<li class="button"><a href="prestamos.php">Préstamos</a</li>
 				<li class="button"><a href="faltas.php">Faltas</a</li>
 				<li class="button"><a href="pagos.php">Pagos</a</li>
 				<li class="button"><a href="asignaturas.php">Asignaturas</a></li>
 			</ul>
 		</div>
         
-		<!-- <?php include("footer.html") ?> -->
+		<?php include("footer.html") ?>
 	</body>
 </html>
