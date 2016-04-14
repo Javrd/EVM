@@ -1,5 +1,6 @@
 html, body {
-    min-height: 100%;
+    min-height: 100%;    
+    font-size: 100%;
 }
 body {
  	background: rgb(240,240,240); /* For browsers that do not support gradients */
@@ -15,6 +16,52 @@ ul{
 	
 }
 
+div {
+	
+	margin-bottom: 5px;
+}
+
+	/*header.html*/
+
+header a{
+	text-decoration: none;
+    color: #444;
+	font-weight: 700;
+    font-family: 'Oswald', arial, serif;
+    line-height: 1;
+}
+
+header {
+	margin: 20px;
+    padding: 10px;
+    background-color: #3dacea;
+}
+
+#header {
+	
+	background: url('logo-min-238x300.png') no-repeat;
+    background-size: 60px;
+    padding-left: 80px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#p_titulo {
+	line-height: 1;
+    margin: 10px 0 8px;
+    margin: 0.625rem 0 0.5rem;    
+    font-size: 42px;
+    font-size: 2.625rem;
+    border: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+#p_descripcion{
+	margin: 0;
+}
+
+	/*index.php*/
+	
 li.button a {
     background-color: #008CBA;
 	border-radius: 4px;
@@ -33,4 +80,27 @@ li.button a {
 .button a:hover {
     background-color: white; /* Green */
     color: #008CBA;
+}
+
+#div_inicio {
+	padding: 20px;    
+	vertical-align: middle;
+
+}
+
+div.formulario {
+	
+    display: block;
+    margin: auto;
+}
+
+::selection{
+	background-color: #3dacea;
+	opacity: 1;
+	color: white;
+}
+
+@font-face {
+  font-family: 'Oswald';
+  src: local('Oswald Regular'), local('Oswald-Regular'), url(http://fonts.gstatic.com/s/oswald/v10/pEobIV_lL25TKBpqVI_a2w.woff2) format('woff2');
 }
