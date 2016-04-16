@@ -1,7 +1,6 @@
 <?php
 session_start();
 if (isset($_SESSION["usuario"]) ){
-    $usuario["action"] = $_SESSION["usuario"]["action"];
     $usuario["nombre"] = $_REQUEST["nombre"];
     $usuario["apellidos"] = $_REQUEST["apellidos"];
     $usuario["fechaNacimiento"]['dia']= $_REQUEST["dia"];
@@ -10,6 +9,8 @@ if (isset($_SESSION["usuario"]) ){
     $usuario["direccion"] = $_REQUEST["direccion"];
     $usuario["email"] = $_REQUEST["email"];
     $usuario["telefono"] = $_REQUEST["telefono"];
+    if(isset($_REQUEST['derechosImagen'])) $usuario['derechosImagen']=$_REQUEST['derechosImagen'];
+    if(isset($_REQUEST['checkResponsable'])) $usuario['checkResponsable']=$_REQUEST['checkResponsable'];
     $usuario["responsable"] = $_REQUEST["responsable"];
     $_SESSION["usuario"] = $usuario;
     
@@ -19,7 +20,7 @@ if (isset($_SESSION["usuario"]) ){
         $_SESSION["errores"] = $errores;
         Header("Location: registraUsuario.php");
     }
-    else Header("Location: exito.php");
+    else Header("Location: exitoUsuario.php");
 } 
 else Header("Location: registraUsuario.php");
     
@@ -40,14 +41,20 @@ else Header("Location: registraUsuario.php");
     $meses = date("m") - ($usuario["fechaNacimiento"]['mes']);
     $dias = date("d") - ($usuario["fechaNacimiento"]['dia']);
     
+        // Menor de 3 años
+          
+    if  ( $anios == 3 && ( $meses < 0 || ( $meses == 0 && $dias < 0 ) ) ){
+          
+        $errores["fechaNacimiento"] = "El niño debe tener al menor 3 años para poder registrarse.";
+        
         // Menor de 18 años
-        
-    if (!isset($_REQUEST["checkResponsable"]) && 
+    } elseif (!isset($_REQUEST["checkResponsable"]) && 
         ( $anios < 18 || ( $anios == 18 && 
-        ( $meses < 0 || ( $meses == 0 && $dias < 0 ))))){  
+        ( $meses < 0 || ( $meses == 0 && $dias < 0 ) ) ))){
+              
         $errores["responsable"] = "Los menores deben tener un responsable.";
-    } 
         
+    } 
     return $errores;
 }
 ?>
