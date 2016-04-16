@@ -1,32 +1,31 @@
-html, body {
-	padding-right: 20px;
-	padding-left: 20px;
-	margin:0px;
-    min-height: 100%;    
-    font-size: 100%;
+html, body {    
+	margin: 0;
+    padding: 0;
+    height: 100%;
 }
-body {
+
+ul{
+	list-style-type: none;
+	padding: 0px;
+	
+}
+
+
+#container{  
+	padding: 2% 40px 2% 40px;
+	padding-left, padding-right:40px;
  	background: rgb(240,240,240); /* For browsers that do not support gradients */
   	background: -webkit-linear-gradient(left top, rgb(230,230,230), rgb(245,245,245)); /* For Safari 5.1 to 6.0 */
   	background: -o-linear-gradient(bottom right, rgb(230,230,230), rgb(245,245,245)); /* For Opera 11.1 to 12.0 */
   	background: -moz-linear-gradient(bottom right, rgb(230,230,230), rgb(245,245,245)); /* For Firefox 3.6 to 15 */
   	background: linear-gradient(to bottom right, rgb(230,230,230), rgb(245,245,245)); /* Standard syntax */
   	background-repeat: no-repeat;
+	min-height: 92%;
+    position: relative; 
 }
-
-ul{
-	list-style-type: none;
-	
-}
-
-div {
-	margin-top: 0px;
-	margin-bottom: 5px;
-}
-
 	/*header.html*/
 
-header a{
+#header a{
 	text-decoration: none;
     color: #444;
 	font-weight: 700;
@@ -34,19 +33,45 @@ header a{
     line-height: 1;
 }
 
-header {
-	margin-top: 20px;
-	margin-bottom:10px;
+#header {
+	position:absolute;
+    height:90px;
+	top: 20px;
+    left:40px;
+    right:40px;
     padding: 10px;
-    background-color: #3dacea;
+	background: #3dacea;
+    font-family: 'Open Sans', sans-serif;
 }
 
-#header {
-	
+#content {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-top: 130px;
+	margin-bottom:85px;
+}
+
+#footer{
+	position: absolute;
+    bottom: 20px;
+    left: 40px;
+    right: 40px;
+    height: 45px;
+	background-color: black;
+	color: white;
+    padding: 10px;
+	/*TODO Hacer que el footer se quede abajo (se va muestra ahora mismo siempre incluso si hay scroll y se descoloca)*/
+}
+
+#footer a {
+    text-decoration: none;
+	color: white;
+}
+
+#logo{
 	background: url('logo-min-238x300.png') no-repeat;
+    padding-left: 70px;
     background-size: 60px;
-    padding-left: 80px;
-    font-family: 'Open Sans', sans-serif;
 }
 
 #p_titulo {
@@ -62,23 +87,6 @@ header {
 
 #p_descripcion{
 	margin: 0;
-}
-
-footer{
-	position: absolute;
-    bottom: 0;
-    right: 40px;
-    left: 40px;
-	background-color: black;
-	color: white;
-	margin-top: 10px;
-    padding: 20px;
-	/*TODO Hacer que el footer se quede abajo (se va muestra ahora mismo siempre incluso si hay scroll y se descoloca)*/
-}
-
-footer a {
-    text-decoration: none;
-	color: white;
 }
 	/*index.php*/
 	
@@ -108,7 +116,7 @@ footer a {
 
 }
 
-#FormularioUsuarios{
+div.formulario{
 	margin-top: 2.5%;
 	margin-left:15%;
 	margin-right:15%;
@@ -119,13 +127,34 @@ footer a {
 	border: solid #008CBA;
 }
 
+div.lineaFormulario{
+    height: 38px;
+}
+
 label {
+	vertical-align: top;
     display:inline-block;
     width:190px;
 }
 
 input.box{
-	width: 30.4%;
+	vertical-align: top;
+	width: 232px;
+}
+
+input.error, select.error{
+	background-color: #FFAAAA;
+	
+}
+
+input.error:focus, select.error:focus{
+  	border-color:#FF4444;
+  	outline-color: #FF9999;
+}
+
+#select_fecha{
+	vertical-align: top;
+	display: inline-block;
 }
 
 button.submit{
@@ -157,6 +186,7 @@ button.submit:hover{
 span.error{
     display:inline-block;
 	color:red;
+    width:320px;
 }
 
 ::selection{

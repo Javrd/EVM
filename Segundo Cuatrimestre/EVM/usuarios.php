@@ -29,34 +29,39 @@
 	</head>
 
 	<body>
-		
-		<?php include("header.html") ?>
-		
-		<nav id="UsuariosNavBar">
-			<ul>
-				<li>Todos</li>
-				<li>Usuarios con préstamos</li>
-                <form action="registraUsuario.php" method="post">
-				<li><button id = "button_nuevo" name="nuevo">Nuevo</button></li>
-				</form>
-			</ul>
-		</nav>
-
-		<div id="ConsultaUsuarios">
-			<?php //TODO Tabla de la consulta (por defecto "Todos")
-                $usuarios = listaUsuarios($conexion);
-                foreach ($usuarios as $usuario) {
-                    echo '<div class="row">'; 
-                    echo $usuario['NOMBRE']." ".$usuario['APELLIDOS'];
-                    echo '</div>';
-                } 
+		  <div id="container">
+		      
+    		<?php include("header.html") ?>
+    		
+    		<div id="content">
+        		<nav id="UsuariosNavBar">
+        			<ul>
+        				<li>Todos</li>
+        				<li>Usuarios con préstamos</li>
+                        <form action="registraUsuario.php" method="post">
+        				<li><button id = "button_nuevo" name="nuevo">Nuevo</button></li>
+        				</form>
+        			</ul>
+        		</nav>
+        
+        		<div id="ConsultaUsuarios">
+        			<?php //TODO Tabla de la consulta (por defecto "Todos")
+                        $usuarios = listaUsuarios($conexion);
+                        foreach ($usuarios as $usuario) {
+                            echo '<div class="row">'; 
+                            echo $usuario['NOMBRE']." ".$usuario['APELLIDOS'];
+                            echo '</div>';
+                        } 
+                    ?>
+        		</div>
+    		</div>
+    		
+    		<?php 
+            	include("footer.html");
+                cerrarConexionBD($conexion);  
             ?>
-		</div>
-		
-		<?php 
-        	include("footer.html");
-            cerrarConexionBD($conexion);  
-        ?>
+            
+        </div>
 
 	</body>
 </html>
