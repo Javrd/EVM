@@ -31,7 +31,7 @@
     		<div id="content">
     			<ul class="menu">
                     <li class="button"><a href="usuarios.php">Usuarios</a></li>
-                    <li class="button"><a href="usuarios.php">Responsables</a></li>
+                    <li class="button"><a href="responsables.php">Responsables</a></li>
     				<li class="button"><a href="matriculas.php">Matrículas</a</li>
     				<li class="button"><a href="prestamos.php">Préstamos</a</li>
     				<li class="button"><a href="faltas.php">Faltas</a</li>

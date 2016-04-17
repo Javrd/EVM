@@ -1,8 +1,6 @@
 <?php
     session_start();
     
-    
-    
     require_once ("GestionarUsuario.php");
     require_once("GestionBD.php");
     $conexion = crearConexionBD();

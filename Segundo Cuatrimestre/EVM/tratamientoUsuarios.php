@@ -12,19 +12,25 @@ if (isset($_SESSION["usuario"]) ){
     if(isset($_REQUEST['derechosImagen'])) $usuario['derechosImagen']=$_REQUEST['derechosImagen'];
     if(isset($_REQUEST['checkResponsable'])) $usuario['checkResponsable']=$_REQUEST['checkResponsable'];
     $usuario["responsable"] = $_REQUEST["responsable"];
-    $_SESSION["usuario"] = $usuario;
+    $usuario['tipoRelacion'] = $_REQUEST["tipoRelacion"];
     
     $errores = validar($usuario);
     
     if ( count ($errores) > 0 ) {
+        $_SESSION["usuario"] = $usuario;
         $_SESSION["errores"] = $errores;
         Header("Location: registraUsuario.php");
     }
-    else Header("Location: exitoUsuario.php");
+    else {
+        $_SESSION["usuarioExito"] = $usuario;
+        Header("Location: exitoUsuario.php");
+    }
 } 
 else Header("Location: registraUsuario.php");
     
     function validar($usuario) {
+    
+    $errores = null;
         // Campos vacios
     if (empty($usuario["nombre"])) {
         $errores["nombre"] = "El nombre no se puede dejar vacío.";
@@ -34,6 +40,9 @@ else Header("Location: registraUsuario.php");
     }
     if (empty($usuario["direccion"])) {
         $errores["direccion"] = "La direccion no se puede dejar vacía.";
+    }
+    if(isset($_REQUEST['checkResponsable']) && empty($usuario['tipoRelacion'])){
+        $errores["tipoRelacion"] = "El tipo de relacion no se puede dejar vacío.";
     }
     
     
