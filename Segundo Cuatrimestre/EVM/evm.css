@@ -35,7 +35,7 @@ ul{
 
 #header {
 	position:absolute;
-    height:90px;
+    min-height:90px;
 	top: 20px;
     left:40px;
     right:40px;
@@ -128,18 +128,20 @@ div.formulario{
 }
 
 div.lineaFormulario{
-    height: 38px;
+    min-height: 38px;
 }
 
 label {
 	vertical-align: top;
+    text-align: right;
     display:inline-block;
+    margin-right: 10px;
     width:190px;
 }
 
 input.box{
 	vertical-align: top;
-	width: 232px;
+	width: 234px;
 }
 
 input.error, select.error{

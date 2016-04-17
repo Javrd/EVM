@@ -5,13 +5,14 @@ session_start();
 		$usuario["nombre"] = "";
 		$usuario["apellidos"] = "";
 		$fechaNacimiento['dia']="1";
-		$fechaNacimiento['mes']="Enero";
-		$fechaNacimiento['anio']=date('Y');
+		$fechaNacimiento['mes']="1";
+		$fechaNacimiento['anio']=date('Y')-3;
 		$usuario["fechaNacimiento"] = $fechaNacimiento;
 		$usuario["direccion"] = "";
 		$usuario["email"] = "";
 		$usuario["telefono"] = "";
-		$usuario["responsable"]="--Responsable--";
+        $usuario["responsable"]="--Responsable--";
+        $usuario["tipoRelacion"]="";
 		$_SESSION["usuario"] = $usuario;
 	} else {
 		$usuario = $_SESSION['usuario'];
@@ -23,7 +24,7 @@ session_start();
 		unset($_SESSION['errores']);		
 	}	
 	
-	require_once ("GestionarUsuario.php");
+    require_once ("GestionarResponsable.php");
 	require_once("GestionBD.php");
 	
 	$conexion = crearConexionBD();
@@ -37,7 +38,7 @@ session_start();
 		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
 		Remove this if you use the .htaccess -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<!-- <?php 
+		<!-- <?php  //TODO cambiar titulo segun nuevo o modificar usuario 
 		if ($usuario["action"]=="modificar"){
 			echo "<title>Modificar usuario</title>";	
 		} elseif($usuario["action"]=="nuevo"){
@@ -65,13 +66,13 @@ session_start();
                     <div id="div_nombre" class="lineaFormulario">  
                       <label id="label_nombre" for="input_nombre">Nombre:</label>
                       <input id="input_nombre" class="box <?php if(isset($errores["nombre"])) echo "error"?>" name="nombre" value="<?php echo $usuario['nombre'] ?>" type="text"/>
-                      <span class="error"><?php if(isset($errores["nombre"])) echo $errores["nombre"]?></span>
+                      <?php if(isset($errores["nombre"])) echo '<span class="error">'.$errores["nombre"]."</span>"?>
                     </div>
         
                     <div id="div_apellidos" class="lineaFormulario">  
                       <label id="label_apellidos" for="input_apellidos">Apellidos:</label>
                       <input id="input_apellidos" class="box <?php if(isset($errores["apellidos"])) echo "error"?>" name="apellidos" value="<?php echo $usuario['apellidos'] ?>" type="text"/>
-                      <span class="error"><?php if(isset($errores["apellidos"])) echo $errores["apellidos"]?></span>
+                      <?php if(isset($errores["apellidos"])) echo '<span class="error">'.$errores["apellidos"]."</span>"?>
                     </div>
         
         			<div id="div_fechaNacimiento" class="lineaFormulario">
@@ -120,12 +121,12 @@ session_start();
                           	</optgroup>
                           	</select>
                         </div>
-                        <span class="error"><?php if(isset($errores["fechaNacimiento"])) echo $errores["fechaNacimiento"]?></span>
+                        <?php if(isset($errores["fechaNacimiento"])) echo '<span class="error">'.$errores["fechaNacimiento"]."</span>"?>
                   	</div>
                    	<div id="div_direccion" class="lineaFormulario">
                 		<label id="label_direccion" for="input_direccion">Dirección:</label>
                     	<input id="input_direccion" class="box <?php if(isset($errores["direccion"])) echo "error"?>" name="direccion" value="<?php echo $usuario['direccion'] ?>" type="text"/>
-                        <span class="error"><?php if(isset($errores["direccion"])) echo $errores["direccion"]?></span>   
+                        <?php if(isset($errores["direccion"])) echo '<span class="error">'.$errores["direccion"].'</span>'?>  
                   	</div>
                     <div id="div_email" class="lineaFormulario">  
                       	<label id="label_email" for="input_email">Email:</label>
@@ -155,6 +156,11 @@ session_start();
         					?>
                       	</select>
                       	<span class="error"><?php if(isset($errores["responsable"])) echo $errores["responsable"]?></span>
+                    </div>
+                    <div id="div_tipoRelación" class="lineaFormulario">
+                        <label id="label_tipoRelación" for="input_tipoRelación">Tipo de relación:</label>
+                        <input id="input_tipoRelación" class="box <?php if(isset($errores["tipoRelacion"])) echo "error"?>" name="tipoRelacion" type="text"/>
+                        <?php if(isset($errores["tipoRelacion"])) echo '<span class="error">'.$errores["tipoRelacion"].'</span>'?>
                     </div>
                     <div id="div_submit">
                           <button id="button_enviar" class="submit" type="submit">Enviar</button>
