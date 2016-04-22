@@ -39,7 +39,7 @@
         
         cerrarConexionBD($conexion);
         
-        // Header("Location: usuarios.php");
+        Header("Location: usuarios.php");
     } else {
         header("Location: registraUsuario.php");
     }

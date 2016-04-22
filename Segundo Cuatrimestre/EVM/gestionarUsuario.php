@@ -2,7 +2,7 @@
 
     function listaUsuarios($conexion){
         try{
-            $total_query = "SELECT * FROM USUARIOS";
+            $total_query = "SELECT * FROM USUARIOS ORDER BY apellidos";
             $stmt = $conexion->query( $total_query );
             return $stmt;
         }catch(PDOException $e){
@@ -14,7 +14,6 @@
         try{
             $stmt = $conexion->prepare("INSERT INTO USUARIOS (nombre,apellidos,fecha_nacimiento,direccion,email,telefono,derechos_imagen)
 VALUES (:nombre, :apellidos, TO_DATE(:fecha,'ddmmYYYY'), :direccion, :email, :telefono, :derechos) RETURNING oid_u INTO :oid_u");
-            $oid_u = null;
             $stmt->bindParam(':nombre',$nombre);
             $stmt->bindParam(':apellidos',$apellidos);
             $stmt->bindParam(':fecha',$fecha);
