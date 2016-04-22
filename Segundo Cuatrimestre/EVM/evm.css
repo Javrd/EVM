@@ -6,21 +6,20 @@ html, body {
 
 ul{
 	list-style-type: none;
-	padding: 0px;
+	padding: 0em;
 	
 }
 
 
 #container{  
-	padding: 2% 40px 2% 40px;
-	padding-left, padding-right:40px;
+	padding: 1.2em 2.5em 1.2em 2.5em;
  	background: rgb(240,240,240); /* For browsers that do not support gradients */
   	background: -webkit-linear-gradient(left top, rgb(190,190,190), rgb(245,245,245)); /* For Safari 5.1 to 6.0 */
   	background: -o-linear-gradient(bottom right, rgb(190,190,190), rgb(245,245,245)); /* For Opera 11.1 to 12.0 */
   	background: -moz-linear-gradient(bottom right, rgb(190,190,190), rgb(245,245,245)); /* For Firefox 3.6 to 15 */
   	background: linear-gradient(to bottom right, rgb(190,190,190), rgb(245,245,245)); /* Standard syntax */
   	background-repeat: no-repeat;
-	min-height: 92%;
+	min-height: 94%;
     position: relative; 
 }
 	/*header.html*/
@@ -28,36 +27,31 @@ ul{
 #header a{
 	text-decoration: none;
     color: #444;
-	font-weight: 700;
+	font-weight: bold;
     font-family: 'Oswald', arial, serif;
-    line-height: 1;
+    line-height: 1em;
 }
 
 #header {
-	position:absolute;
-    min-height:90px;
-	top: 20px;
-    left:40px;
-    right:40px;
-    padding: 10px;
+	position:relative;
+    padding: 1.25em;
 	background: #3dacea;
     font-family: 'Open Sans', sans-serif;
 }
 
-#content {
-	margin-top: 110px;
-	margin-bottom:85px;
+#content{
+	margin-bottom: 6em;
 }
 
 #footer{
 	position: absolute;
-    bottom: 20px;
-    left: 40px;
-    right: 40px;
-    height: 45px;
+	bottom: 1.25em;
+	left: 2.5em;
+	right: 2.5em;
+    height: 2.813em;
 	background-color: black;
 	color: white;
-    padding: 10px;
+    padding: 0.625em;
 }
 
 #footer a {
@@ -67,41 +61,42 @@ ul{
 
 #logo{
 	background: url('logo-min-238x300.png') no-repeat;
-    padding-left: 70px;
-    background-size: 60px;
+    padding-left: 4.375em;
+    background-size: 3.75em;
 }
 
 #p_titulo {
-	line-height: 1;
-    margin: 10px 0 8px;
-    margin: 0.625rem 0 0.5rem;    
-    font-size: 42px;
-    font-size: 2.625rem;
+	line-height: 1em;
+    margin: 0.238em 0 0.191em;
+    font-size: 2.625em;
     border: 0;
     padding: 0;
     vertical-align: baseline;
 }
 
 #p_descripcion{
-	margin: 0;
+	margin: 0em;
 }
 	/*index.php*/
 	
 ul.menu{
-	padding-top:40px;
+	padding-top:1.5em;
+	margin: 0em;
+	margin-top:1.25em;
 }
+
 .button a {
     background-color: #008CBA;
-	border-radius: 4px;
+	border-radius: 0.25em;
     color: white;
     display: block;
     margin: auto;
-	margin-bottom: 5px;
-    padding: 15px 32px;
+	margin-bottom: 0.313em;
+    padding: 0.938em 2em;
     text-align: center;
     text-decoration: none;
     transition-duration: 0.4s;
-    width: 100px;
+    width: 6.25em;
     -webkit-transition-duration: 0.4s; /* Safari */
 }
 
@@ -111,24 +106,24 @@ ul.menu{
 }
 
 #div_inicio {
-	padding: 20px;    
+	padding: 1.25em;    
 	vertical-align: middle;
 
 }
 
 div#formulario{
-	margin-top: 140px;
-	margin-left:190px;
-	margin-right:180px;
-	padding-top:2.5%;
-	padding-bottom:1%;
-	padding-left:40px;
-	padding-right:60px;
+	margin-top: 1em;	
+	margin-left:12.6285%;
+	margin-right:12.6285%;
+	padding-top:1.2em;
+	padding-bottom:0.5em;
+	padding-left:2.5em;
+	padding-right:3.75em;
 	border: solid #008CBA;
 }
 
 div.lineaFormulario{
-    min-height: 38px;
+    min-height: 2.375em;
 }
 
 label {
@@ -203,7 +198,7 @@ div#UsuariosNavBar li,form{
 }
 
 #ConsultaUsuarios{
-	margin-top: 50px;
+	margin-top: 2.125em;
 }
 
 div.evenrow, div.oddrow{
@@ -223,8 +218,13 @@ div.evenrow:hover, div.oddrow:hover{
 	font-weight: bold;
 }
 
-::selection{
-	background-color: #3dacea;
+::-moz-selection { /* Code for Firefox */
+    background: #3dacea;
+    color: #white;
+}
+
+::selection {
+	background: #3dacea;
 	color: white;
 }
 

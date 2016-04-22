@@ -28,7 +28,7 @@
             
     		<?php include("header.html") ?>
     		
-    		<div id="content">
+    		<div id="content" class="menu">
     			<ul class="menu">
                     <li class="button"><a href="usuarios.php">Usuarios</a></li>
                     <li class="button"><a href="responsables.php">Responsables</a></li>
