@@ -24,8 +24,8 @@ session_start();
 		unset($_SESSION['errores']);		
 	}	
 	
-    require_once ("GestionarResponsable.php");
-	require_once("GestionBD.php");
+    require_once ("../gestion/gestionarResponsable.php");
+	require_once("../gestion/gestionBD.php");
 	
 	$conexion = crearConexionBD();
 ?>
@@ -45,24 +45,22 @@ session_start();
 			echo "<title>Nuevo usuario</title>";
 		}
 		 ?> -->
-		<meta name="description" content="">
-		<meta name="author" content="Javi">
 
 		<meta name="viewport" content="width=device-width; initial-scale=1.0">
 
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="apple-touch-icon" href="favicon.png">
-        <link rel="stylesheet" type="text/css" href="evm.css">
+        <link rel="shortcut icon" href="../img/favicon.png">
+        <link rel="apple-touch-icon" href="../img/favicon.png">
+        <link rel="stylesheet" type="text/css" href="../evm.css">
 	</head>
 	
 	<body>
         <div id="container">
 		
-    		<?php include('header.html') ?>
+    		<?php include('../header.html') ?>
     		
     		<div id="content">
     		   <div id="formulario">
-    	       <form action="tratamientoUsuarios.php" method="post">
+    	       <form action="../tratamientos/tratamientoUsuarios.php" method="post">
     	  
                     <div id="div_nombre" class="lineaFormulario">  
                       <label id="label_nombre" for="input_nombre">Nombre:</label>
@@ -172,7 +170,7 @@ session_start();
             </div> <!-- Fin content -->
             
     		<?php    
-    		include("footer.html");
+    		include("../footer.html");
             cerrarConexionBD($conexion); 
             ?>
         </div>

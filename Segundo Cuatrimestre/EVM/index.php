@@ -12,13 +12,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
 		<title>Inicio</title>
-		<meta name="description" content="">
-		<meta name="author" content="Javi">
 
 		<meta name="viewport" content="width=device-width; initial-scale=1.0">
 
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="apple-touch-icon" href="favicon.png">
+        <link rel="shortcut icon" href="img/favicon.png">
+        <link rel="apple-touch-icon" href="img/favicon.png">
         <link rel="stylesheet" type="text/css" href="evm.css">
         <link rel="Shortcut Icon" href="favicon.png" type="image/x-icon" />          
 	</head>
@@ -30,13 +28,13 @@
     		
     		<div id="content" class="menu">
     			<ul class="menu">
-                    <li class="button"><a href="usuarios.php">Usuarios</a></li>
-                    <li class="button"><a href="responsables.php">Responsables</a></li>
-    				<li class="button"><a href="matriculas.php">Matrículas</a</li>
-    				<li class="button"><a href="prestamos.php">Préstamos</a</li>
-    				<li class="button"><a href="faltas.php">Faltas</a</li>
-    				<li class="button"><a href="pagos.php">Pagos</a</li>
-    				<li class="button"><a href="asignaturas.php">Asignaturas</a></li>
+                    <li class="button"><a href="vistas/usuarios.php">Usuarios</a></li>
+                    <li class="button"><a href="vistas/responsables.php">Responsables</a></li>
+    				<li class="button"><a href="vistas/matriculas.php">Matrículas</a</li>
+    				<li class="button"><a href="vistas/prestamos.php">Préstamos</a</li>
+    				<li class="button"><a href="vistas/faltas.php">Faltas</a</li>
+    				<li class="button"><a href="vistas/pagos.php">Pagos</a</li>
+    				<li class="button"><a href="vistas/asignaturas.php">Asignaturas</a></li>
     			</ul>
     		</div>
             

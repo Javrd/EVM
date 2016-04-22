@@ -1,9 +1,9 @@
 <?php
     session_start();
     
-    require_once ("GestionarUsuario.php");
-    require_once ("GestionarResponsable.php");
-    require_once("GestionBD.php");
+    require_once ("../gestion/gestionarUsuario.php");
+    require_once ("../gestion/gestionarResponsable.php");
+    require_once("../gestion/gestionBD.php");
     
     if(isset($_SESSION["usuarioExito"])){
         $conexion = crearConexionBD();
@@ -39,8 +39,8 @@
         
         cerrarConexionBD($conexion);
         
-        Header("Location: usuarios.php");
+        Header("Location: ../vistas/usuarios.php");
     } else {
-        header("Location: registraUsuario.php");
+        header("Location: ../registros/registraUsuario.php");
     }
 ?>
