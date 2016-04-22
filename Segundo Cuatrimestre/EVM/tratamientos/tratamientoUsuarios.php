@@ -19,14 +19,14 @@ if (isset($_SESSION["usuario"]) ){
     if ( count ($errores) > 0 ) {
         $_SESSION["usuario"] = $usuario;
         $_SESSION["errores"] = $errores;
-        Header("Location: registraUsuario.php");
+        Header("Location: ../registros/registraUsuario.php");
     }
     else {
         $_SESSION["usuarioExito"] = $usuario;
-        Header("Location: exitoUsuario.php");
+        Header("Location: ../exito/exitoUsuario.php");
     }
 } 
-else Header("Location: registraUsuario.php");
+else Header("Location: ../registros/registraUsuario.php");
     
     function validar($usuario) {
     
