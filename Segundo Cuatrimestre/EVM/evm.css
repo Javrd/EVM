@@ -15,10 +15,10 @@ ul{
 	padding: 2% 40px 2% 40px;
 	padding-left, padding-right:40px;
  	background: rgb(240,240,240); /* For browsers that do not support gradients */
-  	background: -webkit-linear-gradient(left top, rgb(230,230,230), rgb(245,245,245)); /* For Safari 5.1 to 6.0 */
-  	background: -o-linear-gradient(bottom right, rgb(230,230,230), rgb(245,245,245)); /* For Opera 11.1 to 12.0 */
-  	background: -moz-linear-gradient(bottom right, rgb(230,230,230), rgb(245,245,245)); /* For Firefox 3.6 to 15 */
-  	background: linear-gradient(to bottom right, rgb(230,230,230), rgb(245,245,245)); /* Standard syntax */
+  	background: -webkit-linear-gradient(left top, rgb(190,190,190), rgb(245,245,245)); /* For Safari 5.1 to 6.0 */
+  	background: -o-linear-gradient(bottom right, rgb(190,190,190), rgb(245,245,245)); /* For Opera 11.1 to 12.0 */
+  	background: -moz-linear-gradient(bottom right, rgb(190,190,190), rgb(245,245,245)); /* For Firefox 3.6 to 15 */
+  	background: linear-gradient(to bottom right, rgb(190,190,190), rgb(245,245,245)); /* Standard syntax */
   	background-repeat: no-repeat;
 	min-height: 92%;
     position: relative; 
@@ -45,9 +45,7 @@ ul{
 }
 
 #content {
-	padding-top: 20px;
-	padding-bottom: 20px;
-	margin-top: 130px;
+	margin-top: 110px;
 	margin-bottom:85px;
 }
 
@@ -60,7 +58,6 @@ ul{
 	background-color: black;
 	color: white;
     padding: 10px;
-	/*TODO Hacer que el footer se quede abajo (se va muestra ahora mismo siempre incluso si hay scroll y se descoloca)*/
 }
 
 #footer a {
@@ -90,6 +87,9 @@ ul{
 }
 	/*index.php*/
 	
+ul.menu{
+	padding-top:40px;
+}
 .button a {
     background-color: #008CBA;
 	border-radius: 4px;
@@ -116,14 +116,14 @@ ul{
 
 }
 
-div.formulario{
-	margin-top: 2.5%;
-	margin-left:15%;
-	margin-right:15%;
+div#formulario{
+	margin-top: 140px;
+	margin-left:190px;
+	margin-right:180px;
 	padding-top:2.5%;
 	padding-bottom:1%;
-	padding-left:5%;
-	padding-right:5%;
+	padding-left:40px;
+	padding-right:60px;
 	border: solid #008CBA;
 }
 
@@ -189,6 +189,38 @@ span.error{
     display:inline-block;
 	color:red;
     width:320px;
+}
+
+div#UsuariosNavBar{
+	
+	background-color: #3DACEA;
+	text-align: right;
+}
+div#UsuariosNavBar li,form{
+	display: inline;
+	padding-left:20px;
+	padding-right:20px;
+}
+
+#ConsultaUsuarios{
+	margin-top: 50px;
+}
+
+div.evenrow, div.oddrow{
+	padding: 20px;
+}
+
+div.evenrow{
+	background-color: #008CBA;
+}
+div.oddrow{
+	background-color: #3DACEA;
+}
+
+
+div.evenrow:hover, div.oddrow:hover{
+	
+	font-weight: bold;
 }
 
 ::selection{

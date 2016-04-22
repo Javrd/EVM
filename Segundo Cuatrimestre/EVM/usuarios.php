@@ -32,7 +32,7 @@
     		<?php include("header.html") ?>
     		
     		<div id="content">
-        		<nav id="UsuariosNavBar">
+        		<div id="UsuariosNavBar">
         			<ul>
         				<li>Todos</li>
         				<li>Usuarios con préstamos</li>
@@ -40,15 +40,18 @@
         				<li><button id = "button_nuevo" name="nuevo">Nuevo</button></li>
         				</form>
         			</ul>
-        		</nav>
+        		</div>
         
         		<div id="ConsultaUsuarios">
         			<?php //TODO Tabla de la consulta (por defecto "Todos")
                         $usuarios = listaUsuarios($conexion);
+                        $i = 0;
                         foreach ($usuarios as $usuario) {
-                            echo '<div class="row">'; 
+                            $row = $i%2?'oddrow':'evenrow';
+                            echo "<div class=$row>"; 
                             echo $usuario['NOMBRE']." ".$usuario['APELLIDOS'];
                             echo '</div>';
+                            $i++;
                         } 
                     ?>
         		</div>

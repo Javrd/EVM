@@ -60,7 +60,8 @@ session_start();
 		
     		<?php include('header.html') ?>
     		
-    		<div id="content" class="formulario">
+    		<div id="content">
+    		   <div id="formulario">
     	       <form action="tratamientoUsuarios.php" method="post">
     	  
                     <div id="div_nombre" class="lineaFormulario">  
@@ -115,7 +116,8 @@ session_start();
             						echo "<option ";
             						if ($usuario['fechaNacimiento']['anio'] == $i ) echo "selected='selected'";
             						echo ">";
-            						echo "$i</option>";
+                                    $dia = $i<10?"0$i":"$i";
+            						echo "$dia</option>";
             				  	}
             					?>
                           	</optgroup>
@@ -166,6 +168,7 @@ session_start();
                           <button id="button_enviar" class="submit" type="submit">Enviar</button>
                 	</div>
         	   </form>
+        	   </div>
             </div> <!-- Fin content -->
             
     		<?php    
