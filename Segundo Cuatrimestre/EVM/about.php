@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Error</title>
+		<title>Sobre esta página</title>
 		<link rel="shortcut icon" href="img/favicon.png">
         <link rel="apple-touch-icon" href="img/favicon.png">		
         <link rel="stylesheet" type="text/css" href="evm.css">  
@@ -15,15 +15,19 @@
 	<body>	
 	<div id="container">
 	<?php include("header.html") ?>
-	<div id="p_titulo">Sobre esta página</div>
-	<div id="p_descripcion"><br>Esta página esta creada con el objetivo de administrar la asociación Espacio Vida &amp; Música de una manera más ordenada y fácil.</div>
-	<div id="p_descripcion"><br>Los integrantes que han hecho posible este proyecto son:</div>
-	<div id="p_descripcion"><br>- Javier Rodríguez Martín </div>
-	<div id="p_descripcion">- Daniel Iglesias Pérez </div>
-	<div id="p_descripcion">- Louis Outin </div>
-	<div id="p_descripcion">- Carlos Muñoz de Souza</div>
-	<div id="p_descripcion"><br>Pulse <a href="index.php">aquí</a> para volver a la página principal.</div>
-	<?php include("footer.html") ?>
+	<div id="content">
+    	<div id="p_titulo">Sobre esta página</div>
+        	<p>Esta página esta creada con el objetivo de administrar la asociación Espacio Vida &amp; Música de una manera más ordenada y fácil.</p>
+        	<p>Los integrantes que han hecho posible este proyecto son:</p>
+            <ul class="ul_circle">
+            	<li>Javier Rodríguez Martín </li>
+            	<li>Daniel Iglesias Pérez </li>
+            	<li>Louis Outin </li>
+            	<li>Carlos Muñoz de Souza</li>
+            </ul>
+        	<div>Pulse <a href="index.php">aquí</a> para volver a la página principal.</div>
+        </div>
+    	<?php include("footer.html") ?>
 	</div>
 	</body>
 </html>
