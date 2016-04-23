@@ -136,13 +136,14 @@ session_start();
                       	<label id="label_telefono" for="input_telefono">Teléfono:</label>
                       	<input id="input_telefono" class="box <?php if(isset($errores["telefono"])) echo "error"?>" name="telefono" value="<?php echo $usuario['telefono'] ?>" type="text"/>
                     </div>
-                    <div id="div_derechosImagen" class="lineaFormulario">
+                    <div id="div_checkboxsUsuarios" class="lineaFormulario">
                     	<label id="label_derechosImagen" for="input_derechosImagen">Cede los derechos de imagen</label>
-                  		<input id="input_derechosImagen" name="derechosImagen" <?php if(isset($usuario['derechosImagen'])) echo 'checked' ?> type="checkbox"/>
+                  		<input id="input_derechosImagen" name="derechosImagen" <?php if(isset($usuario['derechosImagen'])) echo 'checked' ?> type="checkbox"/>   
+                        <label id="label_checkResponsable" for="input_checkResponsable">Vincular responsable</label>
+                        <input id="input_checkResponsable" name="checkResponsable" <?php if(isset($usuario['checkResponsable'])) echo "checked='checked'" ?> type="checkbox"/>
                   	</div>
                     <div id="div_responsable" class="lineaFormulario">
-                    	<label id="label_responsable" for="input_responsable">Vincular responsable</label>
-                    	<input id="input_responsable" name="checkResponsable" <?php if(isset($usuario['checkResponsable'])) echo "checked='checked'" ?> type="checkbox"/>
+                        <label id="label_responsable" for="select_responsable">Responsable</label>
                     	<select id="select_responsable " <?php if(isset($errores["responsable"])) echo 'class="error"'?> name="responsable">
                     	    <option>--Responsable--</option>
         	              	<?php

@@ -31,7 +31,7 @@
     		
     		<div id="content">
         		<div id="UsuariosNavBar">
-        			<ul>
+        			<ul class="menu">
         				<li>Todos</li>
         				<li>Usuarios con préstamos</li>
                         <form action="../registros/registraUsuario.php" method="post">

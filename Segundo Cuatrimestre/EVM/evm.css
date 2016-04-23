@@ -4,7 +4,7 @@ html, body {
     height: 100%;
 }
 
-ul{
+ul.menu{
 	list-style-type: none;
 	padding: 0em;
 	
@@ -79,7 +79,7 @@ ul{
 }
 	/*index.php*/
 	
-ul.menu{
+#menuInicio{
 	padding-top:1.5em;
 	margin: 0em;
 	margin-top:1.25em;
@@ -111,6 +111,9 @@ ul.menu{
 
 }
 
+
+/* Formulario Usuario*/
+
 div#formulario{
 	margin-top: 1em;	
 	margin-left:12.6285%;
@@ -132,6 +135,12 @@ label {
     display:inline-block;
     margin-right: 10px;
     width:190px;
+}
+
+#label_checkResponsable{
+	margin-left: 20px;
+	text-align: left;
+	display: inline;
 }
 
 input.box{
@@ -186,6 +195,8 @@ span.error{
     width:320px;
 }
 
+	/* Vista Usuarios*/
+
 div#UsuariosNavBar{
 	
 	background-color: #3DACEA;
@@ -193,8 +204,8 @@ div#UsuariosNavBar{
 }
 div#UsuariosNavBar li,form{
 	display: inline;
-	padding-left:20px;
-	padding-right:20px;
+	padding:20px;
+	padding:20px;
 }
 
 #ConsultaUsuarios{
@@ -228,11 +239,21 @@ div.evenrow:hover, div.oddrow:hover{
 	color: white;
 }
 
+	/*About*/
+
+ul.ul_circle{
+	list-style-type: circle;
+}
+
+ 	/* Error */
+
 div.error{
 	color: red;
 	border: double;
 	margin: 1em;
 }
+
+
 
 @font-face {
   font-family: 'Oswald';
