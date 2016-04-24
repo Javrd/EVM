@@ -26,7 +26,8 @@ VALUES (:nombre, :apellidos, TO_DATE(:fecha,'ddmmYYYY'), :direccion, :email, :te
             return $oid_u;
                         
         }catch(PDOException $e){
-            echo $e->getMessage();
+        $_SESSION['error']=$e->GetMessage();
+        header("Location:../error.php");
         }
     }
         
@@ -38,7 +39,7 @@ VALUES (:nombre, :apellidos, TO_DATE(:fecha,'ddmmYYYY'), :direccion, :email, :te
                 $last = $total;
             }
             if ($constulta == 'Usuarios con prestamos')
-                $select = "SELECT NOMBRE, APELLIDOS FROM PRESTAMOS NATURAL JOIN MATRICULAS NATURAL JOIN USUARIOS WHERE MATRICULAS.FECHA_MATRICULACION>(SYSDATE - 365) ORDER BY APELLIDOS, NOMBRE";
+                $select = "SELECT nombre,apellidos,fecha_nacimiento,direccion,email,telefono,derechos_imagen FROM PRESTAMOS NATURAL JOIN MATRICULAS NATURAL JOIN USUARIOS WHERE MATRICULAS.FECHA_MATRICULACION>(SYSDATE - 365) ORDER BY APELLIDOS, NOMBRE";
             else
                 $select = "SELECT * FROM USUARIOS ORDER BY APELLIDOS, NOMBRE";
             
@@ -60,7 +61,8 @@ VALUES (:nombre, :apellidos, TO_DATE(:fecha,'ddmmYYYY'), :direccion, :email, :te
             return $stmt;
         }
         catch ( PDOException $e ) {
-            echo "Error : $e";
+        $_SESSION['error']=$e->GetMessage();
+        header("Location:../error.php");
     }
     return $stmt;
         
