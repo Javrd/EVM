@@ -213,11 +213,16 @@ div#UsuariosNavBar{
 }
 
 div.hrow{
-	padding-left:1em;
+	position:relative;
+	display: inline;
+}
+
+div.hrow button{
+    width:100%;
+    
 }
 
 div.evenrow, div.oddrow{
-	position:relative;
 	font-weight: bold;
 	padding-left:1em;
 	min-height: 3em;
@@ -234,14 +239,28 @@ div.oddrow{
 	background-color: #3DACEA;
 }
 
-div.col{
-	display: inline-block;
-	width: 10em;
+div.col3{
+	width: 3em;
 }
 
-div.col span{
+div.col6{
+	width: 6em;
+}
+
+div.col12{
+	width: 12em;
+}
+div.col15{
+	width: 15em;
+}
+
+div.col3, div.col6, div.col12, div.col15{
+	display: inline-block;
 	text-align: center;
-	top: 0;
+	padding-top:0.3em;
+}
+
+div.col3 span, div.col6 span, div.col12 span{
 }
 
 ::-moz-selection { /* Code for Firefox */

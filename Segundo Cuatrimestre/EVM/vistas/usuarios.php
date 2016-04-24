@@ -34,6 +34,9 @@
     }
 
     /* Definicion y comprobacion de variables de paginacion */
+
+    if ( $page_size < 1 ) 
+        $page_size = 10;
     
     if ($consulta == "Usuarios con prestamos")
         $total = consultarUsuariosConPrestamos($conexion); // Cuenta el total de usuarios para consulta de usuarios con prestamos
@@ -41,16 +44,13 @@
         $total = consultarTotalUsuarios($conexion);  // Cuenta de total de usuarios por defecto. Por defecto, consulta = Todos
     $total_pages = ( $total / $page_size );
     
-    if ( $page_size < 1 ) 
-        $page_size = 10;
-    
     if ( $total % $page_size > 0 ) // resto de la división
         $total_pages++;
     
     if ( $page_num < 1 ) 
         $page_num = 1;
     else if ( $page_num > $total_pages )
-        $page_num = $total_pages;  
+        $page_num = (int)$total_pages;  
     
     $usuarios["page_num"] = $page_num;
     $usuarios["page_size"] = $page_size;
@@ -109,26 +109,53 @@
              
                 </form>
                 </div>   
-        		<div id="ConsultaUsuarios">
+        		<div id="ConsultaUsuarios" class="table">
         		    <div class="hrow">
-                        <div class=col><button>Nombre</button></div>
-                        <div class=col><button>Apellidos</button></div>
-                        <div class=col><button>Edad</button></div>
-                        <div class=col><button>Direccion</button></div>
-                        <div class=col><button>Email</button></div>
-                        <div class=col><button>Telefono</button></div>
-                        <div class=col><button>Derechos de imagen</button></div>
+                        <div class="col6 hrow_button"><button>Nombre</button></div>
+                        <div class="col15 hrow_button"><button>Apellidos</button></div>
+                        <div class="col6 hrow_button"><button>Edad</button></div>
+                        <div class="col12 hrow_button"><button>Direccion</button></div>
+                        <div class="col12 hrow_button"><button>Email</button></div>
+                        <div class="col6 hrow_button"><button>Telefono</button></div>
+                        <div class="col12 hrow_button"><button>Derechos de imagen</button></div>
         		    </div>
         			<?php 
                         $filas = consultarPaginaUsuarios($conexion,$page_num,$page_size,$total,$consulta);
                         $i = 0;
-                        
                         foreach ($filas as $usuario) {
+                            
                             $row = $i%2?'oddrow':'evenrow';
-                            echo "<div class=$row>"; 
-                            echo "<div class=col><span>".$usuario['NOMBRE']."</span></div>";
-                            echo "<div class=col><span>".$usuario['APELLIDOS']."</span></div>";
-                            echo "</div>";
+                            $nacimiento = DateTime::createFromFormat("d/m/y",$usuario['FECHA_NACIMIENTO']);
+                            $edad = $nacimiento->diff( new DateTime());
+                    ?>
+                            <div class=<?php echo $row ?>>
+                                <div class="col6"><span><?php echo $usuario['NOMBRE']?></span></div>
+                                <div class="col15"><span><?php echo $usuario['APELLIDOS']?></span></div>
+                                <div class="col6"><span><?php echo $edad->format('%y')?></span></div>
+                                <div class="col12"><span><?php echo $usuario['DIRECCION']?></span></div>
+                                <div class="col12"><span><?php echo $usuario['EMAIL']?></span></div>
+                                <div class="col6"><span><?php echo $usuario['TELEFONO']?></span></div>
+                                <div class="col12">
+                    <?php   
+                            if($usuario['DERECHOS_IMAGEN']==1){
+                                echo'<img src="../img/1024px-Green_tick_pointed.png" style="width:20px;height:20px;"/>';
+                            }
+                    ?>
+                                </div>
+                                <div class="col6">
+                                    <form  method="post" action="../registros/registraUsuario.php">
+                                        <input type="hidden" name="oid_u" value="<?php echo $usuario['OID_U']?>"/>
+                                        <input type="hidden" name="nombre" value="<?php echo $usuario['NOMBRE']?>"/>
+                                        <input type="hidden" name="apellidos" value="<?php echo $usuario['APELLIDOS']?>"/>
+                                        <input type="hidden" name="fechaNacimiento" value="<?php echo $usuario['FECHA_NACIMIENTO']?>"/>
+                                        <input type="hidden" name="direccion" value="<?php echo $usuario['DIRECCION']?>"/>
+                                        <input type="hidden" name="email" value="<?php echo $usuario['EMAIL']?>"/>
+                                        <input type="hidden" name="telefono" value="<?php echo $usuario['TELEFONO']?>"/>
+                                        <button><img src="../img/Edit_Notepad_Icon.png" style="width:20px;height:20px;"/></button>
+                                    </form>
+                                </div>
+                            </div>
+                    <?php  
                             $i++;
                         } 
                     ?>
