@@ -212,15 +212,19 @@ div#UsuariosNavBar{
 	margin-top: 2.125em;
 }
 
-div.evenrow, div.oddrow{
-	position:relative;
-	min-height: 3em;
-	font-weight: bold;
+div.hrow{
 	padding-left:1em;
 }
-div.evenrow span, div.oddrow span{
-	position:absolute;
-	bottom:40%
+
+div.evenrow, div.oddrow{
+	position:relative;
+	font-weight: bold;
+	padding-left:1em;
+	min-height: 3em;
+}
+
+div.evenrow:hover, div.oddrow:hover{
+	font-style: italic;
 }
 
 div.evenrow{
@@ -230,12 +234,14 @@ div.oddrow{
 	background-color: #3DACEA;
 }
 
+div.col{
+	display: inline-block;
+	width: 10em;
+}
 
-div.evenrow:hover, div.oddrow:hover{
-	
-	font-size: large;
-	min-height: 2.667em;
-	
+div.col span{
+	text-align: center;
+	top: 0;
 }
 
 ::-moz-selection { /* Code for Firefox */
