@@ -1,21 +1,21 @@
 <?php
 session_start();
     
-	if (!isset($_SESSION['usuario'])){
-		$usuario["nombre"] = "";
-		$usuario["apellidos"] = "";
+	if (!isset($_SESSION['registroUsuario'])){
+		$registroUsuario["nombre"] = "";
+		$registroUsuario["apellidos"] = "";
 		$fechaNacimiento['dia']="1";
 		$fechaNacimiento['mes']="1";
 		$fechaNacimiento['anio']=date('Y')-3;
-		$usuario["fechaNacimiento"] = $fechaNacimiento;
-		$usuario["direccion"] = "";
-		$usuario["email"] = "";
-		$usuario["telefono"] = "";
-        $usuario["responsable"]="--Responsable--";
-        $usuario["tipoRelacion"]="";
-		$_SESSION["usuario"] = $usuario;
+		$registroUsuario["fechaNacimiento"] = $fechaNacimiento;
+		$registroUsuario["direccion"] = "";
+		$registroUsuario["email"] = "";
+		$registroUsuario["telefono"] = "";
+        $registroUsuario["responsable"]="--Responsable--";
+        $registroUsuario["tipoRelacion"]="";
+		$_SESSION["registroUsuario"] = $registroUsuario;
 	} else {
-		$usuario = $_SESSION['usuario'];
+		$registroUsuario = $_SESSION['registroUsuario'];
 	}
 	
 	// Gestion de errores.
@@ -39,9 +39,9 @@ session_start();
 		Remove this if you use the .htaccess -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<!-- <?php  //TODO cambiar titulo segun nuevo o modificar usuario 
-		if ($usuario["action"]=="modificar"){
+		if ($registroUsuario["action"]=="modificar"){
 			echo "<title>Modificar usuario</title>";	
-		} elseif($usuario["action"]=="nuevo"){
+		} elseif($registroUsuario["action"]=="nuevo"){
 			echo "<title>Nuevo usuario</title>";
 		}
 		 ?> -->
@@ -64,13 +64,13 @@ session_start();
     	  
                     <div id="div_nombre" class="lineaFormulario">  
                       <label id="label_nombre" for="input_nombre">Nombre:</label>
-                      <input id="input_nombre" class="box <?php if(isset($errores["nombre"])) echo "error"?>" name="nombre" value="<?php echo $usuario['nombre'] ?>" type="text"/>
+                      <input id="input_nombre" class="box <?php if(isset($errores["nombre"])) echo "error"?>" name="nombre" value="<?php echo $registroUsuario['nombre'] ?>" type="text"/>
                       <?php if(isset($errores["nombre"])) echo '<span class="error">'.$errores["nombre"]."</span>"?>
                     </div>
         
                     <div id="div_apellidos" class="lineaFormulario">  
                       <label id="label_apellidos" for="input_apellidos">Apellidos:</label>
-                      <input id="input_apellidos" class="box <?php if(isset($errores["apellidos"])) echo "error"?>" name="apellidos" value="<?php echo $usuario['apellidos'] ?>" type="text"/>
+                      <input id="input_apellidos" class="box <?php if(isset($errores["apellidos"])) echo "error"?>" name="apellidos" value="<?php echo $registroUsuario['apellidos'] ?>" type="text"/>
                       <?php if(isset($errores["apellidos"])) echo '<span class="error">'.$errores["apellidos"]."</span>"?>
                     </div>
         
@@ -82,7 +82,7 @@ session_start();
             	              	<?php
             	              	for ($i=1; $i < 32 ; $i++) { 
             						echo "<option ";
-            						if ($usuario['fechaNacimiento']['dia'] == $i ) echo "selected='selected'";
+            						if ($registroUsuario['fechaNacimiento']['dia'] == $i ) echo "selected='selected'";
             						echo ">";
             						echo "$i</option>";
             				  	}
@@ -92,18 +92,18 @@ session_start();
                           	
                           	<select id="select_mes" <?php if(isset($errores["fechaNacimiento"])) echo 'class="error"'?> name="mes">
             	            <optgroup label="Mes">
-                            <option value = "01" <?php if ($usuario['fechaNacimiento']['mes']=="01") echo "selected='selected'"; ?> >Enero</option>
-                            <option value = "02" <?php if ($usuario['fechaNacimiento']['mes']=="02") echo "selected='selected'"; ?> >Febrero</option>
-                            <option value = "03" <?php if ($usuario['fechaNacimiento']['mes']=="03") echo "selected='selected'"; ?> >Marzo</option>
-                            <option value = "04" <?php if ($usuario['fechaNacimiento']['mes']=="04") echo "selected='selected'"; ?> >Abril</option>
-                            <option value = "05" <?php if ($usuario['fechaNacimiento']['mes']=="05") echo "selected='selected'"; ?> >Mayo</option>
-                            <option value = "06" <?php if ($usuario['fechaNacimiento']['mes']=="06") echo "selected='selected'"; ?> >Junio</option>
-                            <option value = "07" <?php if ($usuario['fechaNacimiento']['mes']=="07") echo "selected='selected'"; ?> >Julio</option>
-                            <option value = "08" <?php if ($usuario['fechaNacimiento']['mes']=="08") echo "selected='selected'"; ?> >Agosto</option>
-                            <option value = "09" <?php if ($usuario['fechaNacimiento']['mes']=="09") echo "selected='selected'"; ?> >Septiembre</option>
-                            <option value = "10" <?php if ($usuario['fechaNacimiento']['mes']=="10") echo "selected='selected'"; ?> >Octubre</option>
-                            <option value = "11" <?php if ($usuario['fechaNacimiento']['mes']=="11") echo "selected='selected'"; ?> >Noviembre</option>
-                            <option value = "12" <?php if ($usuario['fechaNacimiento']['mes']=="12") echo "selected='selected'"; ?> >Diciembre</option>
+                            <option value = "01" <?php if ($registroUsuario['fechaNacimiento']['mes']=="01") echo "selected='selected'"; ?> >Enero</option>
+                            <option value = "02" <?php if ($registroUsuario['fechaNacimiento']['mes']=="02") echo "selected='selected'"; ?> >Febrero</option>
+                            <option value = "03" <?php if ($registroUsuario['fechaNacimiento']['mes']=="03") echo "selected='selected'"; ?> >Marzo</option>
+                            <option value = "04" <?php if ($registroUsuario['fechaNacimiento']['mes']=="04") echo "selected='selected'"; ?> >Abril</option>
+                            <option value = "05" <?php if ($registroUsuario['fechaNacimiento']['mes']=="05") echo "selected='selected'"; ?> >Mayo</option>
+                            <option value = "06" <?php if ($registroUsuario['fechaNacimiento']['mes']=="06") echo "selected='selected'"; ?> >Junio</option>
+                            <option value = "07" <?php if ($registroUsuario['fechaNacimiento']['mes']=="07") echo "selected='selected'"; ?> >Julio</option>
+                            <option value = "08" <?php if ($registroUsuario['fechaNacimiento']['mes']=="08") echo "selected='selected'"; ?> >Agosto</option>
+                            <option value = "09" <?php if ($registroUsuario['fechaNacimiento']['mes']=="09") echo "selected='selected'"; ?> >Septiembre</option>
+                            <option value = "10" <?php if ($registroUsuario['fechaNacimiento']['mes']=="10") echo "selected='selected'"; ?> >Octubre</option>
+                            <option value = "11" <?php if ($registroUsuario['fechaNacimiento']['mes']=="11") echo "selected='selected'"; ?> >Noviembre</option>
+                            <option value = "12" <?php if ($registroUsuario['fechaNacimiento']['mes']=="12") echo "selected='selected'"; ?> >Diciembre</option>
                           	</optgroup>
                           	</select>
             	              	
@@ -112,7 +112,7 @@ session_start();
             	              	<?php
             	              	for ($i=date('Y')-3; $i > 1919 ; $i--) { 
             						echo "<option ";
-            						if ($usuario['fechaNacimiento']['anio'] == $i ) echo "selected='selected'";
+            						if ($registroUsuario['fechaNacimiento']['anio'] == $i ) echo "selected='selected'";
             						echo ">";
                                     $dia = $i<10?"0$i":"$i";
             						echo "$dia</option>";
@@ -125,22 +125,22 @@ session_start();
                   	</div>
                    	<div id="div_direccion" class="lineaFormulario">
                 		<label id="label_direccion" for="input_direccion">Dirección:</label>
-                    	<input id="input_direccion" class="box <?php if(isset($errores["direccion"])) echo "error"?>" name="direccion" value="<?php echo $usuario['direccion'] ?>" type="text"/>
+                    	<input id="input_direccion" class="box <?php if(isset($errores["direccion"])) echo "error"?>" name="direccion" value="<?php echo $registroUsuario['direccion'] ?>" type="text"/>
                         <?php if(isset($errores["direccion"])) echo '<span class="error">'.$errores["direccion"].'</span>'?>  
                   	</div>
                     <div id="div_email" class="lineaFormulario">  
                       	<label id="label_email" for="input_email">Email:</label>
-                      	<input id="input_email" class="box <?php if(isset($errores["email"])) echo "error"?>" name="email" value="<?php echo $usuario['email'] ?>" type="text"/>
+                      	<input id="input_email" class="box <?php if(isset($errores["email"])) echo "error"?>" name="email" value="<?php echo $registroUsuario['email'] ?>" type="text"/>
                     </div>
                     <div id="div_telefono" class="lineaFormulario">  
                       	<label id="label_telefono" for="input_telefono">Teléfono:</label>
-                      	<input id="input_telefono" class="box <?php if(isset($errores["telefono"])) echo "error"?>" name="telefono" value="<?php echo $usuario['telefono'] ?>" type="text"/>
+                      	<input id="input_telefono" class="box <?php if(isset($errores["telefono"])) echo "error"?>" name="telefono" value="<?php echo $registroUsuario['telefono'] ?>" type="text"/>
                     </div>
                     <div id="div_checkboxsUsuarios" class="lineaFormulario">
                     	<label id="label_derechosImagen" for="input_derechosImagen">Cede los derechos de imagen</label>
-                  		<input id="input_derechosImagen" name="derechosImagen" <?php if(isset($usuario['derechosImagen'])) echo 'checked' ?> type="checkbox"/>   
+                  		<input id="input_derechosImagen" name="derechosImagen" <?php if(isset($registroUsuario['derechosImagen'])) echo 'checked' ?> type="checkbox"/>   
                         <label id="label_checkResponsable" for="input_checkResponsable">Vincular responsable</label>
-                        <input id="input_checkResponsable" name="checkResponsable" <?php if(isset($usuario['checkResponsable'])) echo "checked='checked'" ?> type="checkbox"/>
+                        <input id="input_checkResponsable" name="checkResponsable" <?php if(isset($registroUsuario['checkResponsable'])) echo "checked='checked'" ?> type="checkbox"/>
                   	</div>
                     <div id="div_responsable" class="lineaFormulario">
                         <label id="label_responsable" for="select_responsable">Responsable</label>
@@ -150,7 +150,7 @@ session_start();
         	              	$responsables = listaResponsables($conexion);
         	              	foreach ($responsables as $responsable) { 
         						echo "<option value='".$responsable['OID_R']."' ";
-        						if ($usuario['responsable'] == $responsable['OID_R'] ) echo "selected='selected'";
+        						if ($registroUsuario['responsable'] == $responsable['OID_R'] ) echo "selected='selected'";
         						echo ">";
         						echo $responsable['NOMBRE']." ".$responsable['APELLIDOS']."</option>";
         				  	}
