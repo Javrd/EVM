@@ -21,10 +21,12 @@
 	<body>	
 	<div id="container">
 	<?php include("header.html") ?>
-	<div id="p_titulo">Error</div>
-	<div id="p_descripcion"><br>Se ha producido el siguiente error:</div> 
+	<div id="content">
+	<div class="p_titulo">Error</div>
+	<div class="p_descripcion">Se ha producido el siguiente error:</div> 
 	<div class="error"><?php echo $error ?></div>	
-	<div id="p_descripcion">Pulse <a href="index.php">aquí</a> para volver a la página principal.</div>
+	<div class="p_descripcion">Pulse <a href="index.php">aquí</a> para volver a la página principal.</div>
+	</div>
 	<?php include("footer.html") ?>
 	</div>
 	</body>

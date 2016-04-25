@@ -16,7 +16,7 @@
 	<div id="container">
 	<?php include("header.html") ?>
 	<div id="content">
-    	<div id="p_titulo">Sobre esta página</div>
+    	<div class="p_titulo">Sobre esta página</div>
         	<p>Esta página esta creada con el objetivo de administrar la asociación Espacio Vida &amp; Música de una manera más ordenada y fácil.</p>
         	<p>Los integrantes que han hecho posible este proyecto son:</p>
             <ul class="ul_circle">
