@@ -1,22 +1,51 @@
 <?php
 session_start();
-    
-	if (!isset($_SESSION['registroUsuario'])){
-		$registroUsuario["nombre"] = "";
-		$registroUsuario["apellidos"] = "";
-		$fechaNacimiento['dia']="1";
-		$fechaNacimiento['mes']="1";
-		$fechaNacimiento['anio']=date('Y')-3;
-		$registroUsuario["fechaNacimiento"] = $fechaNacimiento;
-		$registroUsuario["direccion"] = "";
-		$registroUsuario["email"] = "";
-		$registroUsuario["telefono"] = "";
-        $registroUsuario["responsable"]="--Responsable--";
-        $registroUsuario["tipoRelacion"]="";
-		$_SESSION["registroUsuario"] = $registroUsuario;
-	} else {
-		$registroUsuario = $_SESSION['registroUsuario'];
-	}
+    if(isset($_POST['nuevo'])){
+        unset($_SESSION['registroUsuario']);
+    }
+    if(isset($_POST['oid_u'])){
+            $registroUsuario["oid_u"] = $_POST['oid_u'];
+            $registroUsuario["nombre"] = $_POST['nombre'];
+            $registroUsuario["apellidos"] = $_POST['apellidos'];
+            $nacimiento = DateTime::createFromFormat("d/m/y",$_POST['fechaNacimiento']);
+            $fechaNacimiento['dia']=$nacimiento->format('d');
+            $fechaNacimiento['mes']=$nacimiento->format('m');
+            $fechaNacimiento['anio']=$nacimiento->format('y');
+            $registroUsuario["fechaNacimiento"] = $fechaNacimiento;
+            $registroUsuario["direccion"] = $_POST['direccion'];
+            $registroUsuario["email"] = $_POST['email'];
+            $registroUsuario["telefono"] = $_POST['telefono'];
+            if ($_POST['derechos']==1){
+                $registroUsuario["derechosImagen"] = $_POST['derechos'];
+            }
+            if($_POST['oid_r']!=""){
+            $registroUsuario["responsable"]=$_POST['oid_r'];
+            $registroUsuario["tipoRelacion"]=$_POST['tipoRelacion'];
+            $registroUsuario["checkResponsable"]="";
+            } else {
+                unset($registroUsuario['checkResponsable']);
+                $registroUsuario["responsable"]="--Responsable--";                
+                $registroUsuario["tipoRelacion"]="";
+            }
+            $_SESSION["registroUsuario"] = $registroUsuario;
+    } else{
+    	if (!isset($_SESSION['registroUsuario'])){
+    		$registroUsuario["nombre"] = "";
+    		$registroUsuario["apellidos"] = "";
+    		$fechaNacimiento['dia']="1";
+    		$fechaNacimiento['mes']="1";
+    		$fechaNacimiento['anio']=date('Y')-3;
+    		$registroUsuario["fechaNacimiento"] = $fechaNacimiento;
+    		$registroUsuario["direccion"] = "";
+    		$registroUsuario["email"] = "";
+    		$registroUsuario["telefono"] = "";
+            $registroUsuario["responsable"]="--Responsable--";
+            $registroUsuario["tipoRelacion"]="";
+    		$_SESSION["registroUsuario"] = $registroUsuario;
+    	} else {
+    		$registroUsuario = $_SESSION['registroUsuario'];
+    	}
+    }
 	
 	// Gestion de errores.
 	if (isset($_SESSION['errores'])){	
@@ -160,7 +189,8 @@ session_start();
                     </div>
                     <div id="div_tipoRelación" class="lineaFormulario">
                         <label id="label_tipoRelación" for="input_tipoRelación">Tipo de relación:</label>
-                        <input id="input_tipoRelación" class="box <?php if(isset($errores["tipoRelacion"])) echo "error"?>" name="tipoRelacion" type="text"/>
+                        <input id="input_tipoRelación" class="box <?php if(isset($errores["tipoRelacion"])) echo "error"?>" name="tipoRelacion" type="text"
+                        value="<?php echo $registroUsuario['tipoRelacion']?>"/>
                         <?php if(isset($errores["tipoRelacion"])) echo '<span class="error">'.$errores["tipoRelacion"].'</span>'?>
                     </div>
                     <div id="div_submit">

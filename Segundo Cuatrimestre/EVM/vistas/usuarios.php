@@ -2,6 +2,7 @@
     session_start();
     
     require_once ("../gestion/gestionarUsuario.php");
+    require_once ("../gestion/gestionarResponsable.php");
     require_once("../gestion/gestionBD.php");
     $conexion = crearConexionBD();
     
@@ -110,15 +111,16 @@
                 </form>
                 </div>   
         		<div id="ConsultaUsuarios" class="table">
-        		    <div class="hrow">
-                        <div class="col6 hrow_button"><button>Nombre</button></div>
-                        <div class="col15 hrow_button"><button>Apellidos</button></div>
-                        <div class="col6 hrow_button"><button>Edad</button></div>
-                        <div class="col12 hrow_button"><button>Direccion</button></div>
-                        <div class="col12 hrow_button"><button>Email</button></div>
-                        <div class="col6 hrow_button"><button>Telefono</button></div>
-                        <div class="col12 hrow_button"><button>Derechos de imagen</button></div>
-        		    </div>
+        		    <div class="titlerow">
+                        <div class="col6">Nombre</div>
+                        <div class="col15">Apellidos</div>
+                        <div class="col6">Edad</div>
+                        <div class="col12">Direccion</div>
+                        <div class="col12">Email</div>
+                        <div class="col6">Telefono</div>
+                        <div class="col12">Derechos de imagen</div>
+                        <div class="col6">Editar</div>
+                    </div>
         			<?php 
                         $filas = consultarPaginaUsuarios($conexion,$page_num,$page_size,$total,$consulta);
                         $i = 0;
@@ -142,7 +144,7 @@
                             }
                     ?>
                                 </div>
-                                <div class="col6">
+                                <div class="col6">                                        
                                     <form  method="post" action="../registros/registraUsuario.php">
                                         <input type="hidden" name="oid_u" value="<?php echo $usuario['OID_U']?>"/>
                                         <input type="hidden" name="nombre" value="<?php echo $usuario['NOMBRE']?>"/>
@@ -151,6 +153,10 @@
                                         <input type="hidden" name="direccion" value="<?php echo $usuario['DIRECCION']?>"/>
                                         <input type="hidden" name="email" value="<?php echo $usuario['EMAIL']?>"/>
                                         <input type="hidden" name="telefono" value="<?php echo $usuario['TELEFONO']?>"/>
+                                        <input type="hidden" name="derechos" value="<?php echo $usuario['DERECHOS_IMAGEN']?>"/>
+                                        <?php $res=getRelacion($conexion, $usuario['OID_U'])?>                                      
+                                        <input type="hidden" name="oid_r" value="<?php echo $res['OID_R'] ?>"/>
+                                        <input type="hidden" name="tipoRelacion" value="<?php echo $res['TIPO_RELACION'] ?>"/>
                                         <button><img src="../img/Edit_Notepad_Icon.png" style="width:20px;height:20px;"/></button>
                                     </form>
                                 </div>

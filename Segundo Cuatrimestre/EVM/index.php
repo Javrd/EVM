@@ -31,6 +31,7 @@
                     <li class="button"><a href="vistas/usuarios.php">Usuarios</a></li>
                     <li class="button"><a href="vistas/responsables.php">Responsables</a></li>
     				<li class="button"><a href="vistas/matriculas.php">Matrículas</a</li>
+    				<li class="button"><a href="vistas/instrumentos.php">Instrumentos</a</li>
     				<li class="button"><a href="vistas/prestamos.php">Préstamos</a</li>
     				<li class="button"><a href="vistas/faltas.php">Faltas</a</li>
     				<li class="button"><a href="vistas/pagos.php">Pagos</a</li>

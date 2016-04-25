@@ -9,7 +9,17 @@
             echo $e->getMessage();
         }
     }
-    
+    function getRelacion($conexion, $oid_u){
+        try{
+            $stmt = $conexion->prepare("SELECT OID_R, TIPO_RELACION FROM RELACIONES WHERE OID_U=:oid_u");
+            $stmt ->bindParam(':oid_u',$oid_u);
+            $stmt->execute();
+            return $stmt->fetch();
+        }catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+        }
+    }
     function guardaRelacion($conexion, $oid_u, $oid_r, $tipoRelacion){
         try{
             $stmt = $conexion->prepare("CALL CREAR_RELACION(:oid_u, :oid_r, :tipoRelacion)");

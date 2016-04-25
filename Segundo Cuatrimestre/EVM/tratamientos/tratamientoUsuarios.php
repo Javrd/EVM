@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION["usuario"]) ){
+if (isset($_SESSION["registroUsuario"]) ){
     $usuario["nombre"] = $_REQUEST["nombre"];
     $usuario["apellidos"] = $_REQUEST["apellidos"];
     $usuario["fechaNacimiento"]['dia']= $_REQUEST["dia"];
@@ -10,14 +10,16 @@ if (isset($_SESSION["usuario"]) ){
     $usuario["email"] = $_REQUEST["email"];
     $usuario["telefono"] = $_REQUEST["telefono"];
     if(isset($_REQUEST['derechosImagen'])) $usuario['derechosImagen']=$_REQUEST['derechosImagen'];
-    if(isset($_REQUEST['checkResponsable'])) $usuario['checkResponsable']=$_REQUEST['checkResponsable'];
+    if(isset($_REQUEST['checkResponsable']))
+    $usuario['checkResponsable']=$_REQUEST['checkResponsable'];
     $usuario["responsable"] = $_REQUEST["responsable"];
     $usuario['tipoRelacion'] = $_REQUEST["tipoRelacion"];
+    
     
     $errores = validar($usuario);
     
     if ( count ($errores) > 0 ) {
-        $_SESSION["usuario"] = $usuario;
+        $_SESSION["registroUsuario"] = $usuario;
         $_SESSION["errores"] = $errores;
         Header("Location: ../registros/registraUsuario.php");
     }

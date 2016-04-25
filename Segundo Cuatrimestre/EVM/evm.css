@@ -65,7 +65,7 @@ ul.menu{
     background-size: 3.75em;
 }
 
-#p_titulo {
+.p_titulo {
 	line-height: 1em;
     margin: 0.238em 0 0.191em;
     font-size: 2.625em;
@@ -74,8 +74,8 @@ ul.menu{
     vertical-align: baseline;
 }
 
-#p_descripcion{
-	margin: 0em;
+.p_descripcion{
+	margin: 0.5em;
 }
 	/*index.php*/
 	
@@ -212,16 +212,6 @@ div#UsuariosNavBar{
 	margin-top: 2.125em;
 }
 
-div.hrow{
-	position:relative;
-	display: inline;
-}
-
-div.hrow button{
-    width:100%;
-    
-}
-
 div.evenrow, div.oddrow{
 	font-weight: bold;
 	padding-left:1em;
@@ -229,11 +219,18 @@ div.evenrow, div.oddrow{
 }
 
 div.evenrow:hover, div.oddrow:hover{
-	font-style: italic;
+	 /*font-style: italic;*/
 }
 
 div.evenrow{
 	background-color: #008CBA;
+}
+div.titlerow{
+	background-color: #333388;
+	font-weight: bold;
+	padding-left:1em;
+	min-height: 2em;
+	text-align: center;
 }
 div.oddrow{
 	background-color: #3DACEA;
