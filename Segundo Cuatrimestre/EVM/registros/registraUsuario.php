@@ -76,7 +76,8 @@ session_start();
 		 ?> -->
 
 		<meta name="viewport" content="width=device-width; initial-scale=1.0">
-
+        <script src="../js/evm.js"></script>
+        <script src="../js/jquery-1.12.3.min.js"></script>
         <link rel="shortcut icon" href="../img/favicon.png">
         <link rel="apple-touch-icon" href="../img/favicon.png">
         <link rel="stylesheet" type="text/css" href="../evm.css">
@@ -169,11 +170,11 @@ session_start();
                     	<label id="label_derechosImagen" for="input_derechosImagen">Cede los derechos de imagen</label>
                   		<input id="input_derechosImagen" name="derechosImagen" <?php if(isset($registroUsuario['derechosImagen'])) echo 'checked' ?> type="checkbox"/>   
                         <label id="label_checkResponsable" for="input_checkResponsable">Vincular responsable</label>
-                        <input id="input_checkResponsable" name="checkResponsable" <?php if(isset($registroUsuario['checkResponsable'])) echo "checked='checked'" ?> type="checkbox"/>
+                        <input id="input_checkResponsable" name="checkResponsable" onclick="toggleResponsables()" <?php if(isset($registroUsuario['checkResponsable'])) echo "checked='checked'" ?> type="checkbox"/>
                   	</div>
                     <div id="div_responsable" class="lineaFormulario">
                         <label id="label_responsable" for="select_responsable">Responsable</label>
-                    	<select id="select_responsable " <?php if(isset($errores["responsable"])) echo 'class="error"'?> name="responsable">
+                    	<select id="select_responsable" <?php if(isset($errores["responsable"])) echo 'class="error"'?> name="responsable" <?php if(!isset($registroUsuario['checkResponsable'])) echo 'disabled' ?>>
                     	    <option>--Responsable--</option>
         	              	<?php
         	              	$responsables = listaResponsables($conexion);
@@ -190,7 +191,7 @@ session_start();
                     <div id="div_tipoRelación" class="lineaFormulario">
                         <label id="label_tipoRelación" for="input_tipoRelación">Tipo de relación:</label>
                         <input id="input_tipoRelación" class="box <?php if(isset($errores["tipoRelacion"])) echo "error"?>" name="tipoRelacion" type="text"
-                        value="<?php echo $registroUsuario['tipoRelacion']?>"/>
+                        value="<?php echo $registroUsuario['tipoRelacion']?>"  <?php if(!isset($registroUsuario['checkResponsable'])) echo 'disabled' ?>/>
                         <?php if(isset($errores["tipoRelacion"])) echo '<span class="error">'.$errores["tipoRelacion"].'</span>'?>
                     </div>
                     <div id="div_submit">
