@@ -226,11 +226,12 @@ div.evenrow{
 	background-color: #008CBA;
 }
 div.titlerow{
-	background-color: #333388;
+	background-color: #DDDDDD;
+	border: 0.0625em;
+	border-style: solid;
+	border-color: #008CBA;
 	font-weight: bold;
 	padding-left:1em;
-	min-height: 2em;
-	text-align: center;
 }
 div.oddrow{
 	background-color: #3DACEA;
@@ -255,6 +256,7 @@ div.col3, div.col6, div.col12, div.col15{
 	display: inline-block;
 	text-align: center;
 	padding-top:0.3em;
+	padding-bottom:0.3em;
 }
 
 div.col3 span, div.col6 span, div.col12 span{
