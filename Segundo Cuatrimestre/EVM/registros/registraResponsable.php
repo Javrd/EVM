@@ -67,13 +67,13 @@ session_start();
 		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
 		Remove this if you use the .htaccess -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<?php  //TODO cambiar titulo segun nuevo o modificar usuario 
-		if (isset($registroUsuario["oid_u"])){
+		<!-- <?php  //TODO cambiar titulo segun nuevo o modificar usuario 
+		if ($registroUsuario["action"]=="modificar"){
 			echo "<title>Modificar usuario</title>";	
-		} else {
+		} elseif($registroUsuario["action"]=="nuevo"){
 			echo "<title>Nuevo usuario</title>";
 		}
-		 ?>
+		 ?> -->
 
 		<meta name="viewport" content="width=device-width; initial-scale=1.0">
         <script src="../js/evm.js"></script>
@@ -194,9 +194,6 @@ session_start();
                         value="<?php echo $registroUsuario['tipoRelacion']?>"  <?php if(!isset($registroUsuario['checkResponsable'])) echo 'disabled' ?>/>
                         <?php if(isset($errores["tipoRelacion"])) echo '<span class="error">'.$errores["tipoRelacion"].'</span>'?>
                     </div>
-                    <?php if(isset($registroUsuario["oid_u"])) { ?>
-                    <input type="hidden" name="oid_u" value="<?php echo $registroUsuario["oid_u"] ?>"/>
-                    <?php } ?>
                     <div id="div_submit">
                           <button id="button_enviar" class="submit" type="submit">Enviar</button>
                 	</div>

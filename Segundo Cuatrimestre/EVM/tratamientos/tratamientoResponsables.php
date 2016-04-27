@@ -1,10 +1,6 @@
 <?php
 session_start();
 if (isset($_SESSION["registroUsuario"]) ){
-    
-    if (isset($_REQUEST["oid_u"])){
-        $usuario["oid_u"] = $_REQUEST["oid_u"];
-    }
     $usuario["nombre"] = $_REQUEST["nombre"];
     $usuario["apellidos"] = $_REQUEST["apellidos"];
     $usuario["fechaNacimiento"]['dia']= $_REQUEST["dia"];
