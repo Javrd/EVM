@@ -77,7 +77,7 @@
         <link rel="stylesheet" type="text/css" href="../evm.css">
 	</head>
 
-	<body>
+	<body class="vista">
 		  <div id="container">
 		      
     		<?php include("../header.html") ?>
