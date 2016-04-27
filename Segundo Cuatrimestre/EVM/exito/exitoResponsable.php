@@ -29,13 +29,7 @@
             $derechos = 0;
         }
         
-        if(!isset($usuario['oid_u'])){
-            
-            $oid_u = guardaUsuario($conexion, $nombre, $apellidos, $fecha, $direccion, $email, $telefono, $derechos);
-        
-        } else {
-            actualizaUsuario($conexion, $usuario['oid_u'], $nombre, $apellidos, $fecha, $direccion, $email, $telefono, $derechos);
-        }
+        $oid_u = guardaUsuarios($conexion, $nombre, $apellidos, $fecha, $direccion, $email, $telefono, $derechos);
         
         if(isset($usuario['checkResponsable'])){
             $responsable = $usuario['responsable'];   
