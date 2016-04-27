@@ -197,6 +197,10 @@ span.error{
 
 	/* Vista Usuarios*/
 
+body.vista{
+	min-width: 83em;
+}
+
 div#UsuariosNavBar{
 	
 	background-color: #3DACEA;
