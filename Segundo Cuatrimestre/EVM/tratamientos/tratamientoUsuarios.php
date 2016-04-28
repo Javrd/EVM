@@ -7,9 +7,7 @@ if (isset($_SESSION["registroUsuario"]) ){
     }
     $usuario["nombre"] = $_REQUEST["nombre"];
     $usuario["apellidos"] = $_REQUEST["apellidos"];
-    $usuario["fechaNacimiento"]['dia']= $_REQUEST["dia"];
-    $usuario["fechaNacimiento"]['mes']= $_REQUEST["mes"];
-    $usuario["fechaNacimiento"]['anio']= $_REQUEST["anio"];
+    $usuario["fechaNacimiento"] = DateTime::createFromFormat("d/m/Y", ($_REQUEST["dia"]."/".$_REQUEST["mes"]."/".$_REQUEST["anio"]));
     $usuario["direccion"] = $_REQUEST["direccion"];
     $usuario["email"] = $_REQUEST["email"];
     $usuario["telefono"] = $_REQUEST["telefono"];
@@ -28,13 +26,14 @@ if (isset($_SESSION["registroUsuario"]) ){
         Header("Location: ../registros/registraUsuario.php");
     }
     else {
+        unset($_SESSION["registroUsuario"]);
         $_SESSION["usuarioExito"] = $usuario;
         Header("Location: ../exito/exitoUsuario.php");
     }
 } 
 else Header("Location: ../registros/registraUsuario.php");
     
-    function validar($usuario) {
+function validar($usuario) {
     
     $errores = null;
         // Campos vacios
@@ -52,20 +51,16 @@ else Header("Location: ../registros/registraUsuario.php");
     }
     
     
-    $anios = date("Y") - $usuario["fechaNacimiento"]['anio'];
-    $meses = date("m") - ($usuario["fechaNacimiento"]['mes']);
-    $dias = date("d") - ($usuario["fechaNacimiento"]['dia']);
+    $edad = $usuario["fechaNacimiento"]->diff( new DateTime());
     
         // Menor de 3 años
           
-    if  ( $anios == 3 && ( $meses < 0 || ( $meses == 0 && $dias < 0 ) ) ){
+    if  ( $edad->format("%y") < 3){
           
         $errores["fechaNacimiento"] = "El niño debe tener al menor 3 años para poder registrarse.";
         
         // Menor de 18 años
-    } elseif (!isset($_REQUEST["checkResponsable"]) && 
-        ( $anios < 18 || ( $anios == 18 && 
-        ( $meses < 0 || ( $meses == 0 && $dias < 0 ) ) ))){
+    } elseif (!isset($_REQUEST["checkResponsable"]) && $edad->format("%y") < 18){
               
         $errores["responsable"] = "Los menores deben tener un responsable.";
         

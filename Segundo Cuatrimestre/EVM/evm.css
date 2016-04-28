@@ -201,21 +201,24 @@ body.vista{
 	min-width: 83em;
 }
 
-div#UsuariosNavBar{
-	
+nav{
 	background-color: #3DACEA;
 	text-align: right;
 }
-#UsuariosNavBar li,#UsuariosNavBar form{
+nav li,nav form{
 	display: inline;
 	padding:20px;
 	padding:20px;
 }
 
-#ConsultaUsuarios{
+div.consultas{
 	margin-top: 2.125em;
 }
 
+#ConsultaResponsables{
+	margin-left: 15em;
+	margin-right: 15em;
+}
 div.evenrow, div.oddrow{
 	font-weight: bold;
 	padding-left:1em;

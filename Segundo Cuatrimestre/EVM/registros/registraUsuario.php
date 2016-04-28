@@ -7,10 +7,7 @@ session_start();
             $registroUsuario["oid_u"] = $_POST['oid_u'];
             $registroUsuario["nombre"] = $_POST['nombre'];
             $registroUsuario["apellidos"] = $_POST['apellidos'];
-            $nacimiento = DateTime::createFromFormat("d/m/y",$_POST['fechaNacimiento']);
-            $fechaNacimiento['dia']=$nacimiento->format('d');
-            $fechaNacimiento['mes']=$nacimiento->format('m');
-            $fechaNacimiento['anio']=$nacimiento->format('Y');
+            $fechaNacimiento = DateTime::createFromFormat("d/m/y",$_POST['fechaNacimiento']);
             $registroUsuario["fechaNacimiento"] = $fechaNacimiento;
             $registroUsuario["direccion"] = $_POST['direccion'];
             $registroUsuario["email"] = $_POST['email'];
@@ -32,9 +29,7 @@ session_start();
     	if (!isset($_SESSION['registroUsuario'])){
     		$registroUsuario["nombre"] = "";
     		$registroUsuario["apellidos"] = "";
-    		$fechaNacimiento['dia']="1";
-    		$fechaNacimiento['mes']="1";
-    		$fechaNacimiento['anio']=date('Y')-3;
+            $fechaNacimiento = DateTime::createFromFormat("d/m/y","01/01/".(date('y')-3));
     		$registroUsuario["fechaNacimiento"] = $fechaNacimiento;
     		$registroUsuario["direccion"] = "";
     		$registroUsuario["email"] = "";
@@ -67,7 +62,7 @@ session_start();
 		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
 		Remove this if you use the .htaccess -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<?php  //TODO cambiar titulo segun nuevo o modificar usuario 
+		<?php
 		if (isset($registroUsuario["oid_u"])){
 			echo "<title>Modificar usuario</title>";	
 		} else {
@@ -112,7 +107,7 @@ session_start();
             	              	<?php
             	              	for ($i=1; $i < 32 ; $i++) { 
             						echo "<option ";
-            						if ($registroUsuario['fechaNacimiento']['dia'] == $i ) echo "selected='selected'";
+            						if ($registroUsuario['fechaNacimiento']->format('j') == $i ) echo "selected='selected'";
             						echo ">";
             						echo "$i</option>";
             				  	}
@@ -122,30 +117,28 @@ session_start();
                           	
                           	<select id="select_mes" <?php if(isset($errores["fechaNacimiento"])) echo 'class="error"'?> name="mes">
             	            <optgroup label="Mes">
-                            <option value = "01" <?php if ($registroUsuario['fechaNacimiento']['mes']=="01") echo "selected='selected'"; ?> >Enero</option>
-                            <option value = "02" <?php if ($registroUsuario['fechaNacimiento']['mes']=="02") echo "selected='selected'"; ?> >Febrero</option>
-                            <option value = "03" <?php if ($registroUsuario['fechaNacimiento']['mes']=="03") echo "selected='selected'"; ?> >Marzo</option>
-                            <option value = "04" <?php if ($registroUsuario['fechaNacimiento']['mes']=="04") echo "selected='selected'"; ?> >Abril</option>
-                            <option value = "05" <?php if ($registroUsuario['fechaNacimiento']['mes']=="05") echo "selected='selected'"; ?> >Mayo</option>
-                            <option value = "06" <?php if ($registroUsuario['fechaNacimiento']['mes']=="06") echo "selected='selected'"; ?> >Junio</option>
-                            <option value = "07" <?php if ($registroUsuario['fechaNacimiento']['mes']=="07") echo "selected='selected'"; ?> >Julio</option>
-                            <option value = "08" <?php if ($registroUsuario['fechaNacimiento']['mes']=="08") echo "selected='selected'"; ?> >Agosto</option>
-                            <option value = "09" <?php if ($registroUsuario['fechaNacimiento']['mes']=="09") echo "selected='selected'"; ?> >Septiembre</option>
-                            <option value = "10" <?php if ($registroUsuario['fechaNacimiento']['mes']=="10") echo "selected='selected'"; ?> >Octubre</option>
-                            <option value = "11" <?php if ($registroUsuario['fechaNacimiento']['mes']=="11") echo "selected='selected'"; ?> >Noviembre</option>
-                            <option value = "12" <?php if ($registroUsuario['fechaNacimiento']['mes']=="12") echo "selected='selected'"; ?> >Diciembre</option>
+                            <option value = "01" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="01") echo "selected='selected'"; ?> >Enero</option>
+                            <option value = "02" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="02") echo "selected='selected'"; ?> >Febrero</option>
+                            <option value = "03" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="03") echo "selected='selected'"; ?> >Marzo</option>
+                            <option value = "04" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="04") echo "selected='selected'"; ?> >Abril</option>
+                            <option value = "05" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="05") echo "selected='selected'"; ?> >Mayo</option>
+                            <option value = "06" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="06") echo "selected='selected'"; ?> >Junio</option>
+                            <option value = "07" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="07") echo "selected='selected'"; ?> >Julio</option>
+                            <option value = "08" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="08") echo "selected='selected'"; ?> >Agosto</option>
+                            <option value = "09" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="09") echo "selected='selected'"; ?> >Septiembre</option>
+                            <option value = "10" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="10") echo "selected='selected'"; ?> >Octubre</option>
+                            <option value = "11" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="11") echo "selected='selected'"; ?> >Noviembre</option>
+                            <option value = "12" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="12") echo "selected='selected'"; ?> >Diciembre</option>
                           	</optgroup>
                           	</select>
             	              	
                         	<select id="select_anio" <?php if(isset($errores["fechaNacimiento"])) echo 'class="error"'?> name="anio">
             	            <optgroup label="Año">
             	              	<?php
-            	              	for ($i=date('Y')-3; $i > 1919 ; $i--) { 
+            	              	for ($i=date('Y')-3; $i > date('Y')-99 ; $i--) { 
             						echo "<option ";
-            						if ($registroUsuario['fechaNacimiento']['anio'] == $i ) echo "selected='selected'";
-            						echo ">";
-                                    $dia = $i<10?"0$i":"$i";
-            						echo "$dia</option>";
+            						if ($registroUsuario['fechaNacimiento']->format('Y') == $i ) echo "selected='selected'";
+            						echo ">$i</option>";
             				  	}
             					?>
                           	</optgroup>
@@ -160,11 +153,11 @@ session_start();
                   	</div>
                     <div id="div_email" class="lineaFormulario">  
                       	<label id="label_email" for="input_email">Email:</label>
-                      	<input id="input_email" class="box <?php if(isset($errores["email"])) echo "error"?>" name="email" value="<?php echo $registroUsuario['email'] ?>" type="text"/>
+                      	<input id="input_email" class="box <?php if(isset($errores["email"])) echo "error"?>" name="email" value="<?php echo $registroUsuario['email'] ?>" type="email"/>
                     </div>
                     <div id="div_telefono" class="lineaFormulario">  
                       	<label id="label_telefono" for="input_telefono">Teléfono:</label>
-                      	<input id="input_telefono" class="box <?php if(isset($errores["telefono"])) echo "error"?>" name="telefono" value="<?php echo $registroUsuario['telefono'] ?>" type="text"/>
+                      	<input id="input_telefono" class="box <?php if(isset($errores["telefono"])) echo "error"?>" name="telefono" value="<?php echo $registroUsuario['telefono'] ?>" type="tel" pattern="\d{9}"/>
                     </div>
                     <div id="div_checkboxsUsuarios" class="lineaFormulario">
                     	<label id="label_derechosImagen" for="input_derechosImagen">Cede los derechos de imagen</label>

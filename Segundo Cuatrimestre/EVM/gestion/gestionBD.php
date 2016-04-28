@@ -24,4 +24,27 @@ function cerrarConexionBD($conexion){
 	$conexion=null;
 }
 
+function consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$query){
+    try {
+        $first = ($pagina_seleccionada - 1) * $intervalo + 1;
+        $last = $pagina_seleccionada * $intervalo;
+        if ($last > $total){
+            $last = $total;
+        }
+        $paged_query = "SELECT * FROM ("
+                            ." SELECT ROWNUM RNUM, AUX.* FROM ("
+                                .$query
+                            ." ) AUX WHERE ROWNUM <= :last"
+                        ." ) WHERE RNUM >= :first";
+        $stmt = $conexion->prepare( $paged_query );
+        $stmt->bindParam( ':first', $first );
+        $stmt->bindParam( ':last', $last );
+        $stmt->execute();
+        return $stmt;
+    }
+    catch ( PDOException $e ) {
+        $_SESSION['error']=$e->GetMessage();
+        header("Location:../error.php");
+    }
+} 
 ?>

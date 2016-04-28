@@ -32,4 +32,24 @@
             echo $e->getMessage();
         }
     }
+    
+    function consultarTotalResponsables($conexion)  {
+        try {
+            $consulta = "SELECT COUNT(*) AS TOTAL FROM USUARIOS";
+            $stmt = $conexion->query($consulta);
+            $result = $stmt->fetch();
+            $total = $result['TOTAL' ];
+            return (int)$total;
+        }
+        catch ( PDOException $e ) {
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+        }
+    }
+    
+    function consultaPaginadaResponsables($conexion,$pagina_seleccionada,$intervalo,$total){
+            $select = "SELECT * FROM RESPONSABLES ORDER BY APELLIDOS, NOMBRE";
+        return consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
+    }  
+    
 ?>
