@@ -1,71 +1,40 @@
 <?php
 session_start();
-if (isset($_SESSION["registroUsuario"]) ){
-    $usuario["nombre"] = $_REQUEST["nombre"];
-    $usuario["apellidos"] = $_REQUEST["apellidos"];
-    $usuario["fechaNacimiento"]['dia']= $_REQUEST["dia"];
-    $usuario["fechaNacimiento"]['mes']= $_REQUEST["mes"];
-    $usuario["fechaNacimiento"]['anio']= $_REQUEST["anio"];
-    $usuario["direccion"] = $_REQUEST["direccion"];
-    $usuario["email"] = $_REQUEST["email"];
-    $usuario["telefono"] = $_REQUEST["telefono"];
-    if(isset($_REQUEST['derechosImagen'])) $usuario['derechosImagen']=$_REQUEST['derechosImagen'];
-    if(isset($_REQUEST['checkResponsable']))
-    $usuario['checkResponsable']=$_REQUEST['checkResponsable'];
-    $usuario["responsable"] = $_REQUEST["responsable"];
-    $usuario['tipoRelacion'] = $_REQUEST["tipoRelacion"];
+if (isset($_SESSION["registroResponsable"]) ){
+    $responsable["nombre"] = $_REQUEST["nombre"];
+    $responsable["apellidos"] = $_REQUEST["apellidos"];
+    $responsable["email"] = $_REQUEST["email"];
+    $responsable["telefono"] = $_REQUEST["telefono"];
     
-    
-    $errores = validar($usuario);
+    $errores = validar($responsable);
     
     if ( count ($errores) > 0 ) {
-        $_SESSION["registroUsuario"] = $usuario;
+        $_SESSION["registroResponsable"] = $responsable;
         $_SESSION["errores"] = $errores;
-        Header("Location: ../registros/registraUsuario.php");
+        Header("Location: ../registros/registraResponsable.php");
     }
     else {
-        $_SESSION["usuarioExito"] = $usuario;
-        Header("Location: ../exito/exitoUsuario.php");
+        unset($_SESSION["registroResponsable"]);
+        $_SESSION["responsableExito"] = $responsable;
+        Header("Location: ../exito/exitoResponsable.php");
     }
 } 
-else Header("Location: ../registros/registraUsuario.php");
+else Header("Location: ../registros/registraResponsable.php");
     
-    function validar($usuario) {
+    function validar($responsable) {
     
     $errores = null;
         // Campos vacios
-    if (empty($usuario["nombre"])) {
+    if (empty($responsable["nombre"])) {
         $errores["nombre"] = "El nombre no se puede dejar vacío.";
     }
-    if (empty($usuario["apellidos"])) {
+    if (empty($responsable["apellidos"])) {
         $errores["apellidos"] = "Los apellidos no se pueden dejar vacíos.";
     }
-    if (empty($usuario["direccion"])) {
-        $errores["direccion"] = "La direccion no se puede dejar vacía.";
-    }
-    if(isset($_REQUEST['checkResponsable']) && empty($usuario['tipoRelacion'])){
-        $errores["tipoRelacion"] = "El tipo de relacion no se puede dejar vacío.";
+    if (empty($responsable["email"])) {
+        $errores["telefono"] = "El telefono no se puede dejar vacío.";
     }
     
-    
-    $anios = date("Y") - $usuario["fechaNacimiento"]['anio'];
-    $meses = date("m") - ($usuario["fechaNacimiento"]['mes']);
-    $dias = date("d") - ($usuario["fechaNacimiento"]['dia']);
-    
-        // Menor de 3 años
-          
-    if  ( $anios == 3 && ( $meses < 0 || ( $meses == 0 && $dias < 0 ) ) ){
-          
-        $errores["fechaNacimiento"] = "El niño debe tener al menor 3 años para poder registrarse.";
-        
-        // Menor de 18 años
-    } elseif (!isset($_REQUEST["checkResponsable"]) && 
-        ( $anios < 18 || ( $anios == 18 && 
-        ( $meses < 0 || ( $meses == 0 && $dias < 0 ) ) ))){
-              
-        $errores["responsable"] = "Los menores deben tener un responsable.";
-        
-    } 
     return $errores;
 }
 ?>

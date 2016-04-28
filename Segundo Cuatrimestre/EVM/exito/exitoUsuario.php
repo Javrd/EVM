@@ -10,8 +10,7 @@
         $usuario = $_SESSION["usuarioExito"];
         $nombre = $usuario["nombre"];
         $apellidos = $usuario["apellidos"];
-        $fecha = $usuario['fechaNacimiento']['dia'].$usuario['fechaNacimiento']['mes']
-        .$usuario['fechaNacimiento']['anio'];
+        $fecha = $usuario['fechaNacimiento']->format("dmY");
         $direccion = $usuario["direccion"];
         if ($usuario["email"] == ""){
             $email = null;   

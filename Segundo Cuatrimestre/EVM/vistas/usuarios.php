@@ -83,7 +83,7 @@
     		<?php include("../header.html") ?>
     		
     		<div id="content">
-        		<div id="UsuariosNavBar">
+        		<nav>
         			<ul class="menu">
                         <form method="get" action="usuarios.php">
                         <li><button id = "button_usuarios" name="consulta" value="Todos">Todos</button></li>
@@ -93,7 +93,7 @@
         				<li><button id = "button_nuevo" name="nuevo">Nuevo</button></li>    
         				</form>
         			</ul>
-        		</div>
+        		</nav>
                 <div id="Paginacion">
                 <form method="get" action="usuarios.php">
                 <?php
@@ -110,7 +110,7 @@
              
                 </form>
                 </div>   
-        		<div id="ConsultaUsuarios" class="table">
+        		<div id="ConsultaUsuarios" class="consultas">
         		    <div class="titlerow">
                         <div class="col6">Nombre</div>
                         <div class="col15">Apellidos</div>
@@ -122,7 +122,7 @@
                         <div class="col6">Editar</div>
                     </div>
         			<?php 
-                        $filas = consultarPaginaUsuarios($conexion,$page_num,$page_size,$total,$consulta);
+                        $filas = consultaPaginadaUsuarios($conexion,$page_num,$page_size,$total,$consulta);
                         $i = 0;
                         foreach ($filas as $usuario) {
                             
