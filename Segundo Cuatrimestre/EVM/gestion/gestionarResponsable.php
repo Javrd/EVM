@@ -6,7 +6,8 @@
             $stmt = $conexion->query( $total_query );
             return $stmt;
         }catch(PDOException $e){
-            echo $e->getMessage();
+        $_SESSION['error']=$e->GetMessage();
+        header("Location:../error.php");
         }
     }
     function getRelacion($conexion, $oid_u){
@@ -29,13 +30,14 @@
             $stmt->execute();
                         
         }catch(PDOException $e){
-            echo $e->getMessage();
+        $_SESSION['error']=$e->GetMessage();
+        header("Location:../error.php");
         }
     }
     
     function consultarTotalResponsables($conexion)  {
         try {
-            $consulta = "SELECT COUNT(*) AS TOTAL FROM USUARIOS";
+            $consulta = "SELECT COUNT(*) AS TOTAL FROM RESPONSABLES";
             $stmt = $conexion->query($consulta);
             $result = $stmt->fetch();
             $total = $result['TOTAL' ];
