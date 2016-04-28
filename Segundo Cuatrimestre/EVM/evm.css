@@ -219,6 +219,11 @@ div.consultas{
 	margin-left: 15em;
 	margin-right: 15em;
 }
+#ConsultaFaltas{
+	margin-left: 15em;
+	margin-right: 15em;
+}
+}
 div.evenrow, div.oddrow{
 	font-weight: bold;
 	padding-left:1em;
