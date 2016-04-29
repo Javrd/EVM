@@ -1,6 +1,6 @@
 
 
-/************* Funciones de Usuariso ************/
+/************* Funciones de Usuarios ************/
 
 function toggleResponsables(){
 	var select = $("#select_responsable");
