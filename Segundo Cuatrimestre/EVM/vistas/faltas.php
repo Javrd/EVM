@@ -111,6 +111,7 @@
                         <div class="col6">Fecha</div>
                         <div class="col6">Justificada</div>                        
                         <div class="col6">Justificar</div>
+                        <div class="col6">Eliminar</div>
                         
                     </div>
         			<?php 
@@ -137,7 +138,13 @@
                                 <div class="col6">                                        
                                     <form  method="post" action="../tratamientos/tratamientoFaltas.php">
                                         <input type="hidden" name="oid_f" value="<?php echo $falta['OID_F']?>"/>  
-                                        <button name="actu"><img src="../img/Edit_Notepad_Icon.png" style="width:20px;height:20px;"/></button>
+                                        <button name="actu"><img src="../img/icono_m_signdoc.png" class="botonJustificar"/></button>
+                                    </form>
+                                </div>
+                                <div class="col6">                                        
+                                    <form  method="post" action="../tratamientos/tratamientoFaltas.php">
+                                        <input type="hidden" name="oid_f" value="<?php echo $falta['OID_F']?>"/>  
+                                        <button name="borrar"><img src="../img/botonEliminar.png" class="botonJustificar"/></button>
                                     </form>
                                 </div>
                             </div>

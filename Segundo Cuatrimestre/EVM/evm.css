@@ -221,9 +221,12 @@ div.consultas{
 	margin-right: 15em;
 }
 #ConsultaFaltas{
-	margin-left: 15em;
-	margin-right: 15em;
+	margin-left: 12em;
+	margin-right: 12em;
 }
+.botonJustificar{
+	width:2em;
+	height:2em;
 }
 div.evenrow, div.oddrow{
 	font-weight: bold;

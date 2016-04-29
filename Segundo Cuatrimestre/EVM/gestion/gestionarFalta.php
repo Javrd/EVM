@@ -50,6 +50,33 @@
         return consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
     }  
     
+	function getFechaMatriculacion($conexion, $oid_m){
+		 try{
+            $stmt = $conexion->prepare("SELECT FECHA_MATRICULACION FROM MATRICULAS WHERE oid_m=:oid_m");
+            $stmt->bindParam(':oid_m',$oid_m);
+            $stmt->execute();
+			$result = $stmt->fetch();
+            $total = $result['FECHA_MATRICULACION'];
+			return $total;
+                        
+        } catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+        } 
+	}
+	
+	function borraFalta($conexion,$oid_f){
+		try{
+            $stmt = $conexion->prepare("DELETE FROM FALTAS WHERE oid_f=:oid_f");
+            $stmt->bindParam(':oid_f',$oid_f);
+            $stmt->execute();
+                        
+        } catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+        } 
+	}
+	
     function consultarTotalFaltas($conexion)  {
         try {
             $consulta = "SELECT COUNT(*) AS TOTAL FROM FALTAS";
