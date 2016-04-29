@@ -1,9 +1,13 @@
 <?php
 session_start();
+		if(isset($_REQUEST['nuevo'])){
+			unset($_SESSION['registroFalta']);
+		}
     	if (!isset($_SESSION['registroFalta'])){
-            $fecha_falta = DateTime::createFromFormat("d/m/y","01/01/".(date('y')-3));
+            $fecha_falta = new DateTime();
     		$registroFalta["fecha_falta"] = $fecha_falta;
-    		$registroFalta["tipo_falta"] = "";
+    		$registroFalta["tipo_falta"] = "Asistencia";
+			$registroFalta['usuario'] = "-1";
     		$_SESSION["registroFalta"] = $registroFalta;
     	} else {
     		$registroFalta = $_SESSION['registroFalta'];
@@ -54,8 +58,8 @@ session_start();
     	  				
     	  				<div id="div_tipo_falta" class="lineaFormulario">
                 		<label id="label_tipo_falta" for="input_tipo_falta">Tipo de Falta:</label>
-                    	<input id="input_tipo_falta" class="box <?php if(isset($errores["tipo_falta"])) echo "error"?>" name="tipo_falta" value="<?php echo $registroFalta['tipo_falta'] ?>" type="text"/>
-                        <?php if(isset($errores["tipo_falta"])) echo '<span class="error">'.$errores["tipo_falta"].'</span>'?>  
+                    	<input id="input_tipo_falta" name="tipo_falta" value="Asistencia" <?php if($registroFalta['tipo_falta']=='Asistencia')echo "checked='checked'"?> type="radio">Asistencia</input>
+                    	<input id="input_tipo_falta" name="tipo_falta" value="Pago" <?php if($registroFalta['tipo_falta']=='Pago')echo "checked='checked'"?> type="radio">Pago</input>
                   		</div>
                   	
                			<div id="div_fecha_falta" class="lineaFormulario">
@@ -94,7 +98,7 @@ session_start();
                         	<select id="select_anio" <?php if(isset($errores["fecha_falta"])) echo 'class="error"'?> name="anio">
             	            <optgroup label="Año">
             	              	<?php
-            	              	for ($i=date('Y'); $i > date('Y')-99 ; $i--) { 
+            	              	for ($i=date('Y'); $i > date('Y')-2 ; $i--) { 
             						echo "<option ";
             						if ($registroFalta['fecha_falta']->format('Y') == $i ) echo "selected='selected'";
             						echo ">$i</option>";
@@ -109,11 +113,13 @@ session_start();
                     	<div id="div_usuario" class="lineaFormulario">
                         <label id="label_usuario" for="select_usuario">Usuario:</label>
                     	<select id="select_usuario" <?php if(isset($errores["usuario"])) echo 'class="error"'?> name="usuario" >
-                    	    <option>--Usuario--</option>
+                    	    <option value="-1" <?php if ("-1" == $registroFalta['usuario'] ) echo "selected='selected'" ?>>--Usuario--</option>
         	              	<?php
         	              	$usuarios = listaUsuariosActivos($conexion);
         	              	foreach ($usuarios as $usuario) { 
-        						echo "<option value='".$usuario['OID_M']."' >";
+        						echo "<option value='".$usuario['OID_M']."' ";
+        						if ($usuario['OID_M'] == $registroFalta['usuario'] ) echo "selected='selected'";
+        						echo ">";
         						echo $usuario['NOMBRE']." ".$usuario['APELLIDOS']."</option>";
         				  	}
         					?>
