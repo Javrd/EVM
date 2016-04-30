@@ -77,7 +77,7 @@
         <link rel="stylesheet" type="text/css" href="../evm.css">
 	</head>
 
-	<body class="vista">
+	<body class="vistaUsuarios">
 		  <div id="container">
 		      
     		<?php include("../header.html") ?>
@@ -140,7 +140,7 @@
                                 <div class="col12">
                     <?php   
                             if($usuario['DERECHOS_IMAGEN']==1){
-                                echo'<img src="../img/1024px-Green_tick_pointed.png" style="width:20px;height:20px;"/>';
+                                echo'<img src="../img/1024px-Green_tick_pointed.png" class="tickIcon"/>';
                             }
                     ?>
                                 </div>
@@ -157,7 +157,7 @@
                                         <?php $res=getRelacion($conexion, $usuario['OID_U'])?>                                      
                                         <input type="hidden" name="oid_r" value="<?php echo $res['OID_R'] ?>"/>
                                         <input type="hidden" name="tipoRelacion" value="<?php echo $res['TIPO_RELACION'] ?>"/>
-                                        <button><img src="../img/Edit_Notepad_Icon.png" style="width:20px;height:20px;"/></button>
+                                        <button><img src="../img/Edit_Notepad_Icon.png" class="notepadIcon"/></button>
                                     </form>
                                 </div>
                             </div>

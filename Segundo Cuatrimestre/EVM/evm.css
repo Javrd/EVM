@@ -195,12 +195,11 @@ span.error{
     width:320px;
 }
 
-	/* Vista Usuarios*/
-
-body.vista{
-	min-width: 83em;
-}
-
+	/************
+	 *  VISTAS  *
+	 ************/
+	
+	/* Barra de navegacion (filtros y nuevo) */
 nav{
 	background-color: #3DACEA;
 	text-align: right;
@@ -211,19 +210,88 @@ nav li,nav form{
 	padding:20px;
 }
 
+/* TODO Dar formato a los fotones, desplazar los del filtro a la izquierda */
+
+	/* Definicion de min-with para Body (para que al minimizar se vea fondo)
+	 * Tamaño de la tabla (#ConsultaX width) más 5em */
+
+body.vistaUsuarios{
+	min-width: 83em;
+}
+
+body.vistaResponsables{
+	min-width: 52em;
+}
+
+body.vistaMatriculas{
+	/* TODO Definir min-width */
+}
+
+body.vistaInstrumentos{
+	/* TODO Definir min-width */
+}
+
+body.vistaPrestamos{
+	/* TODO Definir min-width */
+}
+
+body.vistaFaltas{
+	min-width: 58.5em;
+}
+
+body.vistaPagos{
+	/* TODO Definir min-width */
+}
+
+body.vistaAsignaturas{
+	/* TODO Definir min-width */
+}
+
+	/* Margenes automaticos. Es necesario establecer la anchura de la tabla para que funciones */
+	
 div.consultas{
 	margin: auto;
 	margin-top: 2.125em;
 }
+	
+#ConsultaUsuarios{
+	width: 78em;
+}
 
 #ConsultaResponsables{
-	margin-left: 15em;
-	margin-right: 15em;
+	width: 47em;
 }
+
+#ConsultaMatriculas{
+	/* TODO Definir width */
+}
+
+#ConsultaInstrumentos{
+	/* TODO Definir width */
+}
+
+#ConsultaPrestamos{
+	/* TODO Definir width */
+}
+
 #ConsultaFaltas{
-	margin-left: 12em;
-	margin-right: 12em;
+	width: 53.5em;
 }
+
+#ConsultaPagos{
+	/* TODO Definir width */
+}
+
+#ConsultaAsignaturas{
+	/* TODO Definir width */
+}
+
+.tickIcon, .notepadIcon{
+	width:1.25em;
+	height:1.25em;
+}
+
+
 .botonJustificar{
 	width:2em;
 	height:2em;
@@ -238,9 +306,17 @@ div.evenrow:hover, div.oddrow:hover{
 	 /*font-style: italic;*/
 }
 
+	/* Color de las filas pares */
 div.evenrow{
 	background-color: #008CBA;
 }
+	
+	/* Color de las filas impares */
+div.oddrow{
+	background-color: #3DACEA;
+}
+
+	/* Cabecera de la tabla */
 div.titlerow{
 	background-color: #DDDDDD;
 	border: 0.0625em;
@@ -248,18 +324,15 @@ div.titlerow{
 	border-color: #008CBA;
 	font-weight: bold;
 }
-div.oddrow{
-	background-color: #3DACEA;
-}
+
+	/* Definicion de distintos tamaños de columna */  
 
 div.col3{
 	width: 3em;
 }
-
 div.col6{
 	width: 6em;
 }
-
 div.col12{
 	width: 12em;
 }
@@ -267,21 +340,22 @@ div.col15{
 	width: 15em;
 }
 
+	/* Propiedades de las columnas */
 div.col3, div.col6, div.col12, div.col15{
 	display: inline-block;
 	text-align: center;
 	padding-top:0.3em;
 	padding-bottom:0.3em;
 }
-
-div.col3 span, div.col6 span, div.col12 span{
+div.col3 span, div.col6 span, div.col12 span, div.col15 span{
 }
 
+
+	/* Color de fondo y de letra al seleccionar texto */
 ::-moz-selection { /* Code for Firefox */
     background: #3dacea;
     color: #white;
 }
-
 ::selection {
 	background: #3dacea;
 	color: white;
