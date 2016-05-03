@@ -40,11 +40,12 @@ session_start();
 		 ?>
 
 		<meta name="viewport" content="width=device-width; initial-scale=1.0">
-        <script src="../js/evm.js"></script>
+        <script src="../js/faltasJS.js"></script>
         <script src="../js/jquery-1.12.3.min.js"></script>
         <link rel="shortcut icon" href="../img/favicon.png">
         <link rel="apple-touch-icon" href="../img/favicon.png">
         <link rel="stylesheet" type="text/css" href="../evm.css">
+        
 	</head>
 	
 	<body>
@@ -54,7 +55,7 @@ session_start();
     		
     		<div id="content">
     		   <div id="formulario">
-    	       <form action="../tratamientos/tratamientoFaltas.php" method="post">
+    	       <form onsubmit="return validarFaltas()" action="../tratamientos/tratamientoFaltas.php" method="post">
     	  				
     	  				<div id="div_tipo_falta" class="lineaFormulario">
                 		<label id="label_tipo_falta" for="input_tipo_falta">Tipo de Falta:</label>
@@ -107,7 +108,7 @@ session_start();
                           	</optgroup>
                           	</select>
                         </div>
-                        <?php if(isset($errores["fecha_falta"])) echo '<span class="error">'.$errores["fecha_falta"]."</span>"?>
+                       <span id="errorFaltasFecha" class="error"><?php if(isset($errores["fecha_falta"])) echo $errores["fecha_falta"] ?></span>
                   	</div>
                    	                    
                     	<div id="div_usuario" class="lineaFormulario">
@@ -124,7 +125,7 @@ session_start();
         				  	}
         					?>
                       	</select>
-                      	<span class="error"><?php if(isset($errores["usuario"])) echo $errores["usuario"]?></span>
+                      	<span id="errorFaltasUsuario" class="error"><?php if(isset($errores["usuario"])) echo $errores["usuario"]?></span>
                     </div>
                     <div id="div_submit">
                           <button id="button_enviar" class="submit" type="submit">Enviar</button>
