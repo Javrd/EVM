@@ -78,7 +78,7 @@ session_start();
                     <div id="div_tipo" class="lineaFormulario">
                         <label id="label_tipo" for="select_responsable">Tipo</label>
                     	<select id="select_tipo" <?php if(isset($errores["tipo"])) echo 'class="error"'?> name="tipo" >
-                    	    <option>--Tipos--</option>
+                    	    <option value = -1 >--Tipos--</option>
         	              	<?php
         	              	$tipos = ["cuerda", "viento"];
         	              	foreach ($tipos as $tipo) { 
@@ -95,7 +95,7 @@ session_start();
         			<div id="div_estado" class="lineaFormulario">
                         <label id="label_estado" for="select_estado">Estado de instrumento
                     	<select id="select_estado" <?php if(isset($errores["ESTADO_INSTRUMENTO"])) echo 'class="error"'?> name="ESTADO_INSTRUMENTO">
-                    	    <option>--Estado Instrumento--</option>
+                    	    <option value = -1>--Estado Instrumento--</option>
         	              	<?php
         	              	$estados = ["Nuevo","Usado","Deteriorado"];
         	              	foreach ($estados as $estado) { 

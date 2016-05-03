@@ -29,6 +29,20 @@
         header("Location:../error.php");
         }
     }
+
+    function devolverInstrumento($conexion, $oid_i){
+        try{
+            $stmt = $conexion->prepare("UPDATE INSTRUMENTOS SET libre=:instrumentoLibre WHERE oid_i=:oid_i");
+            $stmt->bindParam(':oid_i',$oid_i);
+            $var = 1;
+            $stmt->bindParam(':instrumentoLibre',$var);
+            $stmt->execute();
+                        
+        } catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+        } 
+    }
     
     function actualizaInstrumento($conexion, $oid_i, $tipo, $instrumentoLibre, $nombre, $ESTADO_INSTRUMENTO){
        try{

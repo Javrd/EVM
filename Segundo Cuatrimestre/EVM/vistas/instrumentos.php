@@ -94,27 +94,28 @@
         			</ul>
         		</nav>
                 <div id="Paginacion">
-                <form method="get" action="instrumentos.php">
-                <?php
+                    <form method="get" action="instrumentos.php">
+                    <?php
 
-                    for( $page = 1; $page <= $total_pages; $page++ ) {
-                        if ( $page == $page_num ) { // página actual
-                            echo "<button id='".$page."' name='page_num' type='submit' class='seleccionada' value='".$page."' disabled='disabled'>".$page."</button>";
-                        } else { // resto de páginas
-                            echo "<button id='".$page."' name='page_num' type='submit' class='pagina' value='".$page."'>".$page."</button>";
+                        for( $page = 1; $page <= $total_pages; $page++ ) {
+                            if ( $page == $page_num ) { // página actual
+                                echo "<button id='".$page."' name='page_num' type='submit' class='seleccionada' value='".$page."' disabled='disabled'>".$page."</button>";
+                            } else { // resto de páginas
+                                echo "<button id='".$page."' name='page_num' type='submit' class='pagina' value='".$page."'>".$page."</button>";
+                            }
                         }
-                    }
-                ?>
-                Número de resultados por página: <input id='input_page_size' name='page_size' type='text' size='10' onchange='submit();' value='<?php echo "$page_size" ?>'/>
-             
-                </form>
+                    ?>
+                    Número de resultados por página: <input id='input_page_size' name='page_size' type='text' size='10' onchange='submit();' value='<?php echo "$page_size" ?>'/>
+                 
+                    </form>
                 </div>   
         		<div id="ConsultaUsuarios" class="consultas">
         		    <div class="titlerow">
                         <div class="col6">Tipo</div>
-                        <div class="col15">Nombre</div>
+                        <div class="col6">Nombre</div>
                         <div class="col6">Estado Instrumento</div>
-                        <div class="col12">Libre</div>
+                        <div class="col6">Libre</div>
+                        <div class="col6">Devolver</div>
                         <div class="col6">Editar</div>
                     </div>
         			<?php 
@@ -126,15 +127,29 @@
                     ?>
                             <div class=<?php echo $row ?>>
                                 <div class="col6"><span><?php echo $instrumento['TIPO']?></span></div>
-                                <div class="col15"><span><?php echo $instrumento['NOMBRE']?></span></div>
+                                <div class="col6"><span><?php echo $instrumento['NOMBRE']?></span></div>
                                 <div class="col6"><span><?php echo $instrumento['ESTADO_INSTRUMENTO']?></span></div>
-                                <div class="col12">
+                                <div class="col6">
                     <?php   
                             if($instrumento['LIBRE']==1){
                                 echo'<img src="../img/1024px-Green_tick_pointed.png" style="width:20px;height:20px;"/>';
                             }
                     ?>
                                 </div>
+                                <div class="col6"> 
+
+                                    <form  method="post" action="../tratamientos/tratamientoInstrumentos.php">
+
+                                        <input type="hidden" name="oid_i" value="<?php echo $instrumento['OID_I']?>"></input>
+
+                                        <?php   
+                                        if($instrumento['LIBRE']==0){
+                                             echo "<button name='devolver'><img src='../img/botonDevolver.png' style='width:20px;height:20px;'/></button>";
+                                        }
+                                        ?>                                
+                                    </form>
+                                </div>
+
                                 <div class="col6">                                        
                                     <form  method="post" action="../registros/registraInstrumento.php">
                                         <input type="hidden" name="oid_i" value="<?php echo $instrumento['OID_I']?>"/>
@@ -146,6 +161,9 @@
                                         <button><img src="../img/Edit_Notepad_Icon.png" style="width:20px;height:20px;"/></button>
                                     </form>
                                 </div>
+
+
+
                             </div>
                     <?php  
                             $i++;

@@ -7,19 +7,25 @@
     if(isset($_SESSION["instrumentoExito"])){
         $conexion = crearConexionBD();
         $instrumento = $_SESSION["instrumentoExito"];
-        $nombre = $instrumento["nombre"];
-        $tipo = $instrumento["tipo"];
-        $ESTADO_INSTRUMENTO = $instrumento['ESTADO_INSTRUMENTO'];
-        if(isset($instrumento['instrumentoLibre'])){
-            $instrumentoLibre = 1;
-        } else {
-            $instrumentoLibre = 0;
+        if (isset($instrumento["devolver"])){
+            devolverInstrumento($conexion,$instrumento['oid_i']);
         }
-        if(!isset($instrumento['oid_i'])){
-            guardaInstrumento($conexion, $tipo, $instrumentoLibre, $nombre, $ESTADO_INSTRUMENTO);
-        
-        } else {
-            actualizaInstrumento($conexion, $instrumento['oid_i'], $tipo, $instrumentoLibre, $nombre, $ESTADO_INSTRUMENTO);
+        else{
+
+            $nombre = $instrumento["nombre"];
+            $tipo = $instrumento["tipo"];
+            $ESTADO_INSTRUMENTO = $instrumento['ESTADO_INSTRUMENTO'];
+            if(isset($instrumento['instrumentoLibre'])){
+                $instrumentoLibre = 1;
+            } else {
+                $instrumentoLibre = 0;
+            }
+            if(!isset($instrumento['oid_i'])){
+                guardaInstrumento($conexion, $tipo, $instrumentoLibre, $nombre, $ESTADO_INSTRUMENTO);
+            
+            } else {
+                actualizaInstrumento($conexion, $instrumento['oid_i'], $tipo, $instrumentoLibre, $nombre, $ESTADO_INSTRUMENTO);
+            }
         }
         
         cerrarConexionBD($conexion);
