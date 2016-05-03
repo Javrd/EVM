@@ -71,7 +71,7 @@ session_start();
 		 ?>
 
 		<meta name="viewport" content="width=device-width; initial-scale=1.0">
-        <script src="../js/evm.js"></script>
+        <script src="../js/usuarios.js"></script>
         <script src="../js/jquery-1.12.3.min.js"></script>
         <link rel="shortcut icon" href="../img/favicon.png">
         <link rel="apple-touch-icon" href="../img/favicon.png">
@@ -85,18 +85,18 @@ session_start();
     		
     		<div id="content">
     		   <div id="formulario">
-    	       <form action="../tratamientos/tratamientoUsuarios.php" method="post">
+    	       <form action="../tratamientos/tratamientoUsuarios.php" method="post" onsubmit="return validarUsuarios()">
     	  
                     <div id="div_nombre" class="lineaFormulario">  
                       <label id="label_nombre" for="input_nombre">Nombre:</label>
                       <input id="input_nombre" class="box <?php if(isset($errores["nombre"])) echo "error"?>" name="nombre" value="<?php echo $registroUsuario['nombre'] ?>" type="text"/>
-                      <?php if(isset($errores["nombre"])) echo '<span class="error">'.$errores["nombre"]."</span>"?>
+                      <span id="error_nombre" class="error"><?php if(isset($errores["nombre"])) echo $errores["nombre"]?></span>
                     </div>
         
                     <div id="div_apellidos" class="lineaFormulario">  
                       <label id="label_apellidos" for="input_apellidos">Apellidos:</label>
                       <input id="input_apellidos" class="box <?php if(isset($errores["apellidos"])) echo "error"?>" name="apellidos" value="<?php echo $registroUsuario['apellidos'] ?>" type="text"/>
-                      <?php if(isset($errores["apellidos"])) echo '<span class="error">'.$errores["apellidos"]."</span>"?>
+                      <span id="error_apellidos" class="error"><?php if(isset($errores["apellidos"])) echo $errores["apellidos"]?></span>
                     </div>
         
         			<div id="div_fechaNacimiento" class="lineaFormulario">
