@@ -1,6 +1,15 @@
 <?php
 session_start();
-if (isset($_SESSION["registroInstrumento"]) ){
+
+if (isset($_REQUEST["devolver"])){
+        echo "test";
+        $instrumento["oid_i"] = $_REQUEST["oid_i"];
+        $instrumento["devolver"] = True; //Para el cambio en exito.
+        $_SESSION["instrumentoExito"] = $instrumento;
+        Header("Location: ../exito/exitoInstrumento.php");
+    }
+
+elseif (isset($_SESSION["registroInstrumento"]) ){
     
     if (isset($_REQUEST["oid_i"])){
         $instrumento["oid_i"] = $_REQUEST["oid_i"];
@@ -34,11 +43,11 @@ function validar($instrumento) {
         $errores["nombre"] = "El nombre no se puede dejar vacío.";
     }
 
-    if(empty($instrumento['tipo'])){
+    if(($instrumento['tipo']) == -1){
         $errores["tipo"] = "El tipo del instrumento no se puede dejar vacío.";
     }
 
-    if(empty($instrumento['ESTADO_INSTRUMENTO'])){
+    if(($instrumento['ESTADO_INSTRUMENTO']) == -1){
         $errores["ESTADO_INSTRUMENTO"] = "El estado del instrumento no se puede dejar vacío.";
     }
     
