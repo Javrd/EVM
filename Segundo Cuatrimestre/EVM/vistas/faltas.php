@@ -138,7 +138,7 @@
                                 <div class="col6">                                        
                                     <form  method="post" action="../tratamientos/tratamientoFaltas.php">
                                         <input type="hidden" name="oid_f" value="<?php echo $falta['OID_F']?>"/>  
-                                        <button name="actu"><img src="../img/icono_m_signdoc.png" class="botonJustificar"/></button>
+                                        <button <?php if($falta['JUSTIFICADA']==1){ echo "hidden='hidden'";} ?> name="actu"><img src="../img/icono_m_signdoc.png" class="botonJustificar"/></button>
                                     </form>
                                 </div>
                                 <div class="col6">                                        
