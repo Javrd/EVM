@@ -23,7 +23,6 @@
 		}
         
         cerrarConexionBD($conexion);
-        unset($_SESSION);
         Header("Location: ../vistas/faltas.php");
     } else {
         header("Location: ../registros/registraFalta.php");

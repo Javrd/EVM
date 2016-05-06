@@ -1,5 +1,16 @@
 <?php
-	//TODO Datos de sesion
+session_start();
+    if(isset($_SESSION['login'])){
+        Header("Location: inicio.php");
+    } else {
+            $login["usuario"] = "";
+            $login["contrasenia"] = "";
+    }
+    // Gestion de errores.
+    if (isset($_SESSION['errores'])){   
+        $errores = $_SESSION['errores'];
+        unset($_SESSION['errores']);        
+    }
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +22,7 @@
 		Remove this if you use the .htaccess -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-		<title>Inicio</title>
+		<title>Login</title>
 
 		<meta name="viewport" content="width=device-width; initial-scale=1.0">
 
@@ -21,26 +32,40 @@
         <link rel="Shortcut Icon" href="favicon.png" type="image/x-icon" />          
 	</head>
 
-	<body>
+    <body>
         <div id="container">
+        
+            <?php include('header.html') ?>
             
-    		<?php include("header.html") ?>
-    		
-    		<div id="content" class="menu">
-    			<ul id="menuInicio" class ="menu">
-                    <li class="button"><a href="vistas/usuarios.php">Usuarios</a></li>
-                    <li class="button"><a href="vistas/responsables.php">Responsables</a></li>
-    				<li class="button"><a href="vistas/matriculas.php">Matrículas</a</li>
-    				<li class="button"><a href="vistas/instrumentos.php">Instrumentos</a</li>
-    				<li class="button"><a href="vistas/prestamos.php">Préstamos</a</li>
-    				<li class="button"><a href="vistas/faltas.php">Faltas</a</li>
-    				<li class="button"><a href="vistas/pagos.php">Pagos</a</li>
-    				<li class="button"><a href="vistas/asignaturas.php">Asignaturas</a></li>
-    			</ul>
-    		</div>
+            <div id="content">
+               <div id="login">
+               <form action="tratamientos/tratamientoLogin.php" method="post">
+                    <div id="titulo">
+                        <p class="p_titulo2">
+                            Login
+                        </p>
+                    </div>
+                    <span class="error error2"><?php if(isset($errores["login"])) echo $errores["login"]?></span>
+                    <div id="div_usuario" class="lineaFormulario">  
+                      <input id="input_usuario" class="box <?php if(isset($errores["usuario"])) echo "error"?>" placeholder="Usuario" name="usuario" value="<?php echo $login['usuario'] ?>"  type="text"/>
+                      <span class="error error2"><?php if(isset($errores["usuario"])) echo $errores["usuario"]?></span>
+                    </div>
+        
+                    <div id="div_contrasenia" class="lineaFormulario">  
+                      <input id="input_contrasenia" class="box <?php if(isset($errores["contrasenia"])) echo "error"?>" placeholder="Contraseña" name="contrasenia" value="<?php echo $login['contrasenia'] ?>" type="password"/>
+                      <span class="error error2"><?php if(isset($errores["contrasenia"])) echo $errores["contrasenia"]?></span>
+                    </div>
+                    <div id="div_submit">
+                          <button name="login" class="botonLogin" type="submit">Enviar</button>
+                    </div>
+               </form>
+               </div>
+            </div> <!-- Fin content -->
             
-    		<?php include("footer.html") ?>
-    		
-		</div>
-	</body>
+            <?php    
+            include("footer.html");
+            ?>
+        </div>
+        
+    </body>
 </html>
