@@ -1,6 +1,8 @@
 <?php
     session_start();
-    
+    if(!isset($_SESSION["login"])){
+        header("Location: ../index.php");
+    }
     require_once ("../gestion/gestionarUsuario.php");
     require_once ("../gestion/gestionarResponsable.php");
     require_once("../gestion/gestionBD.php");

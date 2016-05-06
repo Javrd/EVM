@@ -1,5 +1,8 @@
 <?php
 session_start();
+    if(!isset($_SESSION["login"])){
+        header("Location: ../index.php");
+    }
     if(isset($_POST['nuevo'])){ // se solicita un registro de nuevo instrumento
         unset($_SESSION['registroInstrumento']); // se borra la session
     }

@@ -74,6 +74,19 @@ ul.menu{
     vertical-align: baseline;
 }
 
+.p_titulo2 {
+	line-height: 1em;
+    margin: 0.238em 0 0;
+    font-size: 2em;
+    border: 0;
+    padding: 0;
+    padding-bottom: 0.5em;
+    vertical-align: baseline;
+    color: #444;
+	font-weight: bold;
+    font-family: 'Oswald', arial, serif;
+}
+
 .p_descripcion{
 	margin: 0.5em;
 }
@@ -113,6 +126,17 @@ ul.menu{
 
 
 /* Formularios */
+
+div#login{	
+	margin:auto;
+	margin-top: 3em;
+	width: 15em;
+	padding-top:1.2em;
+	padding-bottom:0.5em;
+	padding-left:2.5em;
+	padding-right:3.75em;
+	border: solid #008CBA;
+}
 
 div#formulario{
 	margin-top: 1em;	
@@ -180,7 +204,18 @@ button.submit{
     width: 100px;
 }
 
-button.submit:hover{
+button.botonLogin{
+    background-color: #008CBA;
+	border-radius: 0.25em;
+    color: white;
+    display: block;
+    margin-left: auto;
+	margin-bottom: 0.25em;
+    padding: 0.7em 0em;
+    width: 6em;
+}
+
+button.submit:hover button.botonLogin:hover{
     background-color: white;
     color: #008CBA;
     transition-duration: 0.4s;
@@ -194,8 +229,12 @@ button.submit:hover{
 
 span.error{
     display:inline-block;
-	color:red;
+	color:red;	
     width:320px;
+}
+
+span.error2{
+    margin-bottom: 1em;
 }
 
 	/************

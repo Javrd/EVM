@@ -1,5 +1,8 @@
 <?php
 session_start();
+    if(!isset($_SESSION["login"])){
+        header("Location: ../index.php");
+    }
 		if(isset($_REQUEST['nuevo'])){
 			unset($_SESSION['registroFalta']);
 		}

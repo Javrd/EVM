@@ -1,5 +1,8 @@
 <?php
     session_start();
+    if(!isset($_SESSION["login"])){
+        header("Location: ../index.php");
+    }
     try{
         if (!file_exists('../gestion/gestionarResponsable.php' ))
           throw new Exception ('No existe el fichero gestionarResponsable.php');
