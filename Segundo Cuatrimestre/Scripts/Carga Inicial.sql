@@ -3278,5 +3278,5 @@ crear_pertenece_a(sec_m.currval,oid_a1);
 w_oid_m :=sec_m.currval;
 UPDATE pagos SET estado='Pagado' where oid_m=w_oid_m;
 crear_falta('Asistencia', to_date('14022012', 'ddmmYYYY'), 1, w_oid_m);
-INSERT INTO login (user,password) VALUES ('admin','admin');
+INSERT INTO login (usuario,pass) VALUES ('admin','admin');
 END;
