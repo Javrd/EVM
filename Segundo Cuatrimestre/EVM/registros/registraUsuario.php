@@ -154,6 +154,7 @@ session_start();
                     <div id="div_email" class="lineaFormulario">  
                       	<label id="label_email" for="input_email">Email:</label>
                       	<input id="input_email" class="box <?php if(isset($errores["email"])) echo "error"?>" name="email" value="<?php echo $registroUsuario['email'] ?>" type="email"/>
+                        <span id="error_email" class="error"><?php if(isset($errores["email"])) echo $errores["email"]?></span>
                     </div>
                     <div id="div_telefono" class="lineaFormulario">  
                       	<label id="label_telefono" for="input_telefono">Teléfono:</label>
@@ -163,7 +164,7 @@ session_start();
                     	<label id="label_derechosImagen" for="input_derechosImagen">Cede los derechos de imagen</label>
                   		<input id="input_derechosImagen" name="derechosImagen" <?php if(isset($registroUsuario['derechosImagen'])) echo 'checked' ?> type="checkbox"/>   
                         <label id="label_checkResponsable" for="input_checkResponsable">Vincular responsable</label>
-                        <input id="input_checkResponsable" name="checkResponsable" onclick="toggleResponsables()" <?php if(isset($registroUsuario['checkResponsable'])) echo "checked='checked'" ?> type="checkbox"/>
+                        <input id="input_checkResponsable" class="<?php if(isset($errores["checkResponsable"])) echo "error"?>" name="checkResponsable" onclick="toggleResponsables()" <?php if(isset($registroUsuario['checkResponsable'])) echo "checked='checked'" ?> type="checkbox"/>
                   	</div>
                     <div id="div_responsable" class="lineaFormulario">
                         <label id="label_responsable" for="select_responsable">Responsable</label>

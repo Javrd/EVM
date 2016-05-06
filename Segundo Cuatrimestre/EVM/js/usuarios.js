@@ -11,14 +11,17 @@ function validarUsuarios(){
 		// $("#error_nombre").html("El nombre no se puede dejar vacío.");
         // res = false;
    	// } 
-	if (document.getElementById("input_nombre").value == "") {
-		document.getElementById("input_nombre").className += " error";
-		document.getElementById("error_nombre").innerHTML = "El nombre no se puede dejar vacío.";
+   	var inputNombre = document.getElementById("input_nombre");
+   	var errorNombre = document.getElementById("error_nombre");
+	if (inputNombre.value == "") {
+		inputNombre.className += " error";
+		errorNombre.innerHTML = "El nombre no se puede dejar vacío.";
         res = false;
    	} else {
-		document.getElementById("input_nombre").className += " error"; // Bucar con el substring que contiene error y dejarlo sin este.
-		document.getElementById("error_nombre").innerHTML = "El nombre no se puede dejar vacío.";
+		inputNombre.className = inputNombre.className.replace(" error", "");
+		errorNombre.innerHTML = "";
    	}
+   	
     if (document.getElementById("input_apellidos").value == "") {
 		document.getElementById("input_apellidos").className += " error";
 		document.getElementById("error_apellidos").innerHTML = "Los apellidos no se pueden dejar vacíos.";

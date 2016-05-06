@@ -112,7 +112,7 @@ ul.menu{
 }
 
 
-/* Formulario Usuario*/
+/* Formularios */
 
 div#formulario{
 	margin-top: 1em;	
@@ -153,7 +153,10 @@ input.error, select.error{
 	
 }
 
-input.error:focus, select.error:focus{
+#input_checkResponsable.error{
+}
+
+input.error:focus, select.error:focus, #input_checkResponsable.error:focus{
   	border-color:#FF4444;
   	outline-color: #FF9999;
 }

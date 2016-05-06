@@ -13,6 +13,19 @@
         }
     }
     
+    function existeEmail($conexion, $email){
+        try{
+            $stmt = $conexion->prepare("SELECT OID_U FROM USUARIOS WHERE EMAIL=:email");
+            $stmt->bindParam(':email',$email);
+            $stmt->execute();
+            $res = $stmt->fetch();
+            return $res!=null;
+        }catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+        }   
+    }
+    
     function guardaUsuario($conexion, $nombre, $apellidos, $fecha, $direccion, $email, $telefono, $derechos){
         try{
             $stmt = $conexion->prepare("INSERT INTO USUARIOS (nombre,apellidos,fecha_nacimiento,direccion,email,telefono,derechos_imagen)
