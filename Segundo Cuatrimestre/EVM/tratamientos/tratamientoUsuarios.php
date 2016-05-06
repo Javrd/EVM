@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+include("../gestion/gestionBD.php");
+include("../gestion/gestionarUsuario.php");
+$conexion = crearConexionBD();
+
 if (isset($_SESSION["registroUsuario"]) ){
     
     if (isset($_REQUEST["oid_u"])){
@@ -11,14 +16,20 @@ if (isset($_SESSION["registroUsuario"]) ){
     $usuario["direccion"] = $_REQUEST["direccion"];
     $usuario["email"] = $_REQUEST["email"];
     $usuario["telefono"] = $_REQUEST["telefono"];
-    if(isset($_REQUEST['derechosImagen'])) $usuario['derechosImagen']=$_REQUEST['derechosImagen'];
-    if(isset($_REQUEST['checkResponsable']))
-    $usuario['checkResponsable']=$_REQUEST['checkResponsable'];
-    $usuario["responsable"] = $_REQUEST["responsable"];
-    $usuario['tipoRelacion'] = $_REQUEST["tipoRelacion"];
-    
+    if(isset($_REQUEST['derechosImagen'])) 
+        $usuario['derechosImagen']=$_REQUEST['derechosImagen'];
+    if(isset($_REQUEST['checkResponsable'])){
+        $usuario['checkResponsable']=$_REQUEST['checkResponsable'];
+        $usuario["responsable"] = $_REQUEST["responsable"];
+        $usuario['tipoRelacion'] = $_REQUEST["tipoRelacion"];
+    } else {
+        $usuario["responsable"] = null;
+        $usuario['tipoRelacion'] = null;
+    }
     
     $errores = validar($usuario);
+    
+    cerrarConexionBD($conexion);
     
     if ( count ($errores) > 0 ) {
         $_SESSION["registroUsuario"] = $usuario;
@@ -35,6 +46,7 @@ else Header("Location: ../registros/registraUsuario.php");
     
 function validar($usuario) {
     
+    global $conexion;
     $errores = null;
         // Campos vacios
     if (empty($usuario["nombre"])) {
@@ -46,10 +58,9 @@ function validar($usuario) {
     if (empty($usuario["direccion"])) {
         $errores["direccion"] = "La direccion no se puede dejar vacía.";
     }
-    if(isset($_REQUEST['checkResponsable']) && empty($usuario['tipoRelacion'])){
+    if(isset($usuario['checkResponsable']) && empty($usuario['tipoRelacion'])){
         $errores["tipoRelacion"] = "El tipo de relacion no se puede dejar vacío.";
     }
-    
     
     $edad = $usuario["fechaNacimiento"]->diff( new DateTime());
     
@@ -60,11 +71,18 @@ function validar($usuario) {
         $errores["fechaNacimiento"] = "El niño debe tener al menor 3 años para poder registrarse.";
         
         // Menor de 18 años
-    } elseif (!isset($_REQUEST["checkResponsable"]) && $edad->format("%y") < 18){
-              
+    } elseif (!isset($usuario["checkResponsable"]) && $edad->format("%y") < 18) {
+        $errores["checkResponsable"] = true;
         $errores["responsable"] = "Los menores deben tener un responsable.";
         
-    } 
+    } elseif ((isset($usuario['checkResponsable']) && $usuario["responsable"] == "--Responsable--")){
+        $errores["responsable"] = "Los menores deben tener un responsable.";
+    }
+    
+        // Comprobacion email
+     if ($usuario["email"] != "" && existeEmail($conexion, $usuario["email"])){
+        $errores["email"] = "Este email ya esta registrado";
+     }
     return $errores;
 }
 ?>
