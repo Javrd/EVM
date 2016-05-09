@@ -1,6 +1,15 @@
 <?php
 session_start();
+
+include("../gestion/gestionBD.php");
+include("../gestion/gestionarResponsable.php");
+$conexion = crearConexionBD();
+
 if (isset($_SESSION["registroResponsable"]) ){
+    
+    if (isset($_REQUEST["oid_r"])){
+        $responsable["oid_r"] = $_REQUEST["oid_r"];
+    }
     $responsable["nombre"] = $_REQUEST["nombre"];
     $responsable["apellidos"] = $_REQUEST["apellidos"];
     $responsable["email"] = $_REQUEST["email"];
@@ -31,8 +40,8 @@ else Header("Location: ../registros/registraResponsable.php");
     if (empty($responsable["apellidos"])) {
         $errores["apellidos"] = "Los apellidos no se pueden dejar vacíos.";
     }
-    if (empty($responsable["email"])) {
-        $errores["telefono"] = "El telefono no se puede dejar vacío.";
+    if (empty($responsable["telefono"])) {
+        $errores["telefono"] = "El teléfono no se puede dejar vacío.";
     }
     
     return $errores;

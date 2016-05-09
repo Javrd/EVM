@@ -118,23 +118,23 @@
         			<?php 
                         $filas = consultaPaginadaResponsables($conexion,$page_num,$page_size,$total);
                         $i = 0;
-                        foreach ($filas as $usuario) {
+                        foreach ($filas as $responsable) {
                             
                             $row = $i%2?'oddrow':'evenrow';
                     ?>
                             <div class=<?php echo $row ?>>
-                                <div class="col6"><span><?php echo $usuario['NOMBRE']?></span></div>
-                                <div class="col15"><span><?php echo $usuario['APELLIDOS']?></span></div>
-                                <div class="col12"><span><?php echo $usuario['EMAIL']?></span></div>
-                                <div class="col6"><span><?php echo $usuario['TELEFONO']?></span></div>
+                                <div class="col6"><span><?php echo $responsable['NOMBRE']?></span></div>
+                                <div class="col15"><span><?php echo $responsable['APELLIDOS']?></span></div>
+                                <div class="col12"><span><?php echo $responsable['EMAIL']?></span></div>
+                                <div class="col6"><span><?php echo $responsable['TELEFONO']?></span></div>
                                 <div class="col6">                                        
                                     <form  method="post" action="../registros/registraResponsable.php">
-                                        <input type="hidden" name="oid_r" value="<?php echo $usuario['OID_U']?>"/>
-                                        <input type="hidden" name="nombre" value="<?php echo $usuario['NOMBRE']?>"/>
-                                        <input type="hidden" name="apellidos" value="<?php echo $usuario['APELLIDOS']?>"/>
-                                        <input type="hidden" name="email" value="<?php echo $usuario['EMAIL']?>"/>
-                                        <input type="hidden" name="telefono" value="<?php echo $usuario['TELEFONO']?>"/>        
-                                        <button><img src="../img/Edit_Notepad_Icon.png" style="width:20px;height:20px;"/></button>
+                                        <input type="hidden" name="oid_r" value="<?php echo $responsable['OID_R']?>"/>
+                                        <input type="hidden" name="nombre" value="<?php echo $responsable['NOMBRE']?>"/>
+                                        <input type="hidden" name="apellidos" value="<?php echo $responsable['APELLIDOS']?>"/>
+                                        <input type="hidden" name="email" value="<?php echo $responsable['EMAIL']?>"/>
+                                        <input type="hidden" name="telefono" value="<?php echo $responsable['TELEFONO']?>"/>        
+                                        <button><img src="../img/Edit_Notepad_Icon.png" class="notepadIcon"/></button>
                                     </form>
                                 </div>
                             </div>

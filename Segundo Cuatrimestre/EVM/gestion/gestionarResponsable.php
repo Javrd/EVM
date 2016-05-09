@@ -35,6 +35,42 @@
         }
     }
     
+    function guardaResponsable($conexion, $nombre, $apellidos, $email, $telefono){
+        $exito = false;
+        try{
+            $stmt = $conexion->prepare("CALL crear_responsable(:nombre,:apellidos,:email,:telefono)");
+            $stmt->bindParam(':nombre',$nombre);
+            $stmt->bindParam(':apellidos',$apellidos);
+            $stmt->bindParam(':email',$email);
+            $stmt->bindParam(':telefono',$telefono);
+            $exito = $stmt->execute();
+                        
+        }catch(PDOException $e){
+        $_SESSION['error']=$e->GetMessage();
+        header("Location:../error.php");
+        }
+        return $exito;
+    }
+    
+    function actualizaResponsable($conexion, $oid_r, $nombre, $apellidos, $email, $telefono){
+        $exito = false;
+       try{
+            $stmt = $conexion->prepare("UPDATE RESPONSABLES SET nombre=:nombre, apellidos=:apellidos,
+            email=:email, telefono=:telefono WHERE oid_r=:oid_r");
+            $stmt->bindParam(':oid_r',$oid_r);
+            $stmt->bindParam(':nombre',$nombre);
+            $stmt->bindParam(':apellidos',$apellidos);
+            $stmt->bindParam(':email',$email);
+            $stmt->bindParam(':telefono',$telefono);
+            $exito = $stmt->execute();
+                        
+        } catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+        } 
+        return $exito;
+    }
+    
     function consultarTotalResponsables($conexion)  {
         try {
             $consulta = "SELECT COUNT(*) AS TOTAL FROM RESPONSABLES";
