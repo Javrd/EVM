@@ -96,7 +96,7 @@ session_start();
                       <span id="error_nombre" class="error"><?php if(isset($errores["nombre"])) echo $errores["nombre"]?></span>
                     </div>
         
-                    <div id="div_apellidos" class="lineaFormulario">  
+                    <div id="div_apellidos" class="lineaFormulario">
                       <label id="label_apellidos" for="input_apellidos">Apellidos:</label>
                       <input id="input_apellidos" class="box <?php if(isset($errores["apellidos"])) echo "error"?>" name="apellidos" value="<?php echo $registroUsuario['apellidos'] ?>" type="text"/>
                       <span id="error_apellidos" class="error"><?php if(isset($errores["apellidos"])) echo $errores["apellidos"]?></span>
@@ -147,12 +147,12 @@ session_start();
                           	</optgroup>
                           	</select>
                         </div>
-                        <?php if(isset($errores["fechaNacimiento"])) echo '<span class="error">'.$errores["fechaNacimiento"]."</span>"?>
+                       <span class="error"><?php if(isset($errores["fechaNacimiento"])) echo $errores["fechaNacimiento"]?></span>
                   	</div>
                    	<div id="div_direccion" class="lineaFormulario">
                 		<label id="label_direccion" for="input_direccion">Dirección:</label>
                     	<input id="input_direccion" class="box <?php if(isset($errores["direccion"])) echo "error"?>" name="direccion" value="<?php echo $registroUsuario['direccion'] ?>" type="text"/>
-                        <?php if(isset($errores["direccion"])) echo '<span class="error">'.$errores["direccion"].'</span>'?>  
+                        <span class="error"><?php if(isset($errores["direccion"])) echo $errores["direccion"]?></span>
                   	</div>
                     <div id="div_email" class="lineaFormulario">  
                       	<label id="label_email" for="input_email">Email:</label>
@@ -189,7 +189,7 @@ session_start();
                         <label id="label_tipoRelación" for="input_tipoRelación">Tipo de relación:</label>
                         <input id="input_tipoRelación" class="box <?php if(isset($errores["tipoRelacion"])) echo "error"?>" name="tipoRelacion" type="text"
                         value="<?php echo $registroUsuario['tipoRelacion']?>"  <?php if(!isset($registroUsuario['checkResponsable'])) echo 'disabled' ?>/>
-                        <?php if(isset($errores["tipoRelacion"])) echo '<span class="error">'.$errores["tipoRelacion"].'</span>'?>
+                        <span class="error"><?php if(isset($errores["tipoRelacion"])) echo $errores["tipoRelacion"]?></span>
                     </div>
                     <?php if(isset($registroUsuario["oid_u"])) { ?>
                     <input type="hidden" name="oid_u" value="<?php echo $registroUsuario["oid_u"] ?>"/>

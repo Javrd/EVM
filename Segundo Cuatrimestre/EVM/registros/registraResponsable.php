@@ -7,7 +7,7 @@ session_start();
         unset($_SESSION['registroResponsable']);
     }
     if(isset($_POST['oid_r'])){
-            $registroResponsable["oid_u"] = $_POST['oid_r'];
+            $registroResponsable["oid_r"] = $_POST['oid_r'];
             $registroResponsable["nombre"] = $_POST['nombre'];
             $registroResponsable["apellidos"] = $_POST['apellidos'];
             $registroResponsable["email"] = $_POST['email'];
@@ -73,13 +73,13 @@ session_start();
                     <div id="div_nombre" class="lineaFormulario">  
                       <label id="label_nombre" for="input_nombre">Nombre:</label>
                       <input id="input_nombre" class="box <?php if(isset($errores["nombre"])) echo "error"?>" name="nombre" value="<?php echo $registroResponsable['nombre'] ?>" type="text"/>
-                      <?php if(isset($errores["nombre"])) echo '<span class="error">'.$errores["nombre"]."</span>"?>
+                      <span class="error"><?php if(isset($errores["nombre"])) echo $errores["nombre"]?></span>
                     </div>
         
                     <div id="div_apellidos" class="lineaFormulario">  
                       <label id="label_apellidos" for="input_apellidos">Apellidos:</label>
                       <input id="input_apellidos" class="box <?php if(isset($errores["apellidos"])) echo "error"?>" name="apellidos" value="<?php echo $registroResponsable['apellidos'] ?>" type="text"/>
-                      <?php if(isset($errores["apellidos"])) echo '<span class="error">'.$errores["apellidos"]."</span>"?>
+                      <span class="error"><?php if(isset($errores["apellidos"])) echo $errores["apellidos"]?></span>
                     </div>
                     <div id="div_email" class="lineaFormulario">  
                       	<label id="label_email" for="input_email">Email:</label>
@@ -88,7 +88,11 @@ session_start();
                     <div id="div_telefono" class="lineaFormulario">  
                       	<label id="label_telefono" for="input_telefono">Teléfono:</label>
                       	<input id="input_telefono" class="box <?php if(isset($errores["telefono"])) echo "error"?>" name="telefono" value="<?php echo $registroResponsable['telefono'] ?>" type="tel" pattern="\d{9}"/>
+                        <span class="error"><?php if(isset($errores["telefono"])) echo $errores["telefono"]?></span>
                     </div>
+                    <?php if(isset($registroResponsable["oid_r"])) { ?>
+                    <input type="hidden" name="oid_r" value="<?php echo $registroResponsable["oid_r"] ?>"/>
+                    <?php } ?>
                     <div id="div_submit">
                           <button id="button_enviar" class="submit" type="submit">Enviar</button>
                 	</div>
