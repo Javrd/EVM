@@ -29,16 +29,16 @@ function buscadorUsuarios(){
     	xhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
     if (input.length == 0) { 
-        document.getElementById("txtHint").autocomplete = "";
+        document.getElementById("suggestions").autocomplete = "";
         return;
     } else {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+                document.getElementById("suggestions").innerHTML = xmlhttp.responseText;
             }
         };
-        xmlhttp.open("GET", "gethint.php?q=" + str, true);
+        xmlhttp.open("GET", "../tratamientos/buscadorUsuarios.php?q=", true);
         xmlhttp.send();
     }
 	

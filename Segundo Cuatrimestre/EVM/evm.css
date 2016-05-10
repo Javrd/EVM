@@ -360,6 +360,7 @@ div.oddrow{
 
 	/* Cabecera de la tabla */
 div.titlerow{
+	padding-left:1em;
 	background-color: #DDDDDD;
 	border: 0.0625em;
 	border-style: solid;

@@ -1,5 +1,14 @@
-<script src="../js/evm.js"></script>
-<script src="../js/jquery-1.12.3.min.js"></script>
 <label for="buscador">Buscador</label>
-<input id="buscador" name="buscador" type="text" onkeyup="buscadorUsuarios()"/>
-<p id="test"></p>
+<input id="buscador" name="buscador" type="text" list="suggestions" onkeyup="buscadorUsuarios()"/>
+<datalist id="suggestions">
+<?php
+    require_once("../gestion/gestionBD.php");
+    require_once("../gestion/gestionarUsuario.php");
+    $conexion = crearConexionBD();
+    
+    $usuarios = listaUsuarios($conexion);
+    foreach ($usuarios as $usuario){
+        echo "<option value=".$usuario["NOMBRE"]." ".$usuario["APELLIDOS"].">";
+    }
+?>
+</datalist>

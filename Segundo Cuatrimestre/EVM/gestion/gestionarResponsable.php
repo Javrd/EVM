@@ -71,6 +71,19 @@
         return $exito;
     }
     
+        function existeEmailResponsable($conexion, $email){
+        try{
+            $stmt = $conexion->prepare("SELECT OID_R FROM RESPONSABLES WHERE EMAIL=:email");
+            $stmt->bindParam(':email',$email);
+            $stmt->execute();
+            $res = $stmt->fetch();
+            return $res!=null;
+        }catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+        }   
+    }
+    
     function consultarTotalResponsables($conexion)  {
         try {
             $consulta = "SELECT COUNT(*) AS TOTAL FROM RESPONSABLES";

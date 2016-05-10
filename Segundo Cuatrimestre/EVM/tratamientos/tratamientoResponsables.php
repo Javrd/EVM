@@ -31,7 +31,8 @@ if (isset($_SESSION["registroResponsable"]) ){
 else Header("Location: ../registros/registraResponsable.php");
     
     function validar($responsable) {
-    
+        
+    global $conexion;
     $errores = null;
         // Campos vacios
     if (empty($responsable["nombre"])) {
@@ -43,7 +44,10 @@ else Header("Location: ../registros/registraResponsable.php");
     if (empty($responsable["telefono"])) {
         $errores["telefono"] = "El teléfono no se puede dejar vacío.";
     }
-    
+        // Email
+     if ($responsable["email"] != "" && !isset($responsable["oid_r"]) && existeEmailResponsable($conexion, $responsable["email"])){
+        $errores["email"] = "Este email ya esta registrado";
+     }
     return $errores;
 }
 ?>
