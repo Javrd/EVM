@@ -83,7 +83,7 @@ session_start();
                     	<select id="select_tipo" <?php if(isset($errores["tipo"])) echo 'class="error"'?> name="tipo" >
                     	    <option value = -1 >--Tipos--</option>
         	              	<?php
-        	              	$tipos = ["cuerda", "viento"];
+        	              	$tipos = Array("cuerda", "viento");
         	              	foreach ($tipos as $tipo) { 
         						echo "<option value='".$tipo."' ";
         						if ($registroInstrumento['tipo'] == $tipo ) echo "selected='selected'";
@@ -100,7 +100,7 @@ session_start();
                     	<select id="select_estado" <?php if(isset($errores["ESTADO_INSTRUMENTO"])) echo 'class="error"'?> name="ESTADO_INSTRUMENTO">
                     	    <option value = -1>--Estado Instrumento--</option>
         	              	<?php
-        	              	$estados = ["Nuevo","Usado","Deteriorado"];
+        	              	$estados = Array("Nuevo","Usado","Deteriorado");
         	              	foreach ($estados as $estado) { 
         						echo "<option value='".$estado."' ";
         						if ($registroInstrumento['ESTADO_INSTRUMENTO'] == $estado ) echo "selected='selected'";
