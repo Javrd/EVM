@@ -129,8 +129,9 @@
                         foreach ($filas as $usuario) {
                             
                             $row = $i%2?'oddrow':'evenrow';
-                            $nacimiento = DateTime::createFromFormat("d/m/y",$usuario['FECHA_NACIMIENTO']);
-                            $edad = $nacimiento->diff( new DateTime());
+                            $hoy =  new DateTime();
+                            $nacimiento = DateTime::createFromFormat("d/m/Y",$usuario['FECHA_NACIMIENTO']);
+                            $edad = $nacimiento->diff($hoy);
                     ?>
                             <div class=<?php echo $row ?>>
                                 <div class="col6"><span><?php echo $usuario['NOMBRE']?></span></div>

@@ -10,7 +10,7 @@ session_start();
             $registroUsuario["oid_u"] = $_POST['oid_u'];
             $registroUsuario["nombre"] = $_POST['nombre'];
             $registroUsuario["apellidos"] = $_POST['apellidos'];
-            $fechaNacimiento = DateTime::createFromFormat("d/m/y",$_POST['fechaNacimiento']);
+            $fechaNacimiento = DateTime::createFromFormat("d/m/Y",$_POST['fechaNacimiento']);
             $registroUsuario["fechaNacimiento"] = $fechaNacimiento;
             $registroUsuario["direccion"] = $_POST['direccion'];
             $registroUsuario["email"] = $_POST['email'];
@@ -152,7 +152,7 @@ session_start();
                    	<div id="div_direccion" class="lineaFormulario">
                 		<label id="label_direccion" for="input_direccion">Dirección:</label>
                     	<input id="input_direccion" class="box <?php if(isset($errores["direccion"])) echo "error"?>" name="direccion" value="<?php echo $registroUsuario['direccion'] ?>" type="text"/>
-                        <span class="error"><?php if(isset($errores["direccion"])) echo $errores["direccion"]?></span>
+                        <span id="error_direccion" class="error"><?php if(isset($errores["direccion"])) echo $errores["direccion"]?></span>
                   	</div>
                     <div id="div_email" class="lineaFormulario">  
                       	<label id="label_email" for="input_email">Email:</label>

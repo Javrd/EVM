@@ -80,7 +80,7 @@ function validar($usuario) {
     }
     
         // Comprobacion email
-     if ($usuario["email"] != "" && existeEmail($conexion, $usuario["email"])){
+     if ($usuario["email"] != "" && !isset($usuario["oid_u"]) && existeEmailUsuario($conexion, $usuario["email"])){
         $errores["email"] = "Este email ya esta registrado";
      }
     return $errores;

@@ -4,7 +4,7 @@
     
     function listaUsuarios($conexion){
         try{
-            $total_query = "SELECT * FROM USUARIOS ORDER BY apellidos";
+            $total_query = "SELECT * FROM USUARIOS ORDER BY nombre";
             $stmt = $conexion->query( $total_query );
             return $stmt;
         }catch(PDOException $e){
@@ -13,7 +13,7 @@
         }
     }
     
-    function existeEmail($conexion, $email){
+    function existeEmailUsuario($conexion, $email){
         try{
             $stmt = $conexion->prepare("SELECT OID_U FROM USUARIOS WHERE EMAIL=:email");
             $stmt->bindParam(':email',$email);
@@ -59,7 +59,7 @@ VALUES (:nombre, :apellidos, TO_DATE(:fecha,'ddmmYYYY'), :direccion, :email, :te
             $stmt->bindParam(':email',$email);
             $stmt->bindParam(':telefono',$telefono);
             $stmt->bindParam(':derechos',$derechos);
-            $stmt->execute();
+            return $stmt->execute();
                         
         } catch(PDOException $e){
             $_SESSION['error']=$e->GetMessage();
@@ -69,9 +69,9 @@ VALUES (:nombre, :apellidos, TO_DATE(:fecha,'ddmmYYYY'), :direccion, :email, :te
         
     function consultaPaginadaUsuarios($conexion,$pagina_seleccionada,$intervalo,$total,$constulta){
         if ($constulta == 'Usuarios con prestamos')
-            $select = "SELECT oid_u, nombre, apellidos, fecha_nacimiento, direccion, email, telefono, derechos_imagen FROM PRESTAMOS NATURAL JOIN MATRICULAS NATURAL JOIN USUARIOS WHERE MATRICULAS.FECHA_MATRICULACION>(SYSDATE - 365) ORDER BY APELLIDOS, NOMBRE";
+            $select = "SELECT oid_u, nombre, apellidos, to_char(fecha_nacimiento, 'dd/mm/yyyy') as fecha_nacimiento, direccion, email, telefono, derechos_imagen FROM PRESTAMOS NATURAL JOIN MATRICULAS NATURAL JOIN USUARIOS WHERE MATRICULAS.FECHA_MATRICULACION>(SYSDATE - 365) ORDER BY APELLIDOS, NOMBRE";
         else
-            $select = "SELECT * FROM USUARIOS ORDER BY APELLIDOS, NOMBRE";
+            $select = "SELECT oid_u, nombre, apellidos, to_char(fecha_nacimiento, 'dd/mm/yyyy') as fecha_nacimiento, direccion, email, telefono, derechos_imagen FROM USUARIOS ORDER BY APELLIDOS, NOMBRE";
         return consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
     }  
     
