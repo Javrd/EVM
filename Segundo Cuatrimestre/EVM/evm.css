@@ -262,7 +262,7 @@ body.vistaUsuarios{
 }
 
 body.vistaResponsables{
-	min-width: 52em;
+	min-width: 52.5em;
 }
 
 body.vistaMatriculas{
@@ -304,7 +304,7 @@ div.consultas{
 	width: 38em;
 }
 #ConsultaResponsables{
-	width: 47em;
+	width: 47.5em;
 }
 
 #ConsultaMatriculas{

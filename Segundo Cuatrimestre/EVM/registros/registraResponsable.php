@@ -84,6 +84,7 @@ session_start();
                     <div id="div_email" class="lineaFormulario">  
                       	<label id="label_email" for="input_email">Email:</label>
                       	<input id="input_email" class="box <?php if(isset($errores["email"])) echo "error"?>" name="email" value="<?php echo $registroResponsable['email'] ?>" type="email"/>
+                        <span class="error"><?php if(isset($errores["email"])) echo $errores["email"]?></span>
                     </div>
                     <div id="div_telefono" class="lineaFormulario">  
                       	<label id="label_telefono" for="input_telefono">Teléfono:</label>
