@@ -27,11 +27,26 @@
             $stmt->bindParam(':oid_u',$oid_u);
             $stmt->bindParam(':oid_r',$oid_r);
             $stmt->bindParam(':tipoRelacion',$tipoRelacion);
-            $stmt->execute();
+            return $stmt->execute();
                         
         }catch(PDOException $e){
-        $_SESSION['error']=$e->GetMessage();
-        header("Location:../error.php");
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+        }
+    }
+    
+    function actualizaRelacion($conexion, $oid_u, $oid_r, $tipoRelacion){
+        try{
+            $stmt = $conexion->prepare("UPDATE RELACIONES SET oid_r=:oid_r, tipoRelacion=:tipoRelacion
+             WHERE oid_u=:oid_u");
+            $stmt->bindParam(':oid_u',$oid_u);
+            $stmt->bindParam(':oid_r',$oid_r);
+            $stmt->bindParam(':tipoRelacion',$tipoRelacion);
+            return $stmt->execute();
+                        
+        }catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
         }
     }
     
@@ -46,8 +61,8 @@
             $exito = $stmt->execute();
                         
         }catch(PDOException $e){
-        $_SESSION['error']=$e->GetMessage();
-        header("Location:../error.php");
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
         }
         return $exito;
     }
