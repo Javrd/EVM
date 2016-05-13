@@ -17,7 +17,7 @@
 		        $fecha = $falta['fecha_falta']->format("dmY");
 		        $oid_m = $falta["usuario"];
 		            
-		        $oid_f = guardaFalta($conexion, $tipo_falta,  $fecha,  $oid_m);
+		        guardaFalta($conexion, $tipo_falta,  $fecha,  $oid_m);
 	        
 			}
 		}

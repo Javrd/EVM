@@ -17,13 +17,11 @@
     function guardaFalta($conexion, $tipo_falta,  $fecha,  $oid_m){
         try{
             $stmt = $conexion->prepare("INSERT INTO FALTAS (tipo_falta,fecha_falta,justificada,oid_m)
-				VALUES (:tipo_falta,TO_DATE(:fecha,'ddmmYYYY'),0,:oid_m) RETURNING oid_f INTO :oid_f");
+				VALUES (:tipo_falta,TO_DATE(:fecha,'ddmmYYYY'),0,:oid_m)");
             $stmt->bindParam(':tipo_falta',$tipo_falta);
             $stmt->bindParam(':fecha',$fecha);
             $stmt->bindParam(':oid_m',$oid_m);
-            $stmt->bindParam(':oid_f',$oid_f, PDO::PARAM_INT, 8);
-            $stmt->execute();
-            return $oid_f;
+            return $stmt->execute();
                         
         }catch(PDOException $e){
         $_SESSION['error']=$e->GetMessage();
