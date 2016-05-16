@@ -185,7 +185,7 @@ input.error:focus, select.error:focus, #input_checkResponsable.error:focus{
   	outline-color: #FF9999;
 }
 
-#select_fecha{
+.selectsEnLinea{
 	vertical-align: top;
 	display: inline-block;
 }
