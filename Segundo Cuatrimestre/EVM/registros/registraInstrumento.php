@@ -11,9 +11,7 @@ session_start();
             $registroInstrumento["nombre"] = $_POST['nombre'];
             $registroInstrumento["tipo"] = $_POST['tipo'];
             $registroInstrumento["ESTADO_INSTRUMENTO"] = $_POST['ESTADO_INSTRUMENTO'];
-            if ($_POST['libre']==1){
-                $registroInstrumento["libre"] = $_POST['libre'];
-            }
+            $registroInstrumento["libre"] = $_POST['libre'];
             $_SESSION["registroInstrumento"] = $registroInstrumento;
     } else{  // se inilizia las variables por defectos para nuevo instrumento
     	if (!isset($_SESSION['registroInstrumento'])){
@@ -113,8 +111,7 @@ session_start();
                     </div>
 
                     <div id="div_checkboxLibre" class="lineaFormulario">
-                		<label id="label_libre" for="input_libre">Instrumento libre</label>
-              			<input id="input_libre" name="instrumentoLibre" <?php if(isset($registroInstrumento['libre'])) echo 'checked' ?> type="checkbox"/>   
+              			<input type="hidden" id="input_libre" name="instrumentoLibre" <?php if(($registroInstrumento['libre']) == 1){ echo 'value=1'; }else{echo 'value=0';};?> />   
                 	</div>
 
                     <?php if(isset($registroInstrumento["oid_i"])) { ?>
