@@ -3,7 +3,7 @@
     if(!isset($_SESSION["login"])){
         header("Location: ../index.php");
     }
-    require_once ("../gestion/gestionarAsignaturas.php");
+    require_once ("../gestion/gestionarAsignatura.php");
     require_once("../gestion/gestionBD.php");
     $conexion = crearConexionBD();
     
@@ -100,10 +100,10 @@
                 </div>   
         		<div id="ConsultaAsignaturas" class="consultas">
         		    <table>
-        		        <th>
-        		            <td>Nombre</td>
-                            <td>Editar</td>
-        		        </th>
+        		        <tr class="titlerow">
+        		            <th>Nombre</th>
+                            <th>Editar</th>
+        		        </tr>
         			<?php 
                         $filas = consultaPaginadaAsignaturas($conexion,$page_num,$page_size,$total);
                         foreach ($filas as $asignatura) {
@@ -111,17 +111,14 @@
                     ?>
                     
                         <tr>
-                            <td><?php echo $asignatura['NOMBRE']?></td>
-                            <div class=<?php echo $row ?>>
-                                <div class="col6"><span><?php echo $asignatura['NOMBRE']?></span></div>
-                                <div class="col6">                                        
-                                    <form  method="post" action="../registros/registraAsignatura.php">
-                                        <input type="hidden" name="oid_a" value="<?php echo $asignatura['OID_A']?>"/>
-                                        <input type="hidden" name="nombre" value="<?php echo $asignatura['NOMBRE']?>"/>
-                                        <button><img src="../img/Edit_Notepad_Icon.png" class="notepadIcon"/></button>
-                                    </form>
-                                </div>
-                            </div>
+                            <td class="evenrow"><?php echo $asignatura['NOMBRE']?></td> 
+                            <td>               
+                                <form  method="post" action="../registros/registraAsignatura.php">
+                                    <input type="hidden" name="oid_a" value="<?php echo $asignatura['OID_A']?>"/>
+                                    <input type="hidden" name="nombre" value="<?php echo $asignatura['NOMBRE']?>"/>
+                                    <button><img src="../img/Edit_Notepad_Icon.png" class="notepadIcon"/></button>
+                                </form>
+                            </td>
                         </tr>
                     <?php  
                         } 
