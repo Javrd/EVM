@@ -133,7 +133,7 @@
                             $nacimiento = DateTime::createFromFormat("d/m/Y",$usuario['FECHA_NACIMIENTO']);
                             $edad = $nacimiento->diff($hoy);
                     ?>
-                            <div class=<?php echo $row ?>>
+                            <div class="<?php echo $row ?>">
                                 <div class="col6"><span><?php echo $usuario['NOMBRE']?></span></div>
                                 <div class="col15"><span><?php echo $usuario['APELLIDOS']?></span></div>
                                 <div class="col6"><span><?php echo $edad->format('%y')?></span></div>

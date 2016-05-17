@@ -104,7 +104,7 @@ session_start();
         
         			<div id="div_fechaNacimiento" class="lineaFormulario">
                     	<label id="label_fechaNacimiento">Fecha de nacimiento:</label>
-                    	   <div id="select_fecha">
+                    	   <div id="input_fecha" class = "selectsEnLinea">
                         	<select id="select_dia" <?php if(isset($errores["fechaNacimiento"])) echo 'class="error"'?> name="dia">
             	            <optgroup label="Día">
             	              	<?php
@@ -147,7 +147,7 @@ session_start();
                           	</optgroup>
                           	</select>
                         </div>
-                       <span class="error"><?php if(isset($errores["fechaNacimiento"])) echo $errores["fechaNacimiento"]?></span>
+                       <span id="error_fecha" class="error"><?php if(isset($errores["fechaNacimiento"])) echo $errores["fechaNacimiento"]?></span>
                   	</div>
                    	<div id="div_direccion" class="lineaFormulario">
                 		<label id="label_direccion" for="input_direccion">Dirección:</label>
@@ -171,7 +171,7 @@ session_start();
                   	</div>
                     <div id="div_responsable" class="lineaFormulario">
                         <label id="label_responsable" for="select_responsable">Responsable</label>
-                    	<select id="select_responsable" <?php if(isset($errores["responsable"])) echo 'class="error"'?> name="responsable" <?php if(!isset($registroUsuario['checkResponsable'])) echo 'disabled' ?>>
+                    	<select id="input_responsable" <?php if(isset($errores["responsable"])) echo 'class="error"'?> name="responsable" <?php if(!isset($registroUsuario['checkResponsable'])) echo 'disabled' ?>>
                     	    <option>--Responsable--</option>
         	              	<?php
         	              	$responsables = listaResponsables($conexion);
@@ -183,13 +183,13 @@ session_start();
         				  	}
         					?>
                       	</select>
-                      	<span class="error"><?php if(isset($errores["responsable"])) echo $errores["responsable"]?></span>
+                      	<span id="error_responsable" class="error"><?php if(isset($errores["responsable"])) echo $errores["responsable"]?></span>
                     </div>
                     <div id="div_tipoRelación" class="lineaFormulario">
-                        <label id="label_tipoRelación" for="input_tipoRelación">Tipo de relación:</label>
-                        <input id="input_tipoRelación" class="box <?php if(isset($errores["tipoRelacion"])) echo "error"?>" name="tipoRelacion" type="text"
+                        <label id="label_tipoRelacion" for="input_tipoRelacion">Tipo de relación:</label>
+                        <input id="input_tipoRelacion" class="box <?php if(isset($errores["tipoRelacion"])) echo "error"?>" name="tipoRelacion" type="text"
                         value="<?php echo $registroUsuario['tipoRelacion']?>"  <?php if(!isset($registroUsuario['checkResponsable'])) echo 'disabled' ?>/>
-                        <span class="error"><?php if(isset($errores["tipoRelacion"])) echo $errores["tipoRelacion"]?></span>
+                        <span id="error_tipoRelacion" class="error"><?php if(isset($errores["tipoRelacion"])) echo $errores["tipoRelacion"]?></span>
                     </div>
                     <?php if(isset($registroUsuario["oid_u"])) { ?>
                     <input type="hidden" name="oid_u" value="<?php echo $registroUsuario["oid_u"] ?>"/>

@@ -185,7 +185,7 @@ input.error:focus, select.error:focus, #input_checkResponsable.error:focus{
   	outline-color: #FF9999;
 }
 
-#select_fecha{
+#select_fecha, .selectsEnLinea{
 	vertical-align: top;
 	display: inline-block;
 }
@@ -220,7 +220,7 @@ button.submit:hover button.botonLogin:hover{
     color: #008CBA;
     transition-duration: 0.4s;
     -webkit-transition-duration: 0.4s; /* Safari */
-  	cursor: pointer;
+  	cursor: pointer;se
 }
 
 #button_enviar{
