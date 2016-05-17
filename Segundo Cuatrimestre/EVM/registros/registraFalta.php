@@ -8,7 +8,9 @@ session_start();
 		}
     	if (!isset($_SESSION['registroFalta'])){
             $fecha_falta = new DateTime();
-    		$registroFalta["fecha_falta"] = $fecha_falta;
+			$registroFalta["dia"]= $fecha_falta->format("j");
+			$registroFalta["anio"]= $fecha_falta->format('Y');
+			$registroFalta["mes"]= $fecha_falta->format('m');
     		$registroFalta["tipo_falta"] = "Asistencia";
 			$registroFalta['usuario'] = "-1";
     		$_SESSION["registroFalta"] = $registroFalta;
@@ -74,7 +76,7 @@ session_start();
             	              	<?php
             	              	for ($i=1; $i < 32 ; $i++) { 
             						echo "<option ";
-            						if ($registroFalta['fecha_falta']->format('j') == $i ) echo "selected='selected'";
+            						if ($registroFalta['dia'] == $i ) echo "selected='selected'";
             						echo ">";
             						echo "$i</option>";
             				  	}
@@ -84,18 +86,18 @@ session_start();
                           	
                           	<select id="select_mes" <?php if(isset($errores["fecha_falta"])) echo 'class="error"'?> name="mes">
             	            <optgroup label="Mes">
-                            <option value = "01" <?php if ($registroFalta['fecha_falta']->format('m')=="01") echo "selected='selected'"; ?> >Enero</option>
-                            <option value = "02" <?php if ($registroFalta['fecha_falta']->format('m')=="02") echo "selected='selected'"; ?> >Febrero</option>
-                            <option value = "03" <?php if ($registroFalta['fecha_falta']->format('m')=="03") echo "selected='selected'"; ?> >Marzo</option>
-                            <option value = "04" <?php if ($registroFalta['fecha_falta']->format('m')=="04") echo "selected='selected'"; ?> >Abril</option>
-                            <option value = "05" <?php if ($registroFalta['fecha_falta']->format('m')=="05") echo "selected='selected'"; ?> >Mayo</option>
-                            <option value = "06" <?php if ($registroFalta['fecha_falta']->format('m')=="06") echo "selected='selected'"; ?> >Junio</option>
-                            <option value = "07" <?php if ($registroFalta['fecha_falta']->format('m')=="07") echo "selected='selected'"; ?> >Julio</option>
-                            <option value = "08" <?php if ($registroFalta['fecha_falta']->format('m')=="08") echo "selected='selected'"; ?> >Agosto</option>
-                            <option value = "09" <?php if ($registroFalta['fecha_falta']->format('m')=="09") echo "selected='selected'"; ?> >Septiembre</option>
-                            <option value = "10" <?php if ($registroFalta['fecha_falta']->format('m')=="10") echo "selected='selected'"; ?> >Octubre</option>
-                            <option value = "11" <?php if ($registroFalta['fecha_falta']->format('m')=="11") echo "selected='selected'"; ?> >Noviembre</option>
-                            <option value = "12" <?php if ($registroFalta['fecha_falta']->format('m')=="12") echo "selected='selected'"; ?> >Diciembre</option>
+                            <option value = "01" <?php if ($registroFalta['mes']=="01") echo "selected='selected'"; ?> >Enero</option>
+                            <option value = "02" <?php if ($registroFalta['mes']=="02") echo "selected='selected'"; ?> >Febrero</option>
+                            <option value = "03" <?php if ($registroFalta['mes']=="03") echo "selected='selected'"; ?> >Marzo</option>
+                            <option value = "04" <?php if ($registroFalta['mes']=="04") echo "selected='selected'"; ?> >Abril</option>
+                            <option value = "05" <?php if ($registroFalta['mes']=="05") echo "selected='selected'"; ?> >Mayo</option>
+                            <option value = "06" <?php if ($registroFalta['mes']=="06") echo "selected='selected'"; ?> >Junio</option>
+                            <option value = "07" <?php if ($registroFalta['mes']=="07") echo "selected='selected'"; ?> >Julio</option>
+                            <option value = "08" <?php if ($registroFalta['mes']=="08") echo "selected='selected'"; ?> >Agosto</option>
+                            <option value = "09" <?php if ($registroFalta['mes']=="09") echo "selected='selected'"; ?> >Septiembre</option>
+                            <option value = "10" <?php if ($registroFalta['mes']=="10") echo "selected='selected'"; ?> >Octubre</option>
+                            <option value = "11" <?php if ($registroFalta['mes']=="11") echo "selected='selected'"; ?> >Noviembre</option>
+                            <option value = "12" <?php if ($registroFalta['mes']=="12") echo "selected='selected'"; ?> >Diciembre</option>
                           	</optgroup>
                           	</select>
             	              	
@@ -104,7 +106,7 @@ session_start();
             	              	<?php
             	              	for ($i=date('Y'); $i > date('Y')-2 ; $i--) { 
             						echo "<option ";
-            						if ($registroFalta['fecha_falta']->format('Y') == $i ) echo "selected='selected'";
+            						if ($registroFalta['anio'] == $i ) echo "selected='selected'";
             						echo ">$i</option>";
             				  	}
             					?>
