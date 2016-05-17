@@ -18,7 +18,9 @@ if(isset($_REQUEST['borrar'])){
 			if (isset($_SESSION["registroFalta"]) ){    
 			  
 				    $falta["tipo_falta"] = $_REQUEST["tipo_falta"];
-				    $falta["fecha_falta"] = DateTime::createFromFormat("d/m/Y", ($_REQUEST["dia"]."/".$_REQUEST["mes"]."/".$_REQUEST["anio"]));
+					$falta["dia"] = $_REQUEST["dia"];
+					$falta["mes"] = $_REQUEST["mes"];
+					$falta["anio"] = $_REQUEST["anio"];
 					$falta["usuario"] = $_REQUEST["usuario"];
 				
 			    
@@ -47,13 +49,23 @@ function validar($falta) {
 	if ($falta["usuario"]=="-1") {
         $errores["usuario"] = "Seleccione un usuario.";
     }else {
-		 $fecha = DateTime::createFromFormat("d/m/y",getFechaMatriculacion($conexion, $falta['usuario']));
-		if($fecha>$falta['fecha_falta']){
-			$errores['fecha_falta'] = "La fecha no puede ser anterior a la fecha de Matriculación.";
+    	if(!checkdate($falta["mes"], $falta["dia"], $falta["anio"])){
+			$errores['fecha_falta'] = "Introduzca una fecha válida.";
+		}else{			
+	 		$fecha_falta = DateTime::createFromFormat("d/m/Y", ($falta["dia"]."/".$falta["mes"]."/".$falta["anio"]));		
+			 $fecha = DateTime::createFromFormat("d/m/y",getFechaMatriculacion($conexion, $falta['usuario']));
+			if($fecha>$fecha_falta){
+				$errores['fecha_falta'] = "La fecha no puede ser anterior a la fecha de Matriculación.";
+			}
 		}
 	}
-	if ($falta['fecha_falta']>new DateTime()){
+	if(!checkdate($falta["mes"], $falta["dia"], $falta["anio"])){
+		$errores['fecha_falta'] = "Introduzca una fecha válida.";
+	}else{
+	 $fecha_falta= DateTime::createFromFormat("d/m/Y", ($falta["dia"]."/".$falta["mes"]."/".$falta["anio"]));		
+	 if($fecha_falta>new DateTime()){
 		$errores['fecha_falta'] = "La fecha no puede ser posterior a hoy.";
+		}
 	}
     return $errores;
 }
