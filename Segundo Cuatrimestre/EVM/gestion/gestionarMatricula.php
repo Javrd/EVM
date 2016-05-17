@@ -28,19 +28,32 @@
         }
     }
     
-    function actualizaFalta($conexion, $oid_f,$justificada){
-       try{
-            $stmt = $conexion->prepare("UPDATE FALTAS SET justificada=:justificada WHERE oid_f=:oid_f");
-            $stmt->bindParam(':oid_f',$oid_f);
-			$stmt->bindParam(':justificada',$justificada);
+    function consultaAsignaturasDeMatricula($conexion, $oid_m){
+        try{
+            $stmt = $conexion->prepare("SELECT NOMBRE FROM PERTENECE_A NATURAL JOIN ASIGNATURAS WHERE oid_m=:oid_m");
+            $stmt->bindParam(':oid_m',$oid_m);
             $stmt->execute();
-                        
+            return $stmt;
         } catch(PDOException $e){
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
         } 
     }
-        
+
+    function consultaAsignaturas($conexion){
+        try{
+            $stmt = $conexion->prepare("SELECT NOMBRE FROM ASIGNATURAS");
+            $stmt->bindParam(':oid_m',$oid_m);
+            $stmt->execute();
+            return $stmt;
+        } catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+        } 
+    }
+
+
+
     function consultaPaginadaMatriculas($conexion,$pagina_seleccionada,$intervalo,$total,$constulta){
          $select = "SELECT USUARIOS.NOMBRE, USUARIOS.APELLIDOS, MATRICULAS.OID_M, MATRICULAS.CODIGO, MATRICULAS.FECHA_MATRICULACION ,
             	MATRICULAS.CURSO FROM MATRICULAS NATURAL JOIN USUARIOS ORDER BY USUARIOS.APELLIDOS, USUARIOS.NOMBRE";
