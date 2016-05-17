@@ -105,13 +105,15 @@
                             <th>Editar</th>
         		        </tr>
         			<?php 
+        			
+                        $i = 0;
                         $filas = consultaPaginadaAsignaturas($conexion,$page_num,$page_size,$total);
                         foreach ($filas as $asignatura) {
                             
                     ?>
                     
-                        <tr>
-                            <td class="evenrow"><?php echo $asignatura['NOMBRE']?></td> 
+                        <tr class="<?php echo $row ?>">
+                            <td ><?php echo $asignatura['NOMBRE']?></td> 
                             <td>               
                                 <form  method="post" action="../registros/registraAsignatura.php">
                                     <input type="hidden" name="oid_a" value="<?php echo $asignatura['OID_A']?>"/>
