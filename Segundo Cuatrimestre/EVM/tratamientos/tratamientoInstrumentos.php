@@ -18,7 +18,13 @@ elseif (isset($_SESSION["registroInstrumento"]) ){
     $instrumento["tipo"] = $_REQUEST["tipo"];
     $instrumento["ESTADO_INSTRUMENTO"] = $_REQUEST["ESTADO_INSTRUMENTO"];
     if(isset($_REQUEST['instrumentoLibre'])) {
-         $instrumento['instrumentoLibre']= 1;
+        if ($_REQUEST['instrumentoLibre'] == '1'){
+            $instrumento['instrumentoLibre'] = 1;
+        }else {
+            $instrumento['instrumentoLibre'] = 0;
+        }
+
+         
     }
     $errores = validar($instrumento);
     

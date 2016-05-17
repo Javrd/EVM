@@ -54,7 +54,7 @@ session_start();
          ?>
 
 		<meta name="viewport" content="width=device-width; initial-scale=1.0">
-        <script src="../js/usuarios.js"></script>
+        <script src="../js/evm.js"></script>
         <script src="../js/jquery-1.12.3.min.js"></script>
         <link rel="shortcut icon" href="../img/favicon.png">
         <link rel="apple-touch-icon" href="../img/favicon.png">
@@ -68,28 +68,28 @@ session_start();
     		
     		<div id="content">
     		   <div id="formulario">
-    	       <form action="../tratamientos/tratamientoResponsables.php" method="post" onsubmit="return validarResponsables()">
+    	       <form action="../tratamientos/tratamientoResponsables.php" method="post">
     	  
                     <div id="div_nombre" class="lineaFormulario">  
                       <label id="label_nombre" for="input_nombre">Nombre:</label>
                       <input id="input_nombre" class="box <?php if(isset($errores["nombre"])) echo "error"?>" name="nombre" value="<?php echo $registroResponsable['nombre'] ?>" type="text"/>
-                      <span id="error_nombre" class="error"><?php if(isset($errores["nombre"])) echo $errores["nombre"]?></span>
+                      <span class="error"><?php if(isset($errores["nombre"])) echo $errores["nombre"]?></span>
                     </div>
         
                     <div id="div_apellidos" class="lineaFormulario">  
                       <label id="label_apellidos" for="input_apellidos">Apellidos:</label>
                       <input id="input_apellidos" class="box <?php if(isset($errores["apellidos"])) echo "error"?>" name="apellidos" value="<?php echo $registroResponsable['apellidos'] ?>" type="text"/>
-                      <span id="error_apellidos" class="error"><?php if(isset($errores["apellidos"])) echo $errores["apellidos"]?></span>
+                      <span class="error"><?php if(isset($errores["apellidos"])) echo $errores["apellidos"]?></span>
                     </div>
                     <div id="div_email" class="lineaFormulario">  
                       	<label id="label_email" for="input_email">Email:</label>
                       	<input id="input_email" class="box <?php if(isset($errores["email"])) echo "error"?>" name="email" value="<?php echo $registroResponsable['email'] ?>" type="email"/>
-                        <span id="error_email" class="error"><?php if(isset($errores["email"])) echo $errores["email"]?></span>
+                        <span class="error"><?php if(isset($errores["email"])) echo $errores["email"]?></span>
                     </div>
                     <div id="div_telefono" class="lineaFormulario">  
                       	<label id="label_telefono" for="input_telefono">Teléfono:</label>
                       	<input id="input_telefono" class="box <?php if(isset($errores["telefono"])) echo "error"?>" name="telefono" value="<?php echo $registroResponsable['telefono'] ?>" type="tel" pattern="\d{9}"/>
-                        <span id="error_telefono" class="error"><?php if(isset($errores["telefono"])) echo $errores["telefono"]?></span>
+                        <span class="error"><?php if(isset($errores["telefono"])) echo $errores["telefono"]?></span>
                     </div>
                     <?php if(isset($registroResponsable["oid_r"])) { ?>
                     <input type="hidden" name="oid_r" value="<?php echo $registroResponsable["oid_r"] ?>"/>

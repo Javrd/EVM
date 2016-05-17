@@ -88,8 +88,6 @@
         		<nav>
         			<ul class="menu">
                         <form method="get" action="instrumentos.php">
-                        <li><button id = "button_usuarios" name="consulta" value="Todos">Todos</button></li>
-        				<li><button id = "button_prestamos" name="consulta"  value="Usuarios con prestamos">Usuarios con préstamos</button></li>
         				</form>
         				<form  method="post" action="../registros/registraInstrumento.php">
         				<li><button id = "button_nuevo" name="nuevo">Nuevo</button></li>    
@@ -112,10 +110,10 @@
                  
                     </form>
                 </div>   
-        		<div id="ConsultaUsuarios" class="consultas">
+        		<div id="ConsultaInstrumentos" class="consultas">
         		    <div class="titlerow">
                         <div class="col6">Tipo</div>
-                        <div class="col6">Nombre</div>
+                        <div class="col15">Nombre</div>
                         <div class="col6">Estado Instrumento</div>
                         <div class="col6">Libre</div>
                         <div class="col6">Devolver</div>
@@ -130,7 +128,7 @@
                     ?>
                             <div class=<?php echo $row ?>>
                                 <div class="col6"><span><?php echo $instrumento['TIPO']?></span></div>
-                                <div class="col6"><span><?php echo $instrumento['NOMBRE']?></span></div>
+                                <div class="col15"><span><?php echo $instrumento['NOMBRE']?></span></div>
                                 <div class="col6"><span><?php echo $instrumento['ESTADO_INSTRUMENTO']?></span></div>
                                 <div class="col6">
                     <?php   

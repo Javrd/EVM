@@ -112,7 +112,8 @@
                         <div class="col15">Apellidos</div>
                         <div class="col6">Codigo</div>
                         <div class="col6">Fecha de Matriculacion</div>
-                        <div class="col6">Curso</div>                        
+                        <div class="col6">Curso</div>
+                        <div class="col6">Asignaturas</div>                        
                         
                     </div>
         			<?php 
@@ -130,6 +131,14 @@
                                 <div class="col6"><span><?php echo $matricula['CODIGO']?></span></div>
                                 <div class="col6"><span><?php echo $fecha->format("d/m/y")?></span></div>
                                 <div class="col6"><span><?php echo $matricula['CURSO']?></span></div>
+                                <div class="col6"><select>
+                                <?php
+                                    $filasAsignaturas = consultaAsignaturasDeMatricula($conexion,$matricula['OID_M']);
+                                    foreach ($filasAsignaturas as $asignatura){
+                                        echo "<option>".$asignatura["NOMBRE"]."</option>";
+                                    }
+                                ?>
+                                </select></div>
                    
                             </div>
                     <?php  
