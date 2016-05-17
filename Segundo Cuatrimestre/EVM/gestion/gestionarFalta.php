@@ -19,7 +19,7 @@
             $stmt = $conexion->prepare("INSERT INTO FALTAS (tipo_falta,fecha_falta,justificada,oid_m)
 				VALUES (:tipo_falta,TO_DATE(:fecha,'ddmmYYYY'),0,:oid_m)");
             $stmt->bindParam(':tipo_falta',$tipo_falta);
-            $stmt->bindParam(':fecha',$fecha);
+            $stmt->bindParam(':fecha',$fecha->format('dmY'));
             $stmt->bindParam(':oid_m',$oid_m);
             return $stmt->execute();
                         

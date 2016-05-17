@@ -14,7 +14,7 @@
 				actualizaFalta($conexion, $falta['oid_f'], 1);
 			}else{
 		        $tipo_falta = $falta["tipo_falta"];
-		        $fecha = $falta['fecha_falta']->format("dmY");
+				$fecha= DateTime::createFromFormat("d/m/Y", ($falta["dia"]."/".$falta["mes"]."/".$falta["anio"]));
 		        $oid_m = $falta["usuario"];
 		            
 		        guardaFalta($conexion, $tipo_falta,  $fecha,  $oid_m);
