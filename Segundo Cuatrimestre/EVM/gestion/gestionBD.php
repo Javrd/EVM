@@ -16,6 +16,7 @@ function crearConexionBD()
 	}catch(PDOException $e){
 		$_SESSION['error']=$e->GetMessage();
 		header("Location:../error.php");
+        exit();
 	}
 	return $conexion;
 }
@@ -45,6 +46,7 @@ function consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$quer
     catch ( PDOException $e ) {
         $_SESSION['error']=$e->GetMessage();
         header("Location:../error.php");
+        exit();
     }
 } 
 ?>

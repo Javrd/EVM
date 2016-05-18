@@ -9,8 +9,9 @@
             $stmt = $conexion->query( $total_query );
             return $stmt;
         }catch(PDOException $e){
-        $_SESSION['error']=$e->GetMessage();
-        header("Location:../error.php");
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
         }
     }
     
@@ -24,8 +25,9 @@
             return $stmt->execute();
                         
         }catch(PDOException $e){
-        $_SESSION['error']=$e->GetMessage();
-        header("Location:../error.php");
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
         }
     }
     
@@ -39,6 +41,7 @@
         } catch(PDOException $e){
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         } 
     }
         
@@ -60,6 +63,7 @@
         } catch(PDOException $e){
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         } 
 	}
 	
@@ -72,6 +76,7 @@
         } catch(PDOException $e){
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         } 
 	}
 	
@@ -86,6 +91,7 @@
         catch ( PDOException $e ) {
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         }
     }
 ?>
