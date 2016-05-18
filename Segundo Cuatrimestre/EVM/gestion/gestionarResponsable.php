@@ -6,8 +6,9 @@
             $stmt = $conexion->query( $total_query );
             return $stmt;
         }catch(PDOException $e){
-        $_SESSION['error']=$e->GetMessage();
-        header("Location:../error.php");
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
         }
     }
     function getRelacion($conexion, $oid_u){
@@ -19,6 +20,7 @@
         }catch(PDOException $e){
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         }
     }
     function guardaRelacion($conexion, $oid_u, $oid_r, $tipoRelacion){
@@ -32,6 +34,7 @@
         }catch(PDOException $e){
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         }
     }
     
@@ -47,6 +50,7 @@
         }catch(PDOException $e){
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         }
     }
     
@@ -63,6 +67,7 @@
         }catch(PDOException $e){
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         }
         return $exito;
     }
@@ -82,6 +87,7 @@
         } catch(PDOException $e){
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         } 
         return $exito;
     }
@@ -96,6 +102,7 @@
         }catch(PDOException $e){
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         }   
     }
     
@@ -110,6 +117,7 @@
         catch ( PDOException $e ) {
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         }
     }
     

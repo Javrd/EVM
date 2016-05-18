@@ -14,6 +14,7 @@
         }catch(PDOException $e){
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         }
     }
 ?>
