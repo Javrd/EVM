@@ -3,9 +3,17 @@
     if(!isset($_SESSION["login"])){
         header("Location: ../index.php");
     }
+    
+    if(!isset($_SESSION["nuevaAsignatura"])){
+        $nuevaAsignatura["nombre"] = "";
+        $_SESSION["nuevaAsignatura"] = $nuevaAsignatura;
+    } else {
+        $nuevaAsignatura = $_SESSION["nuevaAsignatura"];
+    }
     require_once ("../gestion/gestionarAsignatura.php");
     require_once("../gestion/gestionBD.php");
     $conexion = crearConexionBD();
+    
     
     /* Recuperacion de sesion de las variables que no se hayan pasado como get */
     
@@ -77,9 +85,7 @@
     		<div id="content">
         		<nav>
         			<ul class="menu">
-        				<form  method="post" action="../registros/registraAsignatura.php">
         				<li><button id = "button_nuevo" name="nuevo">Nuevo</button></li>    
-        				</form>
         			</ul>
         		</nav>
                 <div id="Paginacion">
@@ -109,7 +115,7 @@
                         $i = 0;
                         $filas = consultaPaginadaAsignaturas($conexion,$page_num,$page_size,$total);
                         foreach ($filas as $asignatura) {
-                            
+                            $row = $i%2?'oddrow':'evenrow';
                     ?>
                     
                         <tr class="<?php echo $row ?>">
@@ -123,6 +129,7 @@
                             </td>
                         </tr>
                     <?php  
+                            $i++;
                         } 
                     ?>
                     </table>
@@ -134,6 +141,20 @@
             ?>
             
         </div>
-
+        <!-- Registro de asignatura  -->
+        <div class="overlay"></div>
+        <div id="nuevaAsignatura">
+            <form action="../tratamientos/tratamientoAsignatura.php" method="post">
+            <div id="div_nombre" class="lineaModal">  
+                <p class="tituloModal">Nueva asignatura:</p>
+                <label id="label_nombre" for="input_nombre">Nombre:</label>
+                <input id="input_nombre" class="box <?php if(isset($errores["nombre"])) echo "error"?>" name="nombre" value="<?php echo $nuevaAsignatura["nombre"] ?>" type="text"/>
+                <span id="error_nombre" class="error"><?php if(isset($errores["nombre"])) echo $errores["nombre"]?></span>
+            </div>
+            <div id="div_submit">
+                  <button id="button_enviar" class="submit" type="submit">Enviar</button>
+            </div>
+            </form>
+        </div>
 	</body>
 </html>
