@@ -94,7 +94,7 @@ session_start();
                     </div>
         
         			<div id="div_estado" class="lineaFormulario">
-                        <label id="label_estado" for="select_estado">Estado de instrumento
+                        <label id="label_estado" for="select_estado">Estado de instrumento</label>
                     	<select id="select_estado" <?php if(isset($errores["ESTADO_INSTRUMENTO"])) echo 'class="error"'?> name="ESTADO_INSTRUMENTO">
                     	    <option value = -1>--Estado Instrumento--</option>
         	              	<?php

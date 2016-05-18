@@ -168,7 +168,6 @@ label {
 }
 
 input.box{
-	vertical-align: top;
 	width: 234px;
 }
 
@@ -286,7 +285,7 @@ body.vistaPagos{
 }
 
 body.vistaAsignaturas{
-	/* TODO Definir min-width */
+	min-width: 23em;
 }
 
 	/* Margenes automaticos. Es necesario establecer la anchura de la tabla para que funciones */
@@ -328,7 +327,7 @@ div.consultas{
 }
 
 #ConsultaAsignaturas{
-	/* TODO Definir width */
+	width: 18em;
 }
 
 .tickIcon, .notepadIcon{
@@ -341,28 +340,28 @@ div.consultas{
 	width:2em;
 	height:2em;
 }
-div.evenrow, div.oddrow{
+.evenrow, .oddrow{
 	font-weight: bold;
 	padding-left:1em;
 	min-height: 3em;
 }
 
-div.evenrow:hover, div.oddrow:hover{
+.evenrow:hover, .oddrow:hover{
 	 /*font-style: italic;*/
 }
 
 	/* Color de las filas pares */
-div.evenrow{
+.evenrow{
 	background-color: #008CBA;
 }
 	
 	/* Color de las filas impares */
-div.oddrow{
+.oddrow{
 	background-color: #3DACEA;
 }
 
 	/* Cabecera de la tabla */
-div.titlerow{
+.titlerow{
 	padding-left:1em;
 	background-color: #DDDDDD;
 	border: 0.0625em;
@@ -421,8 +420,41 @@ div.error{
 	margin: 1em;
 }
 
+	/* Modal Asignatura */
 
+.overlay{
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 10;
+	background-color: rgba(0,0,0,0.5);
+}
+ /*Work In Progress*/
+#nuevaAsignatura{  
+	display: none;  
+	width: 40em;
+    height: 200px;
+    position: fixed;
+    top: 50%; 
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -20em;
+    background-color: #3DACEA;
+    border-radius: 5px;
+	z-index: 11;
+}
+.lineaModal{
+    margin-top: 3em;
+}
 
+.tituloModal{
+	margin-left: 3em;
+	font-size: 1.5em;
+	font-style: bold;
+}
 @font-face {
   font-family: 'Oswald';
   src: local('Oswald Regular'), local('Oswald-Regular'), url(http://fonts.gstatic.com/s/oswald/v10/pEobIV_lL25TKBpqVI_a2w.woff2) format('woff2');
