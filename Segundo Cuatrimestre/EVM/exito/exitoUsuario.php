@@ -31,25 +31,20 @@
         if(!isset($usuario['oid_u'])){
             
             $oid_u = guardaUsuario($conexion, $nombre, $apellidos, $fecha, $direccion, $email, $telefono, $derechos);
-            $res = oid_u;
         } else {
-            $res = actualizaUsuario($conexion, $usuario['oid_u'], $nombre, $apellidos, $fecha, $direccion, $email, $telefono, $derechos);
+            actualizaUsuario($conexion, $usuario['oid_u'], $nombre, $apellidos, $fecha, $direccion, $email, $telefono, $derechos);
         }
-        if ($oid_u != null || $res!=null){
-            $res = null;
-            if(isset($usuario['checkResponsable'])){
-                $responsable = $usuario['responsable'];   
-                $relacion = $usuario['tipoRelacion'];
-                if (!isset($usuario['oid_u']))
-                    $res = guardaRelacion($conexion,$oid_u,$responsable,$relacion);
-                else
-                    $res = actualizaRelacion($conexion, $usuario['oid_u'], $responsable, $relacion);
-                    
-            }
+        if(isset($usuario['checkResponsable'])){
+            $responsable = $usuario['responsable'];   
+            $relacion = $usuario['tipoRelacion'];
+            if (!isset($usuario['oid_u']))
+                guardaRelacion($conexion,$oid_u,$responsable,$relacion);
+            else
+                actualizaRelacion($conexion, $usuario['oid_u'], $responsable, $relacion);
+                
         }
         cerrarConexionBD($conexion);
-        if ($res!=null)
-            Header("Location: ../vistas/usuarios.php");
+        Header("Location: ../vistas/usuarios.php");
     } else {
         header("Location: ../registros/registraUsuario.php");
     }

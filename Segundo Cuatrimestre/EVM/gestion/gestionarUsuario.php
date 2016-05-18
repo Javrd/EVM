@@ -6,10 +6,10 @@
         try{
             $total_query = "SELECT * FROM USUARIOS ORDER BY nombre";
             $stmt = $conexion->query( $total_query );
-            return $stmt;
         }catch(PDOException $e){
-        $_SESSION['error']=$e->GetMessage();
-        header("Location:../error.php");
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
         }
     }
     
@@ -23,6 +23,7 @@
         }catch(PDOException $e){
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         }   
     }
     
@@ -42,8 +43,9 @@ VALUES (:nombre, :apellidos, TO_DATE(:fecha,'ddmmYYYY'), :direccion, :email, :te
             return $oid_u;
                         
         }catch(PDOException $e){
-        $_SESSION['error']=$e->GetMessage();
-        header("Location:../error.php");
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
         }
     }
     
@@ -59,11 +61,12 @@ VALUES (:nombre, :apellidos, TO_DATE(:fecha,'ddmmYYYY'), :direccion, :email, :te
             $stmt->bindParam(':email',$email);
             $stmt->bindParam(':telefono',$telefono);
             $stmt->bindParam(':derechos',$derechos);
-            return $stmt->execute();
+            $stmt->execute();
                         
         } catch(PDOException $e){
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         } 
     }
         
@@ -86,6 +89,7 @@ VALUES (:nombre, :apellidos, TO_DATE(:fecha,'ddmmYYYY'), :direccion, :email, :te
         catch ( PDOException $e ) {
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         }
     }
     
@@ -100,6 +104,7 @@ VALUES (:nombre, :apellidos, TO_DATE(:fecha,'ddmmYYYY'), :direccion, :email, :te
         catch ( PDOException $e ) {
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         }
     }
 ?>
