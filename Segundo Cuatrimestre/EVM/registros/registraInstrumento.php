@@ -109,10 +109,8 @@ session_start();
                       	</select>
                       	<span class="error"><?php if(isset($errores["ESTADO_INSTRUMENTO"])) echo $errores["ESTADO_INSTRUMENTO"]?></span>
                     </div>
-
-                    <div id="div_checkboxLibre" class="lineaFormulario">
-              			<input type="hidden" id="input_libre" name="instrumentoLibre" <?php if(($registroInstrumento['libre']) == 1){ echo 'value=1'; }else{echo 'value=0';};?> />   
-                	</div>
+          			<input type="hidden" id="input_libre" name="instrumentoLibre" <?php if(($registroInstrumento['libre']) == 1){ echo 'value=1'; }else{echo 'value=0';};?> />   
+                
 
                     <?php if(isset($registroInstrumento["oid_i"])) { ?>
                     	<input type="hidden" name="oid_i" value="<?php echo $registroInstrumento["oid_i"] ?>"/>

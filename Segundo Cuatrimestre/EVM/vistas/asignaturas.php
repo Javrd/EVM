@@ -10,6 +10,10 @@
     } else {
         $nuevaAsignatura = $_SESSION["nuevaAsignatura"];
     }
+    if(isset($_SESSION["error"])){
+        $error = $_SESSION["error"];
+        unset($_SESSION["error"]);
+    };
     require_once ("../gestion/gestionarAsignatura.php");
     require_once("../gestion/gestionBD.php");
     $conexion = crearConexionBD();
@@ -143,14 +147,14 @@
             
         </div>
         <!-- Registro de asignatura  -->
-        <div id="overlay"></div>
-        <div id="nuevaAsignatura">
-            <form action="../tratamientos/tratamientoAsignatura.php" method="post">
+        <div id="overlay" class="<?php if(!isset($error)) echo "hidden" ?>"></div>
+        <div id="nuevaAsignatura" class="<?php if(!isset($error)) echo "hidden" ?>">
+            <form action="../tratamientos/tratamientoAsignaturas.php" method="post">
             <div id="div_nombre" class="lineaModal">  
                 <p class="tituloModal">Nueva asignatura:</p>
                 <label id="label_nombre" for="input_nombre">Nombre:</label>
-                <input id="input_nombre" class="box <?php if(isset($errores["nombre"])) echo "error"?>" name="nombre" value="<?php echo $nuevaAsignatura["nombre"] ?>" type="text"/>
-                <span id="error_nombre" class="error"><?php if(isset($errores["nombre"])) echo $errores["nombre"]?></span>
+                <input id="input_nombre" class="box <?php if(isset($error["nombre"])) echo "error"?>" name="nombre" value="<?php echo $nuevaAsignatura["nombre"] ?>" type="text"/>
+                <span id="error_nombre" class="error"><?php if(isset($error["nombre"])) echo $error["nombre"]?></span>
             </div>
             <div id="div_submit">
                   <button id="button_enviar" class="submit" type="submit">Enviar</button>

@@ -194,9 +194,9 @@ button.submit{
 	border-radius: 4px;
     color: white;
     display: block;
-	float: right;
-    margin: auto;
+    margin-left: auto;
 	margin-bottom: 5px;
+	margin-top: -50px;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -220,10 +220,6 @@ button.submit:hover button.botonLogin:hover{
     transition-duration: 0.4s;
     -webkit-transition-duration: 0.4s; /* Safari */
   	cursor: pointer;se
-}
-
-#button_enviar{
-	margin:-50px;
 }
 
 span.error{
@@ -423,7 +419,6 @@ div.error{
 	/* Modal Asignatura */
 
 #overlay{
-	display: none;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -434,7 +429,6 @@ div.error{
 }
  /*Work In Progress*/
 #nuevaAsignatura{  
-	display: none;  
 	width: 40em;
     height: 200px;
     position: fixed;
@@ -455,6 +449,16 @@ div.error{
 	font-size: 1.5em;
 	font-style: bold;
 }
+
+.modalBox{
+	width: 15em;
+    margin-left: 12em;
+}
+
+.hidden{
+	display: none;  
+}
+
 @font-face {
   font-family: 'Oswald';
   src: local('Oswald Regular'), local('Oswald-Regular'), url(http://fonts.gstatic.com/s/oswald/v10/pEobIV_lL25TKBpqVI_a2w.woff2) format('woff2');

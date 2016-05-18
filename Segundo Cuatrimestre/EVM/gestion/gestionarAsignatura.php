@@ -5,13 +5,14 @@
     
     function guardaAsignatura($conexion, $nombre){
         try{
-            $stmt = $conexion->prepare("INSERT INTO ASIGNATURAS nombre VALUES :nombre");
+            $stmt = $conexion->prepare("INSERT INTO ASIGNATURAS (nombre) VALUES (:nombre)");
             $stmt->bindParam(':nombre',$nombre);
             $stmt->execute();
                         
         }catch(PDOException $e){
-        $_SESSION['error']=$e->GetMessage();
-        header("Location:../error.php");
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
         }
     }
     
@@ -25,6 +26,7 @@
         } catch(PDOException $e){
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         } 
     }
         
@@ -44,6 +46,7 @@
         catch ( PDOException $e ) {
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
+            exit();
         }
     }
    
