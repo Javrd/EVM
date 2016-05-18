@@ -75,6 +75,7 @@
         <link rel="shortcut icon" href="../img/favicon.png">
         <link rel="apple-touch-icon" href="../img/favicon.png">
         <link rel="stylesheet" type="text/css" href="../evm.css">
+        <script src="../js/asignaturas.js"></script>
 	</head>
 
 	<body class="vistaAsignaturas">
@@ -85,7 +86,7 @@
     		<div id="content">
         		<nav>
         			<ul class="menu">
-        				<li><button id = "button_nuevo" name="nuevo">Nuevo</button></li>    
+        				<li><button id = "button_nuevo" name="nuevo" onclick="nuevaAsignatura()">Nuevo</button></li>    
         			</ul>
         		</nav>
                 <div id="Paginacion">
@@ -142,7 +143,7 @@
             
         </div>
         <!-- Registro de asignatura  -->
-        <div class="overlay"></div>
+        <div id="overlay"></div>
         <div id="nuevaAsignatura">
             <form action="../tratamientos/tratamientoAsignatura.php" method="post">
             <div id="div_nombre" class="lineaModal">  
