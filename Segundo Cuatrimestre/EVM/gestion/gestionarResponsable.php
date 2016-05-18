@@ -40,7 +40,7 @@
     
     function actualizaRelacion($conexion, $oid_u, $oid_r, $tipoRelacion){
         try{
-            $stmt = $conexion->prepare("UPDATE RELACIONES SET oid_r=:oid_r, tipoRelacion=:tipoRelacion
+            $stmt = $conexion->prepare("UPDATE RELACIONES SET oid_r=:oid_r, tipo_relacion=:tipoRelacion
              WHERE oid_u=:oid_u");
             $stmt->bindParam(':oid_u',$oid_u);
             $stmt->bindParam(':oid_r',$oid_r);

@@ -46,10 +46,10 @@ function validarUsuarios(){
 	
 	var dia = selectDia.value;
 	var mes = selectMes.value;
-	var anio = selectAnio.value;
-	
-	var fecha1 = new Date(+anio+3, mes, dia);
-	var fecha2 = new Date(+anio+18, mes, dia);
+	var anio = +selectAnio.value+3;
+	var anio2 = +anio +15;
+	var fecha1 = new Date(anio+"-" + mes + "-" + dia);
+	var fecha2 = new Date(anio2+"-" + mes + "-" + dia);
 	var hoy = new Date();
 		
 	var menorTresAnios = fecha1.getTime() > hoy.getTime();
@@ -68,7 +68,7 @@ function validarUsuarios(){
 		if (!selectDia.className.includes("error")) selectDia.className += " error";
 		if (!selectMes.className.includes("error")) selectMes.className += " error";
 		if (!selectAnio.className.includes("error")) selectAnio.className += " error";
-		errorFecha.innerHTML = "El niño debe tener al menor 3 años para poder registrarse.";
+		errorFecha.innerHTML = "El niño debe tener al menos 3 años para poder registrarse.";
    	} else {
 		selectDia.className = selectDia.className.replace(" error", "");
 		selectMes.className = selectMes.className.replace(" error", "");

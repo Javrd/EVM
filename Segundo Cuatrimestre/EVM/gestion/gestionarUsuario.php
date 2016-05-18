@@ -33,7 +33,7 @@
 VALUES (:nombre, :apellidos, TO_DATE(:fecha,'ddmmYYYY'), :direccion, :email, :telefono, :derechos) RETURNING oid_u INTO :oid_u");
             $stmt->bindParam(':nombre',$nombre);
             $stmt->bindParam(':apellidos',$apellidos);
-            $stmt->bindParam(':fecha',$fecha);
+            $stmt->bindParam(':fecha',$fecha->format('dmY'));
             $stmt->bindParam(':direccion',$direccion);
             $stmt->bindParam(':email',$email);
             $stmt->bindParam(':telefono',$telefono);
@@ -56,7 +56,7 @@ VALUES (:nombre, :apellidos, TO_DATE(:fecha,'ddmmYYYY'), :direccion, :email, :te
             $stmt->bindParam(':oid_u',$oid_u);
             $stmt->bindParam(':nombre',$nombre);
             $stmt->bindParam(':apellidos',$apellidos);
-            $stmt->bindParam(':fecha',$fecha);
+            $stmt->bindParam(':fecha',$fecha->format('dmY'));
             $stmt->bindParam(':direccion',$direccion);
             $stmt->bindParam(':email',$email);
             $stmt->bindParam(':telefono',$telefono);

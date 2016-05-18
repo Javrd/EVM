@@ -11,6 +11,9 @@ session_start();
             $registroUsuario["nombre"] = $_POST['nombre'];
             $registroUsuario["apellidos"] = $_POST['apellidos'];
             $fechaNacimiento = DateTime::createFromFormat("d/m/Y",$_POST['fechaNacimiento']);
+			$registroUsuario["dia"]= $fechaNacimiento->format("j");
+			$registroUsuario["anio"]= $fechaNacimiento->format('Y');
+			$registroUsuario["mes"]= $fechaNacimiento->format('m');
             $registroUsuario["fechaNacimiento"] = $fechaNacimiento;
             $registroUsuario["direccion"] = $_POST['direccion'];
             $registroUsuario["email"] = $_POST['email'];
@@ -32,8 +35,10 @@ session_start();
     	if (!isset($_SESSION['registroUsuario'])){
     		$registroUsuario["nombre"] = "";
     		$registroUsuario["apellidos"] = "";
-            $fechaNacimiento = DateTime::createFromFormat("d/m/y","01/01/".(date('y')-3));
-    		$registroUsuario["fechaNacimiento"] = $fechaNacimiento;
+            $fechaNacimiento = new DateTime();
+			$registroUsuario["dia"]= $fechaNacimiento->format("j");
+			$registroUsuario["anio"]= $fechaNacimiento->format('Y')-3;
+			$registroUsuario["mes"]= $fechaNacimiento->format('m');
     		$registroUsuario["direccion"] = "";
     		$registroUsuario["email"] = "";
     		$registroUsuario["telefono"] = "";
@@ -110,7 +115,7 @@ session_start();
             	              	<?php
             	              	for ($i=1; $i < 32 ; $i++) { 
             						echo "<option ";
-            						if ($registroUsuario['fechaNacimiento']->format('j') == $i ) echo "selected='selected'";
+            						if ($registroUsuario['dia'] == $i ) echo "selected='selected'";
             						echo ">";
             						echo "$i</option>";
             				  	}
@@ -120,18 +125,18 @@ session_start();
                           	
                           	<select id="select_mes" <?php if(isset($errores["fechaNacimiento"])) echo 'class="error"'?> name="mes">
             	            <optgroup label="Mes">
-                            <option value = "01" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="01") echo "selected='selected'"; ?> >Enero</option>
-                            <option value = "02" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="02") echo "selected='selected'"; ?> >Febrero</option>
-                            <option value = "03" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="03") echo "selected='selected'"; ?> >Marzo</option>
-                            <option value = "04" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="04") echo "selected='selected'"; ?> >Abril</option>
-                            <option value = "05" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="05") echo "selected='selected'"; ?> >Mayo</option>
-                            <option value = "06" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="06") echo "selected='selected'"; ?> >Junio</option>
-                            <option value = "07" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="07") echo "selected='selected'"; ?> >Julio</option>
-                            <option value = "08" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="08") echo "selected='selected'"; ?> >Agosto</option>
-                            <option value = "09" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="09") echo "selected='selected'"; ?> >Septiembre</option>
-                            <option value = "10" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="10") echo "selected='selected'"; ?> >Octubre</option>
-                            <option value = "11" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="11") echo "selected='selected'"; ?> >Noviembre</option>
-                            <option value = "12" <?php if ($registroUsuario['fechaNacimiento']->format('m')=="12") echo "selected='selected'"; ?> >Diciembre</option>
+                            <option value = "01" <?php if ($registroUsuario['mes']=="01") echo "selected='selected'"; ?> >Enero</option>
+                            <option value = "02" <?php if ($registroUsuario['mes']=="02") echo "selected='selected'"; ?> >Febrero</option>
+                            <option value = "03" <?php if ($registroUsuario['mes']=="03") echo "selected='selected'"; ?> >Marzo</option>
+                            <option value = "04" <?php if ($registroUsuario['mes']=="04") echo "selected='selected'"; ?> >Abril</option>
+                            <option value = "05" <?php if ($registroUsuario['mes']=="05") echo "selected='selected'"; ?> >Mayo</option>
+                            <option value = "06" <?php if ($registroUsuario['mes']=="06") echo "selected='selected'"; ?> >Junio</option>
+                            <option value = "07" <?php if ($registroUsuario['mes']=="07") echo "selected='selected'"; ?> >Julio</option>
+                            <option value = "08" <?php if ($registroUsuario['mes']=="08") echo "selected='selected'"; ?> >Agosto</option>
+                            <option value = "09" <?php if ($registroUsuario['mes']=="09") echo "selected='selected'"; ?> >Septiembre</option>
+                            <option value = "10" <?php if ($registroUsuario['mes']=="10") echo "selected='selected'"; ?> >Octubre</option>
+                            <option value = "11" <?php if ($registroUsuario['mes']=="11") echo "selected='selected'"; ?> >Noviembre</option>
+                            <option value = "12" <?php if ($registroUsuario['mes']=="12") echo "selected='selected'"; ?> >Diciembre</option>
                           	</optgroup>
                           	</select>
             	              	
@@ -140,7 +145,7 @@ session_start();
             	              	<?php
             	              	for ($i=date('Y')-3; $i > date('Y')-99 ; $i--) { 
             						echo "<option ";
-            						if ($registroUsuario['fechaNacimiento']->format('Y') == $i ) echo "selected='selected'";
+            						if ($registroUsuario['anio'] == $i ) echo "selected='selected'";
             						echo ">$i</option>";
             				  	}
             					?>

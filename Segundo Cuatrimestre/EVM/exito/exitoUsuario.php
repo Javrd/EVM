@@ -10,7 +10,10 @@
         $usuario = $_SESSION["usuarioExito"];
         $nombre = $usuario["nombre"];
         $apellidos = $usuario["apellidos"];
-        $fecha = $usuario['fechaNacimiento']->format("dmY");
+		$dia = $usuario['dia'];
+		$mes = $usuario['mes'];
+		$anio = $usuario['anio'];
+        $fecha = DateTime::createFromFormat("d/m/Y", ($usuario["dia"]."/".$usuario["mes"]."/".$usuario["anio"]));
         $direccion = $usuario["direccion"];
         if ($usuario["email"] == ""){
             $email = null;   
@@ -26,6 +29,10 @@
             $derechos = 1;
         } else {
             $derechos = 0;
+        }
+		if(isset($usuario['checkResponsable'])){
+            $relacion = $usuario['tipoRelacion'];
+			$responsable = $usuario['responsable'];
         }
         
         if(!isset($usuario['oid_u'])){

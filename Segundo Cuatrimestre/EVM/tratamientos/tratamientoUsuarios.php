@@ -12,7 +12,9 @@ if (isset($_SESSION["registroUsuario"]) ){
     }
     $usuario["nombre"] = $_REQUEST["nombre"];
     $usuario["apellidos"] = $_REQUEST["apellidos"];
-    $usuario["fechaNacimiento"] = DateTime::createFromFormat("d/m/Y", ($_REQUEST["dia"]."/".$_REQUEST["mes"]."/".$_REQUEST["anio"]));
+	$usuario["dia"] = $_REQUEST["dia"];
+	$usuario["mes"] = $_REQUEST["mes"];
+	$usuario["anio"] = $_REQUEST["anio"];
     $usuario["direccion"] = $_REQUEST["direccion"];
     $usuario["email"] = $_REQUEST["email"];
     $usuario["telefono"] = $_REQUEST["telefono"];
@@ -62,22 +64,27 @@ function validar($usuario) {
         $errores["tipoRelacion"] = "El tipo de relacion no se puede dejar vacío.";
     }
     
-    $edad = $usuario["fechaNacimiento"]->diff( new DateTime());
+    
     
         // Menor de 3 años
-          
-    if  ( $edad->format("%y") < 3){
-          
-        $errores["fechaNacimiento"] = "El niño debe tener al menor 3 años para poder registrarse.";
-        
-        // Menor de 18 años
-    } elseif (!isset($usuario["checkResponsable"]) && $edad->format("%y") < 18) {
-        $errores["checkResponsable"] = true;
-        $errores["responsable"] = "Los menores deben tener un responsable.";
-        
-    } elseif ((isset($usuario['checkResponsable']) && $usuario["responsable"] == "--Responsable--")){
-        $errores["responsable"] = "Los menores deben tener un responsable.";
-    }
+    if(!checkdate($usuario['mes'], $usuario['dia'], $usuario['anio'])){
+    	$errores['fechaNacimiento'] = "Introduzca una fecha válida.";
+    }else{
+	    $usuario["fechaNacimiento"] = DateTime::createFromFormat("d/m/Y", ($_REQUEST["dia"]."/".$_REQUEST["mes"]."/".$_REQUEST["anio"]));
+		$edad = $usuario["fechaNacimiento"]->diff( new DateTime());
+		if  ( $edad->format("%y") < 3){
+		      
+		    $errores["fechaNacimiento"] = "El niño debe tener al menos 3 años para poder registrarse.";
+		    
+		    // Menor de 18 años
+		} elseif (!isset($usuario["checkResponsable"]) && $edad->format("%y") < 18) {
+		    $errores["checkResponsable"] = true;
+		    $errores["responsable"] = "Los menores deben tener un responsable.";
+		    
+		} elseif ((isset($usuario['checkResponsable']) && $usuario["responsable"] == "--Responsable--")){
+		    $errores["responsable"] = "Los menores deben tener un responsable.";
+		}
+	}
     
         // Comprobacion email
      if ($usuario["email"] != "" && !isset($usuario["oid_u"]) && existeEmailUsuario($conexion, $usuario["email"])){
