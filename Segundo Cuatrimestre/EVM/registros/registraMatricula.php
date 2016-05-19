@@ -132,6 +132,13 @@ session_start();
                         </div>
                        <span id="errorMatriculasFecha" class="error"><?php if(isset($errores["fecha_matriculas"])) echo $errores["fecha_matricula"] ?></span>
                   	</div>
+
+                    <div id="div_codigo" class="lineaFormulario">   
+                        <label id="label codigo" for="inpuy_codigo">Codigo:</label>
+                        <input id="input_codigo" class="box <?php if(isset($errores["codigo"])) echo "error"?>" name="codigo" value="<?php echo $registroMatricula['codigo'] ?>" type="text"/>
+                        <span id="errorMatriculaUsuario" class="error"><?php if(isset($errores["codigo"])) echo $errores["codigo"]?></span>
+                    </div>
+
                    	                    
                     <div id="div_usuario" class="lineaFormulario">
                         <label id="label_usuario" for="select_usuario">Usuario:</label>
@@ -155,7 +162,7 @@ session_start();
                         <?php
                         $asignaturas = consultaAsignaturas($conexion);
                         foreach ($asignaturas as $asignatura) {
-                           echo '<label for="'.$asignatura["NOMBRE"].'">'.$asignatura["NOMBRE"].'</label>'.'<input type="checkbox" id="'.$asignatura["NOMBRE"].'" name="'.$asignatura["NOMBRE"].'" value="'.$asignatura["NOMBRE"].'"> ';
+                           echo '<label for="'.$asignatura["NOMBRE"].'">'.$asignatura["NOMBRE"].'</label>'.'<input type="checkbox" id="'.$asignatura["NOMBRE"].'" name="check_list[]" value="'.$asignatura["NOMBRE"].'"> ';
                         }
 
                         ?>
