@@ -30,6 +30,24 @@
         }
     }
     
+    function edadDeUsuario($conexion, $oid_u){
+        try{
+            $stmt = $conexion->prepare("SELECT FECHA_NACIMIENTO FROM USUARIOS WHERE oid_u=:oid_u");
+            $stmt->bindParam(':oid_u',$oid_u);
+            $stmt->execute();
+            $hoy = new Datetime('today');
+            $stmt = $stmt->fetch();
+            $fechaNac = DateTime::createFromFormat("d/m/Y", ($stmt['FECHA_NACIMIENTO']));
+            $age = $fechaNac->diff($hoy)->y;
+            return $age;
+
+        } catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
+        } 
+    }
+
     function consultaAsignaturasDeMatricula($conexion, $oid_m){
         try{
             $stmt = $conexion->prepare("SELECT NOMBRE FROM PERTENECE_A NATURAL JOIN ASIGNATURAS WHERE oid_m=:oid_m");

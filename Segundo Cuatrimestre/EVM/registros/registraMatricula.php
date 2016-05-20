@@ -61,6 +61,13 @@ session_start();
     		   <div id="formulario">
     	       <form onsubmit="return validarMatriculas()" action="../tratamientos/tratamientoMatriculas.php" method="post">
     	  				
+                           <?php
+                           $oidu = 92;
+                           $edad = edadDeUsuario($conexion,$oidu);
+                           echo $edad
+                           ?>
+                              
+
     	  				<div id="div_curso" class="lineaFormulario">
                             <label id="label_curso" for="select_curso">Curso de la matricula:</label>
                             <select id="select_curso" <?php if(isset($errores["curso"])) echo 'class="error"'?> name="curso" >
@@ -77,7 +84,6 @@ session_start();
                             </select>
                             <span id="errorMatriculasCurso" class="error"><?php if(isset($errores["curso"])) echo $errores["curso"]?></span>
                         </div>
-                  	
                			<div id="div_fecha_matricula" class="lineaFormulario">
                     	<label id="label_fecha_matricula">Fecha de Matriculacion:</label>
                     	   <div id="select_fecha">
@@ -117,7 +123,6 @@ session_start();
                             </select>
 
                            
-            	              	
                         	<select id="select_anio" <?php if(isset($errores["fecha_matricula"])) echo 'class="error"'?> name="anio">
             	            <optgroup label="Año">
             	              	<?php
@@ -166,6 +171,7 @@ session_start();
                         }
 
                         ?>
+                        <span id="errorMatriculaUsuario" class="error"><?php if(isset($errores["asignaturas"])) echo $errores["asignaturas"]?></span>
                     </div>
 
                     <div id="div_submit">
