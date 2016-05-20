@@ -152,14 +152,14 @@
             <form action="../tratamientos/tratamientoAsignaturas.php" method="post">
             <div id="div_nombre" class="lineaModal">  
                 <span class="tituloModal">Nueva asignatura:</span>
-                <span id="error_nombre" class="error"><?php if(isset($error["nombre"])) echo $error["nombre"]?></span>
                 <label id="label_nombre" class="modalLabel" for="input_nombre">Nombre:</label>
                 <input id="input_nombre" class="box <?php if(isset($error["nombre"])) echo "error"?>" name="nombre" value="<?php echo $nuevaAsignatura["nombre"] ?>" type="text"/>
+                <span id="error_nombre" class="error"><?php if(isset($error["nombre"])) echo $error["nombre"]?></span>
             </div>
             <div class="modalButtons">
                 <button id="cancelar" class="modalCancel" type="button" onclick="cancelaNuevaAsignatura()">Cancelar</button>
                 <button id="enviar" class="modalSubmit" type="submit">Enviar</button>
-              </div>
+            </div>
             </form>
         </div>
 	</body>

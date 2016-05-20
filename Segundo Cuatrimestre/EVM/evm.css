@@ -463,9 +463,15 @@ div.error{
     margin-left: 12em;
 }
 
+#nuevaAsignatura span.error{
+	margin-top: 0.2em;
+	margin-left: 6em;
+}
+
 .modalButtons{
 	width: 12em;
 	margin: auto;
+	margin-top: 1em;
 }
 .modalCancel, .modalSubmit{
 	border-radius: 4px;
