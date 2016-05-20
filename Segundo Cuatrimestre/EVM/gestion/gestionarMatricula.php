@@ -35,12 +35,14 @@
             $stmt = $conexion->prepare("SELECT FECHA_NACIMIENTO FROM USUARIOS WHERE oid_u=:oid_u");
             $stmt->bindParam(':oid_u',$oid_u);
             $stmt->execute();
-            $hoy = new Datetime('today');
             $stmt = $stmt->fetch();
-            $fechaNac = DateTime::createFromFormat("d/m/Y", ($stmt['FECHA_NACIMIENTO']));
-            $age = $fechaNac->diff($hoy)->y;
-            return $age;
+            $fecha = $stmt['FECHA_NACIMIENTO'];
+            $hoy =  new DateTime();
+            $nacimiento = DateTime::createFromFormat("d/m/Y",$fecha);
+            $edad = $nacimiento->diff($hoy);
+            $res = $edad->format('%y');
 
+            return $res;
         } catch(PDOException $e){
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
