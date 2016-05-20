@@ -113,6 +113,72 @@ ul.menu{
     -webkit-transition-duration: 0.4s; /* Safari */
 }
 
+#button_nuevo,#button_usuarios,#button_prestamos {
+   border-top: 1px solid #96d1f8;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   padding: 5px 10px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   color: white;
+   font-size: 14px;
+   font-family: Georgia, serif;
+   text-decoration: none;
+   vertical-align: middle;   
+	margin-top:0.5em;
+   }
+#button_nuevo:hover,#button_usuarios:hover,#button_prestamos:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+   }
+#button_nuevo:active,#button_usuarios:active,#button_prestamos:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+   }
+
+.seleccionada,.pagina {
+   border-top: 1px solid #96d1f8;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   padding: 2px 4px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 100%;
+   min-width:2em;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   color: white;
+   font-size: 14px;
+   text-decoration: none;
+   vertical-align: middle;   
+	margin-top:0.5em;
+   }
+.seleccionada{
+	color:black;
+}
+.pagina:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+   }
+.pagina:active{
+   border-top-color: #1b435e;
+   background: #1b435e;
+   }
+
+
 .button a:hover {
     background-color: white;
     color: #008CBA;
@@ -240,10 +306,10 @@ span.error2{
 nav{
 	background-color: #3DACEA;
 	text-align: right;
+	min-height: 2.8em;
 }
 nav li,nav form{
 	display: inline;
-	padding:20px;
 	padding:20px;
 }
 
@@ -269,7 +335,7 @@ body.vistaInstrumentos{
 }
 
 body.vistaPrestamos{
-	/* TODO Definir min-width */
+	min-width: 43em;
 }
 
 body.vistaFaltas{
@@ -307,10 +373,6 @@ div.consultas{
 }
 
 #ConsultaInstrumentos{
-	/* TODO Definir width */
-}
-
-#ConsultaPrestamos{
 	/* TODO Definir width */
 }
 
