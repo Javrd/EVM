@@ -19,7 +19,7 @@
     } else {
         $page_num = 1;
         $page_size   = 10;
-        $consulta = "Todos";
+        $consulta = "todos";
     }
 
     /* Gets de formularios de paginación y tipo de consulta */
@@ -41,8 +41,8 @@
     if ( $page_size < 1 ) 
         $page_size = 10;
     
-    if ($consulta == "Usuarios con prestamos")
-        $total = consultarUsuariosConPrestamos($conexion); // Cuenta el total de usuarios para consulta de usuarios con prestamos
+    if ($consulta == "instrumentosLibres")
+        $total = consultarInstrumentosLibres($conexion); // Cuenta el total de usuarios para consulta de usuarios con prestamos
     else 
         $total = consultarTotalInstrumentos($conexion);  // Cuenta de total de usuarios por defecto. Por defecto, consulta = Todos
     $total_pages = ( $total / $page_size );
@@ -88,6 +88,8 @@
         		<nav>
         			<ul class="menu">
                         <form method="get" action="instrumentos.php">
+                        <li><button id = "button_nuevo" name="consulta" value="instrumentosLibres">Instrumentos Libres</button></li>    
+                        <li><button id = "button_nuevo" name="consulta" value="todos">Todos</button></li>   
         				</form>
         				<form  method="post" action="../registros/registraInstrumento.php">
         				<li><button id = "button_nuevo" name="nuevo">Nuevo</button></li>    
