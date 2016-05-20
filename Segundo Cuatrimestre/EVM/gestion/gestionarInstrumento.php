@@ -15,12 +15,12 @@
     }
 
     
-    function guardaInstrumento($conexion, $tipo, $instrumentoLibre, $nombre, $ESTADO_INSTRUMENTO){
+    function guardaInstrumento($conexion, $tipo, $nombre, $ESTADO_INSTRUMENTO){
         try{
             $stmt = $conexion->prepare("CALL CREAR_INSTRUMENTO(:tipo, :instrumentoLibre, :nombre, :ESTADO_INSTRUMENTO)"); 
-            
+            $libre = 1;
             $stmt->bindParam(':tipo',$tipo);
-            $stmt->bindParam(':instrumentoLibre',$instrumentoLibre);
+            $stmt->bindParam(':instrumentoLibre', $libre);
             $stmt->bindParam(':nombre',$nombre);
             $stmt->bindParam(':ESTADO_INSTRUMENTO',$ESTADO_INSTRUMENTO);
             $stmt->execute();
@@ -66,10 +66,10 @@
     }
         
     function consultaPaginadaInstrumentos($conexion,$pagina_seleccionada,$intervalo,$total,$constulta){
-        // if ($constulta == 'Usuarios con prestamos')
-        //     $select = "SELECT oid_u, nombre, apellidos, fecha_nacimiento, direccion, email, telefono, derechos_imagen FROM PRESTAMOS NATURAL JOIN MATRICULAS NATURAL JOIN USUARIOS WHERE MATRICULAS.FECHA_MATRICULACION>(SYSDATE - 365) ORDER BY APELLIDOS, NOMBRE";
-        // else
-        $select = "SELECT * FROM INSTRUMENTOS ORDER BY TIPO, NOMBRE";
+        if ($constulta == 'instrumentosLibres')
+            $select = "SELECT * FROM INSTRUMENTOS WHERE LIBRE = 1 ORDER BY TIPO, NOMBRE";
+        else
+            $select = "SELECT * FROM INSTRUMENTOS ORDER BY TIPO, NOMBRE";
         return consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
     }  
     
@@ -88,9 +88,9 @@
         }
     }
     
-    function consultarUsuariosConPrestamos($conexion)  {
+    function consultarInstrumentosLibres($conexion)  {
         try {
-            $consulta = "SELECT COUNT(*) AS TOTAL FROM PRESTAMOS NATURAL JOIN MATRICULAS NATURAL JOIN USUARIOS WHERE MATRICULAS.FECHA_MATRICULACION>(SYSDATE - 365) ORDER BY APELLIDOS, NOMBRE";
+            $consulta = "SELECT COUNT(*) AS TOTAL FROM INSTRUMENTOS WHERE LIBRE=1";
             $stmt = $conexion->query($consulta);
             $result = $stmt->fetch();
             $total = $result['TOTAL' ];
