@@ -4,16 +4,16 @@
         header("Location: ../index.php");
     }
     
-    require_once ("../gestion/gestionarPagos.php");
+    require_once ("../gestion/gestionarPago.php");
     require_once("../gestion/gestionBD.php");
     $conexion = crearConexionBD();
     
     /* Recuperacion de sesion de las variables que no se hayan pasado como get */
     
     if(isset($_SESSION['pagos'])){
-        $faltas = $_SESSION["pagos"];
-        $page_num = $faltas["page_num"];
-        $page_size = $faltas["page_size"];
+        $pagos = $_SESSION["pagos"];
+        $page_num = $pagos["page_num"];
+        $page_size = $pagos["page_size"];
         unset($_SESSION["pagos"]);
     } else {
         $page_num = 1;
@@ -36,7 +36,7 @@
     if ( $page_size < 1 ) 
         $page_size = 10;
     
-    $total = consultarTotalPagos($conexion);  // Cuenta de total de faltas por defecto. Por defecto, consulta = Todos
+    $total = consultarTotalPagos($conexion);  // Cuenta de total de pagos
     
     $total_pages = ( $total / $page_size );
     
@@ -48,9 +48,9 @@
     else if ( $page_num > $total_pages )
         $page_num = (int)$total_pages;  
     
-    $faltas["page_num"] = $page_num;
-    $faltas["page_size"] = $page_size;
-    $_SESSION["faltas"] = $faltas;
+    $pagos["page_num"] = $page_num;
+    $pagos["page_size"] = $page_size;
+    $_SESSION["pagos"] = $pagos;
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +62,7 @@
 		Remove this if you use the .htaccess -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-		<title>Faltas</title>
+		<title>Pagos</title>
 		
 		<meta name="viewport" content="width=device-width; initial-scale=1.0">
 
@@ -71,7 +71,7 @@
         <link rel="stylesheet" type="text/css" href="../evm.css">
 	</head>
 
-	<body class="vistaFaltas">
+	<body class="vistaPagos">
 		  <div id="container">
 		      
     		<?php include("../header.html") ?>
@@ -79,13 +79,13 @@
     		<div id="content">
         		<nav>
         			<ul class="menu">
-        				<form  method="post" action="../registros/registraFalta.php">
+        				<form  method="post" action="../registros/registraPago.php">
         				<li><button id = "button_nuevo" name="nuevo">Nuevo</button></li>    
-        				</form>
+        				</form> 
         			</ul>
         		</nav>
                 <div id="Paginacion">
-                <form method="get" action="faltas.php">
+                <form method="get" action="pagos.php">
                 <?php
 
                     for( $page = 1; $page <= $total_pages; $page++ ) {
@@ -105,42 +105,42 @@
         		    	<div class="col6">Nombre</div>
                         <div class="col15">Apellidos</div>
                         <div class="col6">Cantidad</div>
-                        <div class="col6">Cantidad</div>
+                        <div class="col6">Concepto</div>
                         <div class="col6">Fecha</div>
                         <div class="col6">Estado</div>                        
                         <div class="col6">Registrar pago</div>
                         
                     </div>
         			<?php 
-                        $filas = consultaPaginadaFaltas($conexion,$page_num,$page_size,$total,$consulta);
+                        $filas = consultaPaginadaPagos($conexion,$page_num,$page_size,$total);
                         $i = 0;
-                        foreach ($filas as $falta) {
+                        foreach ($filas as $pago) {
                             
                             $row = $i%2?'oddrow':'evenrow';
-                            $fecha = DateTime::createFromFormat("d/m/y",$falta['FECHA_FALTA']);
+                            $fecha = DateTime::createFromFormat("d/m/y",$pago['FECHA_PAGO']);
                     ?>
                             <div class=<?php echo $row ?>>
                             	
-                                <div class="col6"><span><?php echo $falta['NOMBRE']?></span></div>
-                                <div class="col15"><span><?php echo $falta['APELLIDOS']?></span></div>
-                                <div class="col6"><span><?php echo $falta['TIPO_FALTA']?></span></div>
+                                <div class="col6"><span><?php echo $pago['NOMBRE']?></span></div>
+                                <div class="col15"><span><?php echo $pago['APELLIDOS']?></span></div>
+                                <div class="col6"><span><?php echo $pago['TIPO_FALTA']?></span></div>
                                 <div class="col6"><span><?php echo $fecha->format("d/m/y")?></span></div>
                                 <div class="col6">
                     <?php   
-                            if($falta['JUSTIFICADA']==1){
+                            if($pago['JUSTIFICADA']==1){
                                 echo'<img src="../img/1024px-Green_tick_pointed.png" style="width:20px;height:20px;"/>';
                             }
                     ?>
                                 </div>
                                 <div class="col6">                                        
-                                    <form  method="post" action="../tratamientos/tratamientoFaltas.php">
-                                        <input type="hidden" name="oid_f" value="<?php echo $falta['OID_F']?>"/>  
-                                        <button <?php if($falta['JUSTIFICADA']==1){ echo "hidden='hidden'";} ?> name="actu"><img src="../img/icono_m_signdoc.png" class="botonJustificar"/></button>
+                                    <form  method="post" action="../tratamientos/tratamientoPagos.php">
+                                        <input type="hidden" name="oid_f" value="<?php echo $pago['OID_F']?>"/>  
+                                        <button <?php if($pago['JUSTIFICADA']==1){ echo "hidden='hidden'";} ?> name="actu"><img src="../img/icono_m_signdoc.png" class="botonJustificar"/></button>
                                     </form>
                                 </div>
                                 <div class="col6">                                        
-                                    <form  method="post" action="../tratamientos/tratamientoFaltas.php">
-                                        <input type="hidden" name="oid_f" value="<?php echo $falta['OID_F']?>"/>  
+                                    <form  method="post" action="../tratamientos/tratamientoPagos.php">
+                                        <input type="hidden" name="oid_f" value="<?php echo $pago['OID_F']?>"/>  
                                         <button name="borrar"><img src="../img/botonEliminar.png" class="botonJustificar"/></button>
                                     </form>
                                 </div>
