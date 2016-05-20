@@ -62,7 +62,7 @@ session_start();
     	       <form onsubmit="return validarMatriculas()" action="../tratamientos/tratamientoMatriculas.php" method="post">
     	  				
                            <?php
-                           $oidu = 92;
+                           $oidu = 10;
                            $edad = edadDeUsuario($conexion,$oidu);
                            echo $edad
                            ?>
