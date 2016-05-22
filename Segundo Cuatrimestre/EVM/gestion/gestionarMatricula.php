@@ -32,7 +32,7 @@
     
     function edadDeUsuario($conexion, $oid_u){
         try{
-            $stmt = $conexion->prepare("SELECT FECHA_NACIMIENTO FROM USUARIOS WHERE oid_u=:oid_u");
+            $stmt = $conexion->prepare("SELECT to_char(fecha_nacimiento, 'dd/mm/yyyy') as FECHA_NACIMIENTO FROM USUARIOS WHERE oid_u=:oid_u");
             $stmt->bindParam(':oid_u',$oid_u);
             $stmt->execute();
             $stmt = $stmt->fetch();
