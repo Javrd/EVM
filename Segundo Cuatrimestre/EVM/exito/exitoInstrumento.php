@@ -14,12 +14,8 @@
 
             $nombre = $instrumento["nombre"];
             $tipo = $instrumento["tipo"];
+            $instrumentoLibre = $instrumento['instrumentoLibre'];
             $ESTADO_INSTRUMENTO = $instrumento['ESTADO_INSTRUMENTO'];
-            if(isset($instrumento['instrumentoLibre'])){
-                $instrumentoLibre = 1;
-            } else {
-                $instrumentoLibre = 0;
-            }
             if(!isset($instrumento['oid_i'])){
                 guardaInstrumento($conexion, $tipo, $instrumentoLibre, $nombre, $ESTADO_INSTRUMENTO);
             

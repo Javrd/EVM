@@ -109,7 +109,7 @@ session_start();
                       	</select>
                       	<span class="error"><?php if(isset($errores["ESTADO_INSTRUMENTO"])) echo $errores["ESTADO_INSTRUMENTO"]?></span>
                     </div>
-          			<input type="hidden" id="input_libre" name="instrumentoLibre" <?php if(($registroInstrumento['libre']) == 1){ echo 'value=1'; }else{echo 'value=0';};?> />   
+          			<input type="hidden" id="input_libre" name="instrumentoLibre" <?php echo 'value="'.$registroInstrumento['libre'].'"';?> />   
                 
 
                     <?php if(isset($registroInstrumento["oid_i"])) { ?>
