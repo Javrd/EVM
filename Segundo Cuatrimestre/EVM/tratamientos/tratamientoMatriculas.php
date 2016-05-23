@@ -39,21 +39,33 @@ function validar($matricula) {
 	if ($matricula["curso"]==-1) {
         $errores["curso"] = "Seleccione un Curso.";
     }
+    if ($matricula["codigo"]== 'Codigo') {
+        $errores["codigo"] = "Seleccione un Codigo.";
+    }
     if ($matricula["usuario"] == -1){
         $errores["usuario"] = "Seleccione un Usuario.";
     }
 
-	if (empty($_POST['check_list'])){
-		$errores['asignaturas'] = "Seleccione las asignaturas de la matricula que desea crear.";
+    $usuario = edadDeUsuario($conexion,$matricula['usuario']);
+    $hoy =  new DateTime();
+    $nacimiento = DateTime::createFromFormat("d/m/Y",$usuario['FECHA_NACIMIENTO']);
+    $edad = $nacimiento->diff($hoy);
+    echo $edad->format('%y');
+
+    if ((intval($edad->format('%y')) <+ 6) and (!in_array(13, $matricula['asignaturas']))){
+    	$errores['asignaturas'] = "el alumno tiene que elegir Expresion Corporal y Danza";
+    }
+
+
+	if ($matricula['curso'] >= 3 and (!in_array(11, $matricula['asignaturas']))){
+		$errores['asignaturas'] = "tienes que elegir una asignatura de tercero";
 	}
-	if ($matricula['curso'] >= 3 and (!in_array("Piano y guitarra", $matricula['asignaturas']))){
-		$errores['asignaturas'] = "tienes que elegir un asignatura de tercero";
-	}
-	if ((!in_array("Lenguaje musical", $matricula['asignaturas']))){
+	if ((!in_array(12, $matricula['asignaturas']))){
 		$errores['asignaturas'] = "tienes que tener la asignatura Lenguaje musical";
 	}
-	if ($matricula["asignaturas"][0] == "Viola"){
-		$errores['asignaturas'] = "viola";
+	if (empty($_POST['check_list'])){
+		$errores['asignaturas'] = "Seleccione las asignaturas de la matricula que desea crear.";
+
 	}
 	return $errores;
 }

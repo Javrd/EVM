@@ -14,13 +14,31 @@
         }
     }
     
-    function guardaFalta($conexion, $tipo_falta,  $fecha,  $oid_m){
+    function guardaMatricula($conexion,  $fecha, $curso, $codigo, $oid_u){
         try{
-            $stmt = $conexion->prepare("INSERT INTO FALTAS (tipo_falta,fecha_falta,justificada,oid_m)
-				VALUES (:tipo_falta,TO_DATE(:fecha,'ddmmYYYY'),0,:oid_m)");
-            $stmt->bindParam(':tipo_falta',$tipo_falta);
-            $stmt->bindParam(':fecha',$fecha);
+            $stmt = $conexion->prepare("INSERT INTO MATRICULAS (fecha,curso,codigo,oid_u)
+				VALUES (TO_DATE(:fecha,'ddmmYYYY'),:curso,:codigo,:oid_u) RETURNING oid_m INTO :oid_m");
+            $stmt->bindParam(':fecha',$fecha->format('dmY'));
+            $stmt->bindParam(':curso',$curso);
+            $stmt->bindParam(':codigo',$codigo);
+            $stmt->bindParam(':oid_u',$oid_u);
+            $stmt->bindParam(':oid_m',$oid_m, PDO::PARAM_INT, 8);
+            return $stmt->execute();
+            return $oid_m;
+                        
+        }catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
+        }
+    }
+
+    function guardaParteneceA($conexion,  $oid_m, $oid_a){
+        try{
+            $stmt = $conexion->prepare("INSERT INTO PARTENECE_A (oid_m, oid_a)
+                VALUES (:oid_m,:oid_a)");
             $stmt->bindParam(':oid_m',$oid_m);
+            $stmt->bindParam(':oid_a',$oid_a);
             return $stmt->execute();
                         
         }catch(PDOException $e){
@@ -29,6 +47,7 @@
             exit();
         }
     }
+
     
     function edadDeUsuario($conexion, $oid_u){
         try{
@@ -36,13 +55,8 @@
             $stmt->bindParam(':oid_u',$oid_u);
             $stmt->execute();
             $stmt = $stmt->fetch();
-            $fecha = $stmt['FECHA_NACIMIENTO'];
-            $hoy =  new DateTime();
-            $nacimiento = DateTime::createFromFormat("d/m/Y",$fecha);
-            $edad = $nacimiento->diff($hoy);
-            $res = $edad->format('%y');
+            return $stmt;
 
-            return $res;
         } catch(PDOException $e){
             $_SESSION['error']=$e->GetMessage();
             header("Location:../error.php");
@@ -65,8 +79,7 @@
 
     function consultaAsignaturas($conexion){
         try{
-            $stmt = $conexion->prepare("SELECT NOMBRE FROM ASIGNATURAS");
-            $stmt->bindParam(':oid_m',$oid_m);
+            $stmt = $conexion->prepare("SELECT OID_A, NOMBRE FROM ASIGNATURAS");
             $stmt->execute();
             return $stmt;
         } catch(PDOException $e){

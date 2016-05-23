@@ -60,12 +60,7 @@ session_start();
     		<div id="content">
     		   <div id="formulario">
     	       <form onsubmit="return validarMatriculas()" action="../tratamientos/tratamientoMatriculas.php" method="post">
-    	  				
-                           <?php
-                           $oidu = 10;
-                           $edad = edadDeUsuario($conexion,$oidu);
-                           echo $edad
-                           ?>
+
                               
 
     	  				<div id="div_curso" class="lineaFormulario">
@@ -139,7 +134,7 @@ session_start();
                   	</div>
 
                     <div id="div_codigo" class="lineaFormulario">   
-                        <label id="label codigo" for="inpuy_codigo">Codigo:</label>
+                        <label id="label codigo" for="input_codigo">Codigo:</label>
                         <input id="input_codigo" class="box <?php if(isset($errores["codigo"])) echo "error"?>" name="codigo" value="<?php echo $registroMatricula['codigo'] ?>" type="text"/>
                         <span id="errorMatriculaUsuario" class="error"><?php if(isset($errores["codigo"])) echo $errores["codigo"]?></span>
                     </div>
@@ -167,7 +162,7 @@ session_start();
                         <?php
                         $asignaturas = consultaAsignaturas($conexion);
                         foreach ($asignaturas as $asignatura) {
-                           echo '<label for="'.$asignatura["NOMBRE"].'">'.$asignatura["NOMBRE"].'</label>'.'<input type="checkbox" id="'.$asignatura["NOMBRE"].'" name="check_list[]" value="'.$asignatura["NOMBRE"].'"> ';
+                           echo '<label for="'.$asignatura["NOMBRE"].'">'.$asignatura["NOMBRE"].'</label>'.'<input type="checkbox" id="'.$asignatura["NOMBRE"].'" name="check_list[]" value="'.$asignatura["OID_A"].'"> ';
                         }
 
                         ?>
