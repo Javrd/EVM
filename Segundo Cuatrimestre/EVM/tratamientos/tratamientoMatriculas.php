@@ -36,29 +36,31 @@ function validar($matricula) {
 	if ($matricula["curso"]==-1) {
         $errores["curso"] = "Seleccione un Curso.";
     }
-    if ($matricula["codigo"]== 'Codigo') {
-        $errores["codigo"] = "Seleccione un Codigo.";
+    if ($matricula["codigo"]== '') {
+        $errores["codigo"] = "El código no se puede dejar vacío.";
     }
     if ($matricula["usuario"] == -1){
         $errores["usuario"] = "Seleccione un Usuario.";
-    }
-
-    $usuario = edadDeUsuario($conexion,$matricula['usuario']);
-    $hoy =  new DateTime();
-    $nacimiento = DateTime::createFromFormat("d/m/Y",$usuario['FECHA_NACIMIENTO']);
-    $edad = $nacimiento->diff($hoy);
-    echo $edad->format('%y');
-
-    if ((intval($edad->format('%y')) <+ 6) and (!in_array(13, $matricula['asignaturas']))){
-    	$errores['asignaturas'] = "el alumno tiene que elegir Expresion Corporal y Danza";
-    }
-
+    }else{
+	    $usuario = edadDeUsuario($conexion,$matricula['usuario']);
+	    $hoy =  new DateTime();
+	    $nacimiento = DateTime::createFromFormat("d/m/Y",$usuario['FECHA_NACIMIENTO']);
+	    $edad = $nacimiento->diff($hoy);
+	    echo $edad->format('%y');
+	    if ((intval($edad->format('%y')) <+ 6) and (!in_array(13, $matricula['asignaturas']))){
+    	$errores['asignaturas'] = "Debe estar matriculado en Expresion Corporal y Danza, si es menor de 6 años";
+	    }else if (!(intval($edad->format('%y')) <+ 6) and (!in_array(12, $matricula['asignaturas']))){
+			$errores['asignaturas'] = "Debe estar matriculado en la asignatura Lenguaje musical si es mayor de 6 años";
+		}
+	    	
+	}
+	if(!checkdate($matricula["mes"], $matricula["dia"], $matricula["anio"])){
+		$errores["fecha_matricula"]="Seleccione una fecha válida";
+	}
+    
 
 	if ($matricula['curso'] >= 3 and (!in_array(11, $matricula['asignaturas']))){
-		$errores['asignaturas'] = "tienes que elegir una asignatura de tercero";
-	}
-	if ((!in_array(12, $matricula['asignaturas']))){
-		$errores['asignaturas'] = "tienes que tener la asignatura Lenguaje musical";
+		$errores['asignaturas'] = "Debe estar matriculado en una asignatura de tercero";
 	}
 	if (empty($_POST['check_list'])){
 		$errores['asignaturas'] = "Seleccione las asignaturas de la matricula que desea crear.";
