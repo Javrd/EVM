@@ -115,33 +115,25 @@
                         $filas = consultaPaginadaPagos($conexion,$page_num,$page_size,$total);
                         $i = 0;
                         foreach ($filas as $pago) {
-                            
                             $row = $i%2?'oddrow':'evenrow';
-                            $fecha = DateTime::createFromFormat("d/m/y",$pago['FECHA_PAGO']);
+                            if ($pago['FECHA_PAGO']!=null)
+                                $fecha = DateTime::createFromFormat("d/m/y",$pago['FECHA_PAGO'])->format("d/m/y");
+                            else
+                                $fecha = "-";
                     ?>
                             <div class=<?php echo $row ?>>
                             	
                                 <div class="col6"><span><?php echo $pago['NOMBRE']?></span></div>
                                 <div class="col15"><span><?php echo $pago['APELLIDOS']?></span></div>
-                                <div class="col6"><span><?php echo $pago['TIPO_FALTA']?></span></div>
-                                <div class="col6"><span><?php echo $fecha->format("d/m/y")?></span></div>
+                                <div class="col6"><span><?php echo $pago['CANTIDAD']?></span></div>
+                                <div class="col6"><span><?php echo $pago['CONCEPTO']?></span></div>
+                                <div class="col6"><span><?php echo $fecha?></span></div>
+                                <div class="col6"><span><?php echo $pago['ESTADO']?></span></div>
+                    
                                 <div class="col6">
-                    <?php   
-                            if($pago['JUSTIFICADA']==1){
-                                echo'<img src="../img/1024px-Green_tick_pointed.png" style="width:20px;height:20px;"/>';
-                            }
-                    ?>
-                                </div>
-                                <div class="col6">                                        
-                                    <form  method="post" action="../tratamientos/tratamientoPagos.php">
-                                        <input type="hidden" name="oid_f" value="<?php echo $pago['OID_F']?>"/>  
-                                        <button <?php if($pago['JUSTIFICADA']==1){ echo "hidden='hidden'";} ?> name="actu"><img src="../img/icono_m_signdoc.png" class="botonJustificar"/></button>
-                                    </form>
-                                </div>
-                                <div class="col6">                                        
-                                    <form  method="post" action="../tratamientos/tratamientoPagos.php">
-                                        <input type="hidden" name="oid_f" value="<?php echo $pago['OID_F']?>"/>  
-                                        <button name="borrar"><img src="../img/botonEliminar.png" class="botonJustificar"/></button>
+                                    <form  method="post" action="../exito/exitoPago.php">
+                                        <input type="hidden" name="oid_pa" value="<?php echo $pago['OID_PA']?>"/>  
+                                        <button <?php if($pago['ESTADO']=="Pagado"){ echo "hidden='hidden'";} ?> name="actu"><img src="../img/icono_m_signdoc.png" class="botonJustificar"/></button>
                                     </form>
                                 </div>
                             </div>
