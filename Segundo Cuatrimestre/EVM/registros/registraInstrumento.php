@@ -54,7 +54,7 @@ session_start();
 		 ?>
 
 		<meta name="viewport" content="width=device-width; initial-scale=1.0">
-        <script src="../js/evm.js"></script>
+        <script src="../js/instrumentos.js"></script>
         <script src="../js/jquery-1.12.3.min.js"></script>
         <link rel="shortcut icon" href="../img/favicon.png">
         <link rel="apple-touch-icon" href="../img/favicon.png">
@@ -68,12 +68,12 @@ session_start();
     		
     		<div id="content">
     		   <div id="formulario">
-    	       <form action="../tratamientos/tratamientoInstrumentos.php" method="post">
+    	       <form action="../tratamientos/tratamientoInstrumentos.php" method="post" onsubmit="return validarInstrumentos()">
     	  
                     <div id="div_nombre" class="lineaFormulario">  
                       <label id="label_nombre" for="input_nombre">Nombre:</label>
                       <input id="input_nombre" class="box <?php if(isset($errores["nombre"])) echo "error"?>" name="nombre" value="<?php echo $registroInstrumento['nombre'] ?>" type="text"/>
-                      <?php if(isset($errores["nombre"])) echo '<span class="error">'.$errores["nombre"]."</span>"?>
+                      <span id="errorNombre" class="error"><?php if(isset($errores["nombre"])) echo $errores["nombre"]?></span>
                     </div>
         
                     <div id="div_tipo" class="lineaFormulario">
@@ -90,7 +90,7 @@ session_start();
         				  	}
         					?>
                       	</select>
-                      	<span class="error"><?php if(isset($errores["tipo"])) echo $errores["tipo"]?></span>
+                      	<span id="errorTipo" class="error" ><?php if(isset($errores["tipo"])) echo $errores["tipo"]?></span>
                     </div>
         
         			<div id="div_estado" class="lineaFormulario">
@@ -107,8 +107,9 @@ session_start();
         				  	}
         					?>
                       	</select>
-                      	<span class="error"><?php if(isset($errores["ESTADO_INSTRUMENTO"])) echo $errores["ESTADO_INSTRUMENTO"]?></span>
+                      	<span id="errorEstado" class="error"><?php if(isset($errores["ESTADO_INSTRUMENTO"])) echo $errores["ESTADO_INSTRUMENTO"]?></span>
                     </div>
+
           			<input type="hidden" id="input_libre" name="instrumentoLibre" <?php echo 'value="'.$registroInstrumento['libre'].'"';?> />   
                 
 
