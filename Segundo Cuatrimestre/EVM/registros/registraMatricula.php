@@ -59,7 +59,7 @@ session_start();
     		
     		<div id="content">
     		   <div id="formulario">
-    	       <form onsubmit="return validarMatriculas()" action="../tratamientos/tratamientoMatriculas.php" method="post">
+    	       <form  action="../tratamientos/tratamientoMatriculas.php" method="post">
 
                               
 
@@ -77,7 +77,7 @@ session_start();
                                 }
                                 ?>
                             </select>
-                            <span id="errorMatriculasCurso" class="error"><?php if(isset($errores["curso"])) echo $errores["curso"]?></span>
+                            <span id="errorCurso" class="error"><?php if(isset($errores["curso"])) echo $errores["curso"]?></span>
                         </div>
                			<div id="div_fecha_matricula" class="lineaFormulario">
                     	<label id="label_fecha_matricula">Fecha de Matriculacion:</label>
@@ -101,7 +101,7 @@ session_start();
                                     $meses = [Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Noviembre,Diciembre];
                                     for ($i=0; $i < 11 ; $i++) { 
                                         echo ' <option value = "';
-                                        if (i<10) {
+                                        if ($i<10) {
                                             $num = "0" . $i;
                                         }
                                         else{
@@ -166,7 +166,7 @@ session_start();
                         }
 
                         ?>
-                        <span id="errorMatriculaUsuario" class="error"><?php if(isset($errores["asignaturas"])) echo $errores["asignaturas"]?></span>
+                        <span id="errorMatriculaAsignaturas" class="error"><?php if(isset($errores["asignaturas"])) echo $errores["asignaturas"]?></span>
                     </div>
 
                     <div id="div_submit">

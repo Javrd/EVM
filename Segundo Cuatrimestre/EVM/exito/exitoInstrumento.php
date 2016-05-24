@@ -17,7 +17,7 @@
             $instrumentoLibre = $instrumento['instrumentoLibre'];
             $ESTADO_INSTRUMENTO = $instrumento['ESTADO_INSTRUMENTO'];
             if(!isset($instrumento['oid_i'])){
-                guardaInstrumento($conexion, $tipo, $instrumentoLibre, $nombre, $ESTADO_INSTRUMENTO);
+                guardaInstrumento($conexion, $tipo, $nombre, $ESTADO_INSTRUMENTO);
             
             } else {
                 actualizaInstrumento($conexion, $instrumento['oid_i'], $tipo, $instrumentoLibre, $nombre, $ESTADO_INSTRUMENTO);

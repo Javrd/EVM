@@ -10,9 +10,6 @@ if (isset($_SESSION["registroMatricula"]) ){
     $matricula["dia"] = $_REQUEST["dia"];
 	$matricula["mes"] = $_REQUEST["mes"];
 	$matricula["anio"] = $_REQUEST["anio"];
-	$date = new DateTime();
-	$date->setDate($matricula["anio"], $matricula["mes"], $matricula["dia"]);
-	$matricula['fecha_matricula'] = $date;
     $matricula["codigo"] = $_REQUEST["codigo"];
     $matricula["usuario"] = $_REQUEST["usuario"];
     $matricula["asignaturas"] = $_POST['check_list'];
