@@ -8,10 +8,12 @@ session_start();
 		}
     	if (!isset($_SESSION['registroMatricula'])){
             $fecha_matricula = new DateTime();
-    		$registroMatricula["fecha_matricula"] = $fecha_matricula;
+			$registroMatricula["dia"]= $fecha_matricula->format("j");
+			$registroMatricula["anio"]= $fecha_matricula->format('Y');
+			$registroMatricula["mes"]= $fecha_matricula->format('m');
     		$registroMatricula["curso"] = "-1";
             $registroMatricula["usuario"] = "-1";
-			$registroMatricula['codigo'] = "Codigo";
+			$registroMatricula['codigo'] = "";
     		$_SESSION["registroMatricula"] = $registroMatricula;
     	} else {
     		$registroMatricula = $_SESSION['registroMatricula'];
@@ -87,7 +89,7 @@ session_start();
                     	              	<?php
                     	              	for ($i=1; $i < 32 ; $i++) { 
                     						echo "<option ";
-                    						if ($registroMatricula['fecha_matricula']->format('j') == $i ) echo "selected='selected'";
+                    						if ($registroMatricula['dia'] == $i ) echo "selected='selected'";
                     						echo ">";
                     						echo "$i</option>";
                     				  	}
@@ -98,10 +100,10 @@ session_start();
                           	<select id="select_mes" <?php if(isset($errores["fecha_matricula"])) echo 'class="error"'?> name="mes">
                 	            <optgroup label="Mes">
                                     <?php
-                                    $meses = [Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Noviembre,Diciembre];
-                                    for ($i=0; $i < 11 ; $i++) { 
+                                    $meses = Array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Noviembre","Diciembre");
+                                    for ($i=1; $i < 12 ; $i++) { 
                                         echo ' <option value = "';
-                                        if ($i<10) {
+                                        if ($i<11) {
                                             $num = "0" . $i;
                                         }
                                         else{
@@ -109,9 +111,9 @@ session_start();
                                         }
                                         echo $num;
                                         echo '"';
-                                        if ($registroMatricula['fecha_matricula']->format('m')==$num+1) echo "selected='selected'";
+                                        if ($registroMatricula['mes']==$num) echo "selected='selected'";
                                         echo ">";
-                                        echo "$meses[$i]</option>";
+                                        echo $meses[$i-1]."</option>";
                                     }
                                     ?>
                                 </optgroup>
@@ -123,19 +125,19 @@ session_start();
             	              	<?php
             	              	for ($i=date('Y'); $i > date('Y')-2 ; $i--) { 
             						echo "<option ";
-            						if ($registroMatricula['fecha_matricula']->format('Y') == $i ) echo "selected='selected'";
+            						if ($registroMatricula['anio']== $i ) echo "selected='selected'";
             						echo ">$i</option>";
             				  	}
             					?>
                           	</optgroup>
                           	</select>
                         </div>
-                       <span id="errorMatriculasFecha" class="error"><?php if(isset($errores["fecha_matriculas"])) echo $errores["fecha_matricula"] ?></span>
+                       <span id="errorMatriculasFecha" class="error"><?php if(isset($errores["fecha_matricula"])) echo $errores["fecha_matricula"] ?></span>
                   	</div>
 
                     <div id="div_codigo" class="lineaFormulario">   
                         <label id="label codigo" for="input_codigo">Codigo:</label>
-                        <input id="input_codigo" class="box <?php if(isset($errores["codigo"])) echo "error"?>" name="codigo" value="<?php echo $registroMatricula['codigo'] ?>" type="text"/>
+                        <input id="input_codigo" maxlength="5" class="box <?php if(isset($errores["codigo"])) echo "error"?>" name="codigo" value="<?php echo $registroMatricula['codigo'] ?>" type="text"/>
                         <span id="errorMatriculaUsuario" class="error"><?php if(isset($errores["codigo"])) echo $errores["codigo"]?></span>
                     </div>
 
