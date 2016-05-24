@@ -16,14 +16,14 @@
     
     function guardaMatricula($conexion,  $fecha, $curso, $codigo, $oid_u){
         try{
-            $stmt = $conexion->prepare("INSERT INTO MATRICULAS (fecha,curso,codigo,oid_u)
-				VALUES (TO_DATE(:fecha,'ddmmYYYY'),:curso,:codigo,:oid_u) RETURNING oid_m INTO :oid_m");
-            $stmt->bindParam(':fecha',$fecha->format('dmY'));
-            $stmt->bindParam(':curso',$curso);
-            $stmt->bindParam(':codigo',$codigo);
-            $stmt->bindParam(':oid_u',$oid_u);
-            $stmt->bindParam(':oid_m',$oid_m, PDO::PARAM_INT, 8);
-            return $stmt->execute();
+            $stmt = $conexion->prepare("INSERT INTO MATRICULAS (FECHA_MATRICULACION,CURSO,CODIGO,OID_U)
+				VALUES (TO_DATE(:FECHA_MATRICULACION,'ddmmYYYY'),:CURSO,:CODIGO,:OID_U) RETURNING OID_M INTO :OID_M");
+            $stmt->bindParam(':FECHA_MATRICULACION',$fecha->format('dmY'));
+            $stmt->bindParam(':CURSO',$curso);
+            $stmt->bindParam(':CODIGO',$codigo);
+            $stmt->bindParam(':OID_U',$oid_u);
+            $stmt->bindParam(':OID_M',$oid_m, PDO::PARAM_INT, 8);
+            $stmt->execute();
             return $oid_m;
                         
         }catch(PDOException $e){
@@ -33,9 +33,9 @@
         }
     }
 
-    function guardaParteneceA($conexion,  $oid_m, $oid_a){
+    function guardaPerteneceA($conexion,  $oid_m, $oid_a){
         try{
-            $stmt = $conexion->prepare("INSERT INTO PARTENECE_A (oid_m, oid_a)
+            $stmt = $conexion->prepare("INSERT INTO PERTENECE_A (oid_m, oid_a)
                 VALUES (:oid_m,:oid_a)");
             $stmt->bindParam(':oid_m',$oid_m);
             $stmt->bindParam(':oid_a',$oid_a);
@@ -89,11 +89,31 @@
         } 
     }
 
+    function consultarBusqueda($conexion,$palabra)  {
+        try {
+            $stmt = $conexion-> prepare("SELECT COUNT(*) AS TOTAL FROM MATRICULAS WHERE CODIGO=:palabra or NOMBRE=:palabra");
+            $stmt->bindParam(':palabra',$palabra);
+            $stmt->execute();
+            $result = $stmt->fetch();
+            $total = $result['TOTAL' ];
+            return (int)$total;
+        }
+        catch ( PDOException $e ) {
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
+        }
+    }
+
 
 
     function consultaPaginadaMatriculas($conexion,$pagina_seleccionada,$intervalo,$total,$constulta){
-         $select = "SELECT USUARIOS.NOMBRE, USUARIOS.APELLIDOS, MATRICULAS.OID_M, MATRICULAS.CODIGO, MATRICULAS.FECHA_MATRICULACION ,
+        if ($constulta == 'Todos')
+            $select = "SELECT USUARIOS.NOMBRE, USUARIOS.APELLIDOS, MATRICULAS.OID_M, MATRICULAS.CODIGO, MATRICULAS.FECHA_MATRICULACION ,
             	MATRICULAS.CURSO FROM MATRICULAS NATURAL JOIN USUARIOS ORDER BY USUARIOS.APELLIDOS, USUARIOS.NOMBRE";
+        else
+            $select = "SELECT USUARIOS.NOMBRE, USUARIOS.APELLIDOS, MATRICULAS.OID_M, MATRICULAS.CODIGO, MATRICULAS.FECHA_MATRICULACION ,
+                MATRICULAS.CURSO FROM MATRICULAS NATURAL JOIN USUARIOS WHERE MATRICULAS.CODIGO=:consulta ORDER BY USUARIOS.APELLIDOS, USUARIOS.NOMBRE";
         return consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
     }  
     
