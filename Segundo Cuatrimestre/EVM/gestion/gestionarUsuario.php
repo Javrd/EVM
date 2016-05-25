@@ -13,9 +13,9 @@
         }
     }
     
-    function existeEmailUsuario($conexion, $email){
+    function existeEmailUsuario($conexion, $email, $oid){
         try{
-            $stmt = $conexion->prepare("SELECT OID_U FROM USUARIOS WHERE EMAIL=:email");
+            $stmt = $conexion->prepare("SELECT OID_U FROM USUARIOS WHERE EMAIL=:email and OID_U<>$oid");
             $stmt->bindParam(':email',$email);
             $stmt->execute();
             $res = $stmt->fetch();

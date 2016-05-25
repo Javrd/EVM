@@ -92,9 +92,9 @@
         return $exito;
     }
     
-        function existeEmailResponsable($conexion, $email){
+        function existeEmailResponsable($conexion, $email, $oid){
         try{
-            $stmt = $conexion->prepare("SELECT OID_R FROM RESPONSABLES WHERE EMAIL=:email");
+            $stmt = $conexion->prepare("SELECT OID_R FROM RESPONSABLES WHERE EMAIL=:email and OID_R<>$oid");
             $stmt->bindParam(':email',$email);
             $stmt->execute();
             $res = $stmt->fetch();

@@ -45,7 +45,11 @@ else Header("Location: ../registros/registraResponsable.php");
         $errores["telefono"] = "El teléfono no se puede dejar vacío.";
     }
         // Email
-     if ($responsable["email"] != "" && !isset($responsable["oid_r"]) && existeEmailResponsable($conexion, $responsable["email"])){
+     if (isset($responsable["oid_r"]))
+        $oid = $responsable["oid_r"];
+     else
+        $oid = -1;
+     if ($responsable["email"] != "" && existeEmailResponsable($conexion, $responsable["email"], $oid)){
         $errores["email"] = "Este email ya esta registrado";
      }
     return $errores;

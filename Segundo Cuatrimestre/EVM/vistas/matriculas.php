@@ -77,7 +77,7 @@
         <link rel="stylesheet" type="text/css" href="../evm.css">
 	</head>
 
-	<body class="vistaFaltas">
+	<body class="vistaMatriculas">
 		  <div id="container">
 		      
     		<?php include("../header.html") ?>
@@ -86,7 +86,7 @@
         		<nav>
         			<ul class="menu">
         				<form  method="post" action="../registros/registraMatricula.php">
-        				<li><button id = "button_nuevo" name="nuevo">Nuevo</button></li>    
+        				<li><button id = "button_nuevo" name="nuevo">Nueva</button></li>    
         				</form>
         			</ul>
         		</nav>
@@ -106,14 +106,14 @@
              
                 </form>
                 </div>   
-        		<div id="ConsultaFaltas" class="consultas">
+        		<div id="ConsultaMatriculas" class="consultas">
         		    <div class="titlerow">
         		    	<div class="col6">Nombre</div>
                         <div class="col15">Apellidos</div>
                         <div class="col6">Codigo</div>
                         <div class="col6">Fecha de Matriculacion</div>
                         <div class="col6">Curso</div>
-                        <div class="col6">Asignaturas</div>                        
+                        <div class="col9">Asignaturas</div>                        
                         
                     </div>
         			<?php
@@ -130,7 +130,7 @@
                                 <div class="col6"><span><?php echo $matricula['CODIGO']?></span></div>
                                 <div class="col6"><span><?php echo $fecha->format("d/m/y")?></span></div>
                                 <div class="col6"><span><?php echo $matricula['CURSO']?></span></div>
-                                <div class="col6"><select>
+                                <div class="col9"><select>
                                 <?php
                                     $filasAsignaturas = consultaAsignaturasDeMatricula($conexion,$matricula['OID_M']);
                                     foreach ($filasAsignaturas as $asignatura){

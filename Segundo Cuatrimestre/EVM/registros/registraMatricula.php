@@ -46,6 +46,7 @@ session_start();
 		 ?>
 
 		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+        <script src="../js/evm.js"></script>
         <script src="../js/faltasJS.js"></script>
         <script src="../js/jquery-1.12.3.min.js"></script>
         <link rel="shortcut icon" href="../img/favicon.png">
@@ -97,7 +98,7 @@ session_start();
                                   	</optgroup>
                               	</select>
                           	
-                          	<select id="select_mes" <?php if(isset($errores["fecha_matricula"])) echo 'class="error"'?> name="mes">
+                          	<select id="select_mes" onchange="checkDate()" <?php if(isset($errores["fecha_matricula"])) echo 'class="error"'?> name="mes">
                 	            <optgroup label="Mes">
                                     <?php
                                     $meses = Array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Noviembre","Diciembre");
@@ -120,7 +121,7 @@ session_start();
                             </select>
 
                            
-                        	<select id="select_anio" <?php if(isset($errores["fecha_matricula"])) echo 'class="error"'?> name="anio">
+                        	<select id="select_anio" onchange="checkDate()" <?php if(isset($errores["fecha_matricula"])) echo 'class="error"'?> name="anio">
             	            <optgroup label="Año">
             	              	<?php
             	              	for ($i=date('Y'); $i > date('Y')-2 ; $i--) { 

@@ -86,7 +86,7 @@
         		<nav>
         			<ul class="menu">
         				<form  method="post" action="../registros/registraFalta.php">
-        				<li><button id = "button_nuevo" name="nuevo">Nuevo</button></li>    
+        				<li><button id = "button_nuevo" name="nuevo">Nueva</button></li>    
         				</form>
         			</ul>
         		</nav>
