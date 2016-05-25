@@ -90,7 +90,7 @@
     		<div id="content">
         		<nav>
         			<ul class="menu">
-        				<li><button id = "button_nuevo" name="nuevo" onclick="nuevaAsignatura()">Nuevo</button></li>    
+        				<li><button id = "button_nuevo" name="nuevo" onclick="nuevaAsignatura()">Nueva</button></li>    
         			</ul>
         		</nav>
                 <div id="Paginacion">

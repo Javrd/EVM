@@ -124,7 +124,7 @@ session_start();
                           	</optgroup>
                           	</select>
                           	
-                          	<select id="select_mes" <?php if(isset($errores["fechaNacimiento"])) echo 'class="error"'?> name="mes">
+                          	<select id="select_mes" onchange="checkDate()" <?php if(isset($errores["fechaNacimiento"])) echo 'class="error"'?> name="mes">
             	            <optgroup label="Mes">
                             <option value = "01" <?php if ($registroUsuario['mes']=="01") echo "selected='selected'"; ?> >Enero</option>
                             <option value = "02" <?php if ($registroUsuario['mes']=="02") echo "selected='selected'"; ?> >Febrero</option>
@@ -141,7 +141,7 @@ session_start();
                           	</optgroup>
                           	</select>
             	              	
-                        	<select id="select_anio" <?php if(isset($errores["fechaNacimiento"])) echo 'class="error"'?> name="anio">
+                        	<select id="select_anio" onchange="checkDate()" <?php if(isset($errores["fechaNacimiento"])) echo 'class="error"'?> name="anio">
             	            <optgroup label="Año">
             	              	<?php
             	              	for ($i=date('Y')-3; $i > date('Y')-99 ; $i--) { 

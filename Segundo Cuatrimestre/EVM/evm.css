@@ -113,7 +113,7 @@ ul.menu{
     -webkit-transition-duration: 0.4s; /* Safari */
 }
 
-#button_nuevo,#button_usuarios,#button_prestamos {
+#button_nuevo,#button_usuarios,#button_prestamos, .navButton {
    border-top: 1px solid #96d1f8;
    background: #65a9d7;
    background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
@@ -313,8 +313,6 @@ nav li,nav form{
 	padding:20px;
 }
 
-/* TODO Dar formato a los fotones, desplazar los del filtro a la izquierda */
-
 	/* Definicion de min-with para Body (para que al minimizar se vea fondo)
 	 * Tamaño de la tabla (#ConsultaX width) más 5em */
 
@@ -327,11 +325,11 @@ body.vistaResponsables{
 }
 
 body.vistaMatriculas{
-	/* TODO Definir min-width */
+	min-width: 59em;
 }
 
 body.vistaInstrumentos{
-	/* TODO Definir min-width */
+	min-width: 52.5em;
 }
 
 body.vistaPrestamos{
@@ -339,11 +337,11 @@ body.vistaPrestamos{
 }
 
 body.vistaFaltas{
-	min-width: 58.5em;
+	min-width: 59em;
 }
 
 body.vistaPagos{
-	/* TODO Definir min-width */
+	min-width: 59em;
 }
 
 body.vistaAsignaturas{
@@ -369,19 +367,19 @@ div.consultas{
 }
 
 #ConsultaMatriculas{
-	/* TODO Definir width */
+	width: 54em;
 }
 
 #ConsultaInstrumentos{
-	/* TODO Definir width */
+	width: 47.5em;
 }
 
 #ConsultaFaltas{
-	width: 53.5em;
+	width: 54em;
 }
 
 #ConsultaPagos{
-	/* TODO Definir width */
+	width: 54em;
 }
 
 #ConsultaAsignaturas{
@@ -440,6 +438,9 @@ div.col3{
 div.col6{
 	width: 6em;
 }
+div.col9{
+	width: 9em;
+}
 div.col12{
 	width: 12em;
 }
@@ -448,13 +449,14 @@ div.col15{
 }
 
 	/* Propiedades de las columnas */
-div.col3, div.col6, div.col12, div.col15{
-	display: inline-block;
+div.col3, div.col6, div.col9, div.col12, div.col15{
+    display: inline-block;
 	text-align: center;
 	padding-top:0.3em;
 	padding-bottom:0.3em;
 }
-div.col3 span, div.col6 span, div.col12 span, div.col15 span{
+	/* Propiedades del texto de las columnas */
+div.col3 span, div.col6 span, div.col9 span, div.col12 span, div.col15 span{
 }
 
 

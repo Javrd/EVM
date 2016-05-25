@@ -79,7 +79,7 @@
         <link rel="stylesheet" type="text/css" href="../evm.css">
 	</head>
 
-	<body class="vista">
+	<body class="vistaInstrumentos">
 		  <div id="container">
 		      
     		<?php include("../header.html") ?>
@@ -87,9 +87,9 @@
     		<div id="content">
         		<nav>
         			<ul class="menu">
-                        <form method="get" action="instrumentos.php">
-                        <li><button id = "button_nuevo" name="consulta" value="instrumentosLibres">Instrumentos Libres</button></li>    
-                        <li><button id = "button_nuevo" name="consulta" value="todos">Todos</button></li>   
+                        <form method="get" action="instrumentos.php">    
+                        <li><button name="consulta" class="toLeft navButton" value="todos">Todos</button></li>   
+                        <li><button name="consulta" class="toLeft navButton" value="instrumentosLibres">Instrumentos libres</button></li>
         				</form>
         				<form  method="post" action="../registros/registraInstrumento.php">
         				<li><button id = "button_nuevo" name="nuevo">Nuevo</button></li>    

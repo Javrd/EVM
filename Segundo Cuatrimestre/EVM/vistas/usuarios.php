@@ -89,8 +89,8 @@
         		<nav>
         			<ul class="menu">
                         <form method="get" action="usuarios.php">
-                        <li><button id = "button_usuarios" name="consulta" value="Todos">Todos</button></li>
-        				<li><button id = "button_prestamos" name="consulta"  value="Usuarios con prestamos">Usuarios con préstamos</button></li>
+                        <li><button id = "button_usuarios"  class="toLeft" name="consulta" value="Todos">Todos</button></li>
+        				<li><button id = "button_prestamos" class="toLeft" name="consulta" value="Usuarios con prestamos">Usuarios con préstamos</button></li>
         				</form>
         				<form  method="post" action="../registros/registraUsuario.php">
         				<li><button id = "button_nuevo" name="nuevo">Nuevo</button></li>    
