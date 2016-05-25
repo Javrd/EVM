@@ -48,10 +48,10 @@ ul.menu{
 	bottom: 1.25em;
 	left: 2.5em;
 	right: 2.5em;
-    height: 2.813em;
+    height: 1.4em;
 	background-color: black;
 	color: white;
-    padding: 0.625em;
+    padding: 1.331em;
 }
 
 #footer a {
@@ -404,6 +404,10 @@ div.consultas{
 	min-height: 3em;
 }
 
+.detallesRow{
+	padding-left:3em;
+}
+
 .evenrow:hover, .oddrow:hover{
 	 /*font-style: italic;*/
 }
@@ -557,6 +561,16 @@ div.error{
 	display: none;  
 }
 
+.toLeft{
+	float: left;
+	margin-left: 1.5em;
+}
+
+.toRight{
+	float: right;
+	margin-right: 1.5em;
+	
+}
 @font-face {
   font-family: 'Oswald';
   src: local('Oswald Regular'), local('Oswald-Regular'), url(http://fonts.gstatic.com/s/oswald/v10/pEobIV_lL25TKBpqVI_a2w.woff2) format('woff2');

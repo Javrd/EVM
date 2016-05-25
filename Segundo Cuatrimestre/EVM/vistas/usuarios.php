@@ -77,6 +77,7 @@
         <link rel="shortcut icon" href="../img/favicon.png">
         <link rel="apple-touch-icon" href="../img/favicon.png">
         <link rel="stylesheet" type="text/css" href="../evm.css">
+        <script src="../js/usuarios.js"></script>
 	</head>
 
 	<body class="vistaUsuarios">
@@ -132,14 +133,16 @@
                             $hoy =  new DateTime();
                             $nacimiento = DateTime::createFromFormat("d/m/Y",$usuario['FECHA_NACIMIENTO']);
                             $edad = $nacimiento->diff($hoy);
+                            $matriculas = consultaMatriculasUsuario($conexion, $usuario['OID_U']);
+                            $responsables = consultaResponsablesUsuario($conexion, $usuario['OID_U']);
                     ?>
-                            <div class="<?php echo $row ?>">
+                            <div onclick="toggleDetalles(<?php echo $usuario['OID_U'] ?>)" class="<?php echo $row ?>">
                                 <div class="col6"><span><?php echo $usuario['NOMBRE']?></span></div>
                                 <div class="col15"><span><?php echo $usuario['APELLIDOS']?></span></div>
                                 <div class="col6"><span><?php echo $edad->format('%y')?></span></div>
                                 <div class="col12"><span><?php echo $usuario['DIRECCION']?></span></div>
-                                <div class="col12"><span><?php echo $usuario['EMAIL']?></span></div>
-                                <div class="col6"><span><?php echo $usuario['TELEFONO']?></span></div>
+                                <div class="col12"><span><?php if($usuario['EMAIL']!=null) echo $usuario['EMAIL']; else echo "-";?></span></div>
+                                <div class="col6"><span><?php if($usuario['TELEFONO']!=null) echo $usuario['TELEFONO']; else echo "-";?></span></div>
                                 <div class="col12">
                     <?php   
                             if($usuario['DERECHOS_IMAGEN']==1){
@@ -162,6 +165,32 @@
                                         <input type="hidden" name="tipoRelacion" value="<?php echo $res['TIPO_RELACION'] ?>"/>
                                         <button><img src="../img/Edit_Notepad_Icon.png" class="notepadIcon"/></button>
                                     </form>
+                                </div>
+                            </div>
+                            <div onclick="toggleDetalles(<?php echo $usuario['OID_U'] ?>)" class="detallesRow <?php echo $row." hidden" ?>" id="id<?php echo $usuario['OID_U']?>">
+                                <div class="">
+                                     <span>Matriculas:</span>
+                                     
+                                         <?php
+                                            $j=true;
+                                             foreach ($matriculas as $matricula) {
+                                                 if ($j)
+                                                    $j = false;
+                                                 else
+                                                    echo ", ";
+                                                 echo '<a href="matriculas.php?consulta='.$matricula['OID_M'].'">'.$matricula['CODIGO'].'</a>';
+                                             }
+                                         ?>
+                                </div>
+                                <div class="">
+                                     <span>Responsables:</span>
+                                     <ul>
+                                         <?php 
+                                             foreach ($responsables as $responsable) {
+                                                 echo "<li>".$responsable['TIPO_RELACION'].": ".$responsable['NOMBRE']." ".$responsable['APELLIDOS']."</li>";
+                                             }
+                                         ?>
+                                     </ul>
                                 </div>
                             </div>
                     <?php  

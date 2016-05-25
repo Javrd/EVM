@@ -1,47 +1,21 @@
 
 
-/************* Funciones de Usuarios ************/
+/************* Funciones de Comunes ************/
 
-function toggleResponsables(){
-	var select = $("#select_responsable");
-	var text = $("#input_tipoRelación");
-	if(select.attr('disabled')){
-		select.removeAttr('disabled');
-		text.removeAttr('disabled');
-	} else {
-		select.attr({
-			'disabled': 'disabled'
-		});
-		text.attr({
-			'disabled': 'disabled'
-		});
-	}
-}
-
-function buscadorUsuarios(){
-	var buscador = document.getElementById("buscador");
-	var input = buscador.value;
-	var xhttp; 
-	if (window.XMLHttpRequest) {
-    	xhttp = new XMLHttpRequest();
-    } else {
-    	// code for IE6, IE5
-    	xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-    if (input.length == 0) { 
-        document.getElementById("suggestions").autocomplete = "";
-        return;
-    } else {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("suggestions").innerHTML = xmlhttp.responseText;
-            }
-        };
-        xmlhttp.open("GET", "../tratamientos/buscadorUsuarios.php?q=", true);
-        xmlhttp.send();
-    }
+function checkDate(){
 	
+	var selectDia = document.getElementById('select_dia');
+	var selectMes = document.getElementById('select_mes');
+	var selectAnio = document.getElementById('select_anio');
+	
+	var dia = selectDia.value;
+	var mes = selectMes.value;
+	var anio = selectAnio.value;
+	
+	if(mes== 04 || mes == 06 || mes == 09 || mes == 11){ // Abril, Junio, Septiembre y Noviembre, meses con 30 dias
+		if (dia==31)
+			selectDia.value = 30;
+	}
 }
 
 /************************************************/

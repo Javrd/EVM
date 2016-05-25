@@ -2,7 +2,7 @@
 /* TODO 
  * - SI EMAIL O TELEFONO NO VACIOS, ¿SON VALIDOS? TAMBIEN EN SERVIDOR
  * - COMPROBAR FECHA VALIDA EN CLIENTE Y SERVIDOR
- * - REALIZAR FUNCION JS QUE NO TE PERMITA ELEJIR FECHA NO VALIDA (en el punto anterior sobraría en servidor)
+ * - REALIZAR FUNCION JS QUE NO TE PERMITA ELEJIR FECHA NO VALIDA (en el punto anterior sobraría en cliente)
  */ 
 
 /************* Funciones de Usuarios ************/
@@ -96,6 +96,15 @@ function validarResponsables(){
 	inputError(errorTelefonoVacio, "El teléfono no se puede dejar vacío.", "telefono");
    	
 	return !(errorNombreVacio || errorApellidosVacios || errorTelefonoVacio );
+}
+
+function toggleDetalles(oid_u){
+	div_detalles = document.getElementById("id"+oid_u);
+	clase = div_detalles.className;
+	if(clase.includes("hidden"))
+		div_detalles.className = div_detalles.className.replace("hidden", "");
+	else
+		div_detalles.className += "hidden";
 }
 
 function toggleResponsables(){
