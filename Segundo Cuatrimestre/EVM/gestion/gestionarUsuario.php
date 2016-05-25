@@ -72,11 +72,40 @@ VALUES (:nombre, :apellidos, TO_DATE(:fecha,'ddmmYYYY'), :direccion, :email, :te
         
     function consultaPaginadaUsuarios($conexion,$pagina_seleccionada,$intervalo,$total,$constulta){
         if ($constulta == 'Usuarios con prestamos')
-            $select = "SELECT oid_u, nombre, apellidos, to_char(fecha_nacimiento, 'dd/mm/yyyy') as fecha_nacimiento, direccion, email, telefono, derechos_imagen FROM PRESTAMOS NATURAL JOIN MATRICULAS NATURAL JOIN USUARIOS WHERE MATRICULAS.FECHA_MATRICULACION>(SYSDATE - 365) ORDER BY APELLIDOS, NOMBRE";
+            $select = "SELECT oid_u, nombre, apellidos, to_char(fecha_nacimiento, 'dd/mm/yyyy') as fecha_nacimiento, 
+            direccion, email, telefono, derechos_imagen 
+            FROM PRESTAMOS NATURAL JOIN MATRICULAS NATURAL JOIN USUARIOS 
+            WHERE MATRICULAS.FECHA_MATRICULACION>(SYSDATE - 365) ORDER BY APELLIDOS, NOMBRE";
         else
             $select = "SELECT oid_u, nombre, apellidos, to_char(fecha_nacimiento, 'dd/mm/yyyy') as fecha_nacimiento, direccion, email, telefono, derechos_imagen FROM USUARIOS ORDER BY APELLIDOS, NOMBRE";
         return consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
     }  
+    
+    function consultaMatriculasUsuario($conexion, $oid_u){
+        try{
+            $stmt = $conexion->prepare("SELECT OID_M, CODIGO FROM MATRICULAS WHERE oid_u=:oid_u");
+            $stmt->bindParam(':oid_u',$oid_u);
+            $stmt->execute();
+            return $stmt;
+        } catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
+        } 
+    }
+    
+    function consultaResponsablesUsuario($conexion, $oid_u){
+        try{
+            $stmt = $conexion->prepare("SELECT NOMBRE, APELLIDOS, TIPO_RELACION FROM RELACIONES NATURAL JOIN RESPONSABLES WHERE oid_u=:oid_u");
+            $stmt->bindParam(':oid_u',$oid_u);
+            $stmt->execute();
+            return $stmt;
+        } catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
+        } 
+    }
     
     function consultarTotalUsuarios($conexion)  {
         try {

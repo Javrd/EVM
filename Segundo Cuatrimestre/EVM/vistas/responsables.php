@@ -125,7 +125,7 @@
                             <div class=<?php echo $row ?>>
                                 <div class="col6"><span><?php echo $responsable['NOMBRE']?></span></div>
                                 <div class="col15"><span><?php echo $responsable['APELLIDOS']?></span></div>
-                                <div class="col12"><span><?php echo $responsable['EMAIL']?></span></div>
+                                <div class="col12"><span><?php if($responsable['EMAIL']!=null) echo $responsable['EMAIL']; else echo "-";?></span></div>
                                 <div class="col6"><span><?php echo $responsable['TELEFONO']?></span></div>
                                 <div class="col6">                                        
                                     <form  method="post" action="../registros/registraResponsable.php">

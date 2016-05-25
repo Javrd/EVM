@@ -14,16 +14,15 @@
         $matriculas = $_SESSION["matriculas"];
         $page_num = $matriculas["page_num"];
         $page_size = $matriculas["page_size"];
-        $consulta = $matriculas["consulta"];
         unset($_SESSION["matriculas"]);
     } else {
         $page_num = 1;
         $page_size   = 10;
-        $consulta = "Todos";
     }
 
     /* Gets de formularios de paginación y tipo de consulta */
     
+    $consulta = "Todas";
     if ( isset($_GET["page_num"]) && isset($_GET["page_size"])){
         $page_num = (int)$_GET["page_num"];
         $page_size = (int)$_GET["page_size"];
@@ -40,8 +39,10 @@
 
     if ( $page_size < 1 ) 
         $page_size = 10;
-    
-    $total = consultarTotalMatriculas($conexion);  // Cuenta de total de faltas por defecto. Por defecto, consulta = Todos
+    if ($consulta == "Todas")
+        $total = consultarTotalMatriculas($conexion);  // Cuenta de total de faltas por defecto. Por defecto, consulta = Todas, si no, $consulta = oid_u
+    else 
+        $total = 1;
     
     $total_pages = ( $total / $page_size );
     
@@ -55,7 +56,6 @@
     
     $matriculas["page_num"] = $page_num;
     $matriculas["page_size"] = $page_size;
-    $matriculas["consulta"] = $consulta;
     $_SESSION["matriculas"] = $matriculas;
 ?>
 
@@ -93,7 +93,7 @@
                 <div id="Paginacion">
                 <form method="get" action="matriculas.php">
                 <?php
-
+                    $filas = consultaPaginadaMatriculas($conexion,$page_num,$page_size,$total,$consulta);
                     for( $page = 1; $page <= $total_pages; $page++ ) {
                         if ( $page == $page_num ) { // página actual
                             echo "<button id='".$page."' name='page_num' type='submit' class='seleccionada' value='".$page."' disabled='disabled'>".$page."</button>";
@@ -116,8 +116,7 @@
                         <div class="col6">Asignaturas</div>                        
                         
                     </div>
-        			<?php 
-                        $filas = consultaPaginadaMatriculas($conexion,$page_num,$page_size,$total,$consulta);
+        			<?php
                         $i = 0;
                         foreach ($filas as $matricula) {
                             

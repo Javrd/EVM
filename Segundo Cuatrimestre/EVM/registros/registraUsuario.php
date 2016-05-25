@@ -80,6 +80,7 @@ session_start();
 
 		<meta name="viewport" content="width=device-width; initial-scale=1.0">
         <script src="../js/usuarios.js"></script>
+        <script src="../js/evm.js"></script>
         <script src="../js/jquery-1.12.3.min.js"></script>
         <link rel="shortcut icon" href="../img/favicon.png">
         <link rel="apple-touch-icon" href="../img/favicon.png">
@@ -97,13 +98,13 @@ session_start();
     	  
                     <div id="div_nombre" class="lineaFormulario">  
                       <label id="label_nombre" for="input_nombre">Nombre:</label>
-                      <input id="input_nombre" class="box <?php if(isset($errores["nombre"])) echo "error"?>" name="nombre" value="<?php echo $registroUsuario['nombre'] ?>" type="text"/>
+                      <input id="input_nombre" maxlength="50" class="box <?php if(isset($errores["nombre"])) echo "error"?>" name="nombre" value="<?php echo $registroUsuario['nombre'] ?>" type="text"/>
                       <span id="error_nombre" class="error"><?php if(isset($errores["nombre"])) echo $errores["nombre"]?></span>
                     </div>
         
                     <div id="div_apellidos" class="lineaFormulario">
                       <label id="label_apellidos" for="input_apellidos">Apellidos:</label>
-                      <input id="input_apellidos" class="box <?php if(isset($errores["apellidos"])) echo "error"?>" name="apellidos" value="<?php echo $registroUsuario['apellidos'] ?>" type="text"/>
+                      <input id="input_apellidos" maxlength="50" class="box <?php if(isset($errores["apellidos"])) echo "error"?>" name="apellidos" value="<?php echo $registroUsuario['apellidos'] ?>" type="text"/>
                       <span id="error_apellidos" class="error"><?php if(isset($errores["apellidos"])) echo $errores["apellidos"]?></span>
                     </div>
         
@@ -156,12 +157,12 @@ session_start();
                   	</div>
                    	<div id="div_direccion" class="lineaFormulario">
                 		<label id="label_direccion" for="input_direccion">Dirección:</label>
-                    	<input id="input_direccion" class="box <?php if(isset($errores["direccion"])) echo "error"?>" name="direccion" value="<?php echo $registroUsuario['direccion'] ?>" type="text"/>
+                    	<input id="input_direccion" maxlength="60" class="box <?php if(isset($errores["direccion"])) echo "error"?>" name="direccion" value="<?php echo $registroUsuario['direccion'] ?>" type="text"/>
                         <span id="error_direccion" class="error"><?php if(isset($errores["direccion"])) echo $errores["direccion"]?></span>
                   	</div>
                     <div id="div_email" class="lineaFormulario">  
                       	<label id="label_email" for="input_email">Email:</label>
-                      	<input id="input_email" class="box <?php if(isset($errores["email"])) echo "error"?>" name="email" value="<?php echo $registroUsuario['email'] ?>" type="email"/>
+                      	<input id="input_email" maxlength="60" class="box <?php if(isset($errores["email"])) echo "error"?>" name="email" value="<?php echo $registroUsuario['email'] ?>" type="email"/>
                         <span id="error_email" class="error"><?php if(isset($errores["email"])) echo $errores["email"]?></span>
                     </div>
                     <div id="div_telefono" class="lineaFormulario">  
