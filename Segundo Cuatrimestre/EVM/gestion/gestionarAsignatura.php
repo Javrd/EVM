@@ -18,7 +18,7 @@
     
     function actualizaAsignatura($conexion, $oid_a, $nombre){
        try{
-            $stmt = $conexion->prepare("UPDATE ASIGNATURAS SET nombre=:nombre WHERE oid_u=:oid_u");
+            $stmt = $conexion->prepare("UPDATE ASIGNATURAS SET nombre=:nombre WHERE oid_a=:oid_a");
             $stmt->bindParam(':oid_a',$oid_a);
             $stmt->bindParam(':nombre',$nombre);
             return $stmt->execute();

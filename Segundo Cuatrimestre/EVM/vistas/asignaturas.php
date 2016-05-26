@@ -10,10 +10,13 @@
     } else {
         $nuevaAsignatura = $_SESSION["nuevaAsignatura"];
     }
-    if(isset($_SESSION["error"])){
+    if(isset($_SESSION["modalError"])){
+        $modalError = $_SESSION["modalError"];
+        unset($_SESSION["modalError"]);
+    } else if(isset($_SESSION["error"])){
         $error = $_SESSION["error"];
         unset($_SESSION["error"]);
-    };
+    }
     require_once ("../gestion/gestionarAsignatura.php");
     require_once("../gestion/gestionBD.php");
     $conexion = crearConexionBD();
@@ -61,6 +64,13 @@
     $asignaturas["page_num"] = $page_num;
     $asignaturas["page_size"] = $page_size;
     $_SESSION["asignaturas"] = $asignaturas;
+    
+    /* Edicion de asignatura */
+    
+    if (isset($_REQUEST['oid']))
+        $oid=$_REQUEST['oid'];
+    else
+        $oid=0;
 ?>
 
 <!DOCTYPE html>
@@ -119,19 +129,31 @@
         			
                         $i = 0;
                         $filas = consultaPaginadaAsignaturas($conexion,$page_num,$page_size,$total);
+                        echo "<span id='error_nombre' class='error'>";
+                        if(isset($error["nombre"]))
+                            echo $error["nombre"];
+                        echo "</span>";
                         foreach ($filas as $asignatura) {
                             $row = $i%2?'oddrow':'evenrow';
                     ?>
-                    
+                        
                         <tr class="<?php echo $row ?>">
-                            <td ><?php echo $asignatura['NOMBRE']?></td> 
+                    <?php if($oid!=$asignatura['OID_A']) { ?>
+                            <td><?php echo $asignatura['NOMBRE']?></td> 
                             <td>               
-                                <form  method="post" action="../registros/registraAsignatura.php">
-                                    <input type="hidden" name="oid_a" value="<?php echo $asignatura['OID_A']?>"/>
-                                    <input type="hidden" name="nombre" value="<?php echo $asignatura['NOMBRE']?>"/>
+                                <form  method="post" action="../vistas/asignaturas.php">
+                                    <input type="hidden" name="oid" value="<?php echo $asignatura['OID_A']?>"/>
                                     <button><img src="../img/Edit_Notepad_Icon.png" class="notepadIcon"/></button>
                                 </form>
                             </td>
+                    <?php } else { ?>
+                            
+                            <form  method="post" action="../tratamientos/tratamientoAsignaturas.php">
+                                <input type="hidden" name="oid" value="<?php echo $asignatura['OID_A']?>"/>
+                                <td><input maxlength="60" onfocus="this.select();" type="text" name="nombre" class="editInLine" value="<?php echo $asignatura['NOMBRE']?>" autofocus/></td>
+                                <td><button><img src="../img/1024px-Green_tick_pointed.png" class="notepadIcon"/></button></td>
+                            </form>
+                    <?php } ?>
                         </tr>
                     <?php  
                             $i++;
@@ -147,14 +169,14 @@
             
         </div>
         <!-- Registro de asignatura  -->
-        <div id="overlay" class="<?php if(!isset($error)) echo "hidden" ?>"></div>
-        <div id="nuevaAsignatura" class="<?php if(!isset($error)) echo "hidden" ?>">
+        <div id="overlay" class="<?php if(!isset($modalError)) echo "hidden" ?>" onclick="cancelaNuevaAsignatura()"></div>
+        <div id="nuevaAsignatura" class="<?php if(!isset($modalError)) echo "hidden" ?>">
             <form action="../tratamientos/tratamientoAsignaturas.php" method="post">
             <div id="div_nombre" class="lineaModal">  
                 <span class="tituloModal">Nueva asignatura:</span>
                 <label id="label_nombre" class="modalLabel" for="input_nombre">Nombre:</label>
-                <input id="input_nombre" class="box <?php if(isset($error["nombre"])) echo "error"?>" name="nombre" value="<?php echo $nuevaAsignatura["nombre"] ?>" type="text"/>
-                <span id="error_nombre" class="error"><?php if(isset($error["nombre"])) echo $error["nombre"]?></span>
+                <input id="input_nombre" class="box <?php if(isset($modalError["nombre"])) echo "error"?>" name="nombre" value="<?php echo $nuevaAsignatura["nombre"] ?>" type="text"/>
+                <span id="error_nombre" class="error"><?php if(isset($modalError["nombre"])) echo $modalError["nombre"]?></span>
             </div>
             <div class="modalButtons">
                 <button id="cancelar" class="modalCancel" type="button" onclick="cancelaNuevaAsignatura()">Cancelar</button>

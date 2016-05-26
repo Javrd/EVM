@@ -3,13 +3,18 @@ session_start();
 
 if (isset($_POST["nombre"]) ){
     
+    if (isset($_REQUEST['oid']))
+        $asignatura['oid_a']=$_REQUEST['oid'];
     $asignatura["nombre"] = $_REQUEST["nombre"];
  
     $error = validar($asignatura);
     
     if ( count ($error) > 0 ) {
         $_SESSION["nuevaAsignatura"] = $asignatura;
-        $_SESSION["error"] = $error;
+            if (!isset($asignatura['oid_a']))
+                $_SESSION["modalError"] = $error;
+            else
+                $_SESSION["error"] = $error;
         Header("Location: ../vistas/asignaturas.php");
     }
     else {
