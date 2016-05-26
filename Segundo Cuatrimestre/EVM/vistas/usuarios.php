@@ -77,7 +77,6 @@
         <link rel="shortcut icon" href="../img/favicon.png">
         <link rel="apple-touch-icon" href="../img/favicon.png">
         <link rel="stylesheet" type="text/css" href="../evm.css">
-        <script src="../js/usuarios.js"></script>
 	</head>
 
 	<body class="vistaUsuarios">
@@ -144,7 +143,7 @@
                                 <div class="col12"><span><?php if($usuario['EMAIL']!=null) echo $usuario['EMAIL']; else echo "-";?></span></div>
                                 <div class="col6"><span><?php if($usuario['TELEFONO']!=null) echo $usuario['TELEFONO']; else echo "-";?></span></div>
                                 <div class="col12">
-                    <?php   
+                    <?php   	
                             if($usuario['DERECHOS_IMAGEN']==1){
                                 echo'<img src="../img/1024px-Green_tick_pointed.png" class="tickIcon"/>';
                             }
@@ -166,8 +165,8 @@
                                         <button><img src="../img/Edit_Notepad_Icon.png" class="notepadIcon"/></button>
                                     </form>
                                 </div>
-                            </div>
-                            <div onclick="toggleDetalles(<?php echo $usuario['OID_U'] ?>)" class="detallesRow <?php echo $row." hidden" ?>" id="id<?php echo $usuario['OID_U']?>">
+                            
+                            <div class="detallesRow <?php echo $row." hidden" ?>" id="id<?php echo $usuario['OID_U']?>">
                                 <div class="">
                                      <span>Matriculas:</span>
                                      
@@ -193,6 +192,7 @@
                                      </ul>
                                 </div>
                             </div>
+                          </div>
                     <?php  
                             $i++;
                         } 
@@ -206,6 +206,6 @@
             ?>
             
         </div>
-
+    <script src="../js/usuarios.js"></script>
 	</body>
 </html>
