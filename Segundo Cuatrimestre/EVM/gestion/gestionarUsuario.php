@@ -71,14 +71,22 @@ VALUES (:nombre, :apellidos, TO_DATE(:fecha,'ddmmYYYY'), :direccion, :email, :te
     }
         
     function consultaPaginadaUsuarios($conexion,$pagina_seleccionada,$intervalo,$total,$constulta){
-        if ($constulta == 'Usuarios con prestamos')
-            $select = "SELECT oid_u, nombre, apellidos, to_char(fecha_nacimiento, 'dd/mm/yyyy') as fecha_nacimiento, 
-            direccion, email, telefono, derechos_imagen 
-            FROM PRESTAMOS NATURAL JOIN MATRICULAS NATURAL JOIN USUARIOS 
-            WHERE MATRICULAS.FECHA_MATRICULACION>(SYSDATE - 365) ORDER BY APELLIDOS, NOMBRE";
-        else
-            $select = "SELECT oid_u, nombre, apellidos, to_char(fecha_nacimiento, 'dd/mm/yyyy') as fecha_nacimiento, direccion, email, telefono, derechos_imagen FROM USUARIOS ORDER BY APELLIDOS, NOMBRE";
-        return consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
+        try{
+            if ($constulta == 'Usuarios con prestamos')
+                $select = "SELECT oid_u, nombre, apellidos, to_char(fecha_nacimiento, 'dd/mm/yyyy') as fecha_nacimiento, 
+                direccion, email, telefono, derechos_imagen 
+                FROM PRESTAMOS NATURAL JOIN MATRICULAS NATURAL JOIN USUARIOS 
+                WHERE MATRICULAS.FECHA_MATRICULACION>(SYSDATE - 365) ORDER BY APELLIDOS, NOMBRE";
+            else
+                $select = "SELECT oid_u, nombre, apellidos, to_char(fecha_nacimiento, 'dd/mm/yyyy') as fecha_nacimiento, direccion, email, telefono, derechos_imagen FROM USUARIOS ORDER BY APELLIDOS, NOMBRE";
+            $stmt = consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
+            $stmt->execute();
+            return $stmt;
+        } catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
+        } 
     }  
     
     function consultaMatriculasUsuario($conexion, $oid_u){

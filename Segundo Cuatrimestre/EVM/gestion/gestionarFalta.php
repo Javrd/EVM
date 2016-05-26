@@ -46,9 +46,17 @@
     }
         
     function consultaPaginadaFaltas($conexion,$pagina_seleccionada,$intervalo,$total,$constulta){
-         $select = "SELECT USUARIOS.NOMBRE, USUARIOS.APELLIDOS, FALTAS.OID_F, FALTAS.TIPO_FALTA, FALTAS.FECHA_FALTA,
-            	FALTAS.JUSTIFICADA FROM FALTAS NATURAL JOIN MATRICULAS NATURAL JOIN USUARIOS ORDER BY USUARIOS.APELLIDOS, USUARIOS.NOMBRE";
-        return consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
+        try{     
+            $select = "SELECT USUARIOS.NOMBRE, USUARIOS.APELLIDOS, FALTAS.OID_F, FALTAS.TIPO_FALTA, FALTAS.FECHA_FALTA,
+                	FALTAS.JUSTIFICADA FROM FALTAS NATURAL JOIN MATRICULAS NATURAL JOIN USUARIOS ORDER BY USUARIOS.APELLIDOS, USUARIOS.NOMBRE";
+            $stmt = consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
+            $stmt->execute();
+            return $stmt;
+        } catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
+        } 
     }  
     
 	function getFechaMatriculacion($conexion, $oid_m){

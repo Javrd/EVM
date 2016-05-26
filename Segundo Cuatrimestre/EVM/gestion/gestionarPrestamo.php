@@ -44,10 +44,18 @@
     }
         
     function consultaPaginadaPrestamos($conexion,$pagina_seleccionada,$intervalo,$total,$constulta){
-         $select = "SELECT USUARIOS.NOMBRE AS USUARIOSNOMBRE, USUARIOS.APELLIDOS, INSTRUMENTOS.NOMBRE, FECHA_PRESTAMO
-          FROM INSTRUMENTOS, PRESTAMOS, MATRICULAS, USUARIOS WHERE INSTRUMENTOS.OID_I=PRESTAMOS.OID_I AND
-          PRESTAMOS.OID_M=MATRICULAS.OID_M AND MATRICULAS.OID_U=USUARIOS.OID_U ORDER BY FECHA_PRESTAMO DESC";
-        return consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
+        try{
+             $select = "SELECT USUARIOS.NOMBRE AS USUARIOSNOMBRE, USUARIOS.APELLIDOS, INSTRUMENTOS.NOMBRE, FECHA_PRESTAMO
+              FROM INSTRUMENTOS, PRESTAMOS, MATRICULAS, USUARIOS WHERE INSTRUMENTOS.OID_I=PRESTAMOS.OID_I AND
+              PRESTAMOS.OID_M=MATRICULAS.OID_M AND MATRICULAS.OID_U=USUARIOS.OID_U ORDER BY FECHA_PRESTAMO DESC";
+            $stmt = consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
+            $stmt->execute();
+            return $stmt;
+        } catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
+        } 
     }  
     
     function consultarTotalPrestamos($conexion)  {

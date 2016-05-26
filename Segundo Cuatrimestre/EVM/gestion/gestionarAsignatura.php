@@ -31,8 +31,16 @@
     }
         
     function consultaPaginadaAsignaturas($conexion,$pagina_seleccionada,$intervalo,$total){
-        $select = "SELECT oid_a, nombre FROM ASIGNATURAS ORDER BY NOMBRE";
-        return consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
+        try{
+            $select = "SELECT oid_a, nombre FROM ASIGNATURAS ORDER BY NOMBRE";
+            $stmt = consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
+            $stmt->execute();
+            return $stmt;
+        } catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
+        } 
     }  
     
     function consultarTotalAsignaturas($conexion)  {
