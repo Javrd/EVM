@@ -513,6 +513,19 @@ div.error{
 	z-index: 11;
 }
 
+.editInLine{
+	background: transparent;
+	border: none;
+	font: 1em Times;
+	font-weight: bold;
+}
+
+.editInLine:focus{
+	background: transparent;
+	border: none;
+	outline-width: 0;
+}
+
 .lineaModal{
 	width:24em;
 	margin:auto;
@@ -552,6 +565,7 @@ div.error{
     width: 6em;
     border-width: 0;
     height: 2em;
+    transition: 0.4s;
 }
 
 .modalSubmit {
@@ -561,6 +575,16 @@ div.error{
 .modalCancel {
     background-color: #FF4444;
     margin-right: 1.5em;
+}
+
+.modalSubmit:hover {
+    color: #008CBA;
+    background-color: white;
+}
+
+.modalCancel:hover{
+    color: #FF4444;
+    background-color: white;
 }
 
 .hidden{
