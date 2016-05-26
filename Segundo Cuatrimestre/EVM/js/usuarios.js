@@ -6,6 +6,7 @@
  */ 
 
 /************* Funciones de Usuarios ************/
+
 function validaVacio(id){
  	// Devuelve true si el campo esta vacio
    	return document.getElementById("input_"+id).value == "";
@@ -98,14 +99,29 @@ function validarResponsables(){
 	return !(errorNombreVacio || errorApellidosVacios || errorTelefonoVacio );
 }
 
+
+
+
 function toggleDetalles(oid_u){
+
+	allDivs = document.getElementsByClassName('detallesRow');
 	div_detalles = document.getElementById("id"+oid_u);
 	clase = div_detalles.className;
-	if(clase.includes("hidden"))
-		div_detalles.className = div_detalles.className.replace("hidden", "");
-	else
+
+	if (!clase.includes("hidden")){
 		div_detalles.className += "hidden";
-}
+	}
+	else{
+		for (var i = 0; i < allDivs.length; i++) {
+		div = allDivs[i];
+		if (!div.className.includes("hidden")){
+    		div.className += "hidden";
+			}
+		}
+		div_detalles.className = div_detalles.className.replace("hidden", "");
+	}
+} 	
+
 
 function toggleResponsables(){
 	var select = $("#input_responsable");

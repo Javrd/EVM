@@ -408,20 +408,25 @@ div.consultas{
 
 .detallesRow{
 	padding-left:3em;
+	background-color: transparent;
 }
 
-.evenrow:hover, .oddrow:hover{
-	 /*font-style: italic;*/
-}
+
 
 	/* Color de las filas pares */
-.evenrow{
+.evenrow:not(.detallesRow){
 	background-color: #008CBA;
 }
 	
 	/* Color de las filas impares */
-.oddrow{
+.oddrow:not(.detallesRow){
 	background-color: #3DACEA;
+}
+
+.evenrow:hover, .oddrow:hover{
+	 /*font-style: italic;*/
+	 cursor: pointer; 
+	 background-color: #33FFFF;
 }
 
 	/* Cabecera de la tabla */
