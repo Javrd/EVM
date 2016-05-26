@@ -122,8 +122,16 @@
     }
     
     function consultaPaginadaResponsables($conexion,$pagina_seleccionada,$intervalo,$total){
+        try{
             $select = "SELECT * FROM RESPONSABLES ORDER BY APELLIDOS, NOMBRE";
-        return consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
+            $stmt = consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
+            $stmt->execute();
+            return $stmt;
+        } catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
+        } 
     }  
     
 ?>

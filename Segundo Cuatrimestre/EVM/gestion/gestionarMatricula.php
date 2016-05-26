@@ -108,24 +108,24 @@
 
 
     function consultaPaginadaMatriculas($conexion,$pagina_seleccionada,$intervalo,$total,$consulta){
-        if ($consulta == 'Todas'){
-            $select = "SELECT USUARIOS.NOMBRE, USUARIOS.APELLIDOS, MATRICULAS.OID_M, MATRICULAS.CODIGO, MATRICULAS.FECHA_MATRICULACION ,
-            	MATRICULAS.CURSO FROM MATRICULAS NATURAL JOIN USUARIOS ORDER BY USUARIOS.APELLIDOS, USUARIOS.NOMBRE";
-        	return consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
-        }else{
-            try {
-                $stmt = $conexion->prepare("SELECT USUARIOS.NOMBRE, USUARIOS.APELLIDOS, MATRICULAS.OID_M, MATRICULAS.CODIGO, MATRICULAS.FECHA_MATRICULACION ,
-                    MATRICULAS.CURSO FROM MATRICULAS NATURAL JOIN USUARIOS WHERE MATRICULAS.OID_M=:consulta ORDER BY USUARIOS.APELLIDOS, USUARIOS.NOMBRE");
+        try{
+            if ($consulta == 'Todas'){
+                $select = "SELECT USUARIOS.NOMBRE, USUARIOS.APELLIDOS, MATRICULAS.OID_M, MATRICULAS.CODIGO, MATRICULAS.FECHA_MATRICULACION ,
+                	MATRICULAS.CURSO FROM MATRICULAS NATURAL JOIN USUARIOS ORDER BY USUARIOS.APELLIDOS, USUARIOS.NOMBRE";
+                $stmt = consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
+            } else {
+                $select = "SELECT USUARIOS.NOMBRE, USUARIOS.APELLIDOS, MATRICULAS.OID_M, MATRICULAS.CODIGO, MATRICULAS.FECHA_MATRICULACION ,
+                    MATRICULAS.CURSO FROM MATRICULAS NATURAL JOIN USUARIOS WHERE MATRICULAS.OID_M=:consulta ORDER BY USUARIOS.APELLIDOS, USUARIOS.NOMBRE";
+                $stmt = consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
                 $stmt->bindParam( ':consulta', $consulta);
-                $stmt->execute();
-                return $stmt;
             }
-            catch ( PDOException $e ) {
-                $_SESSION['error']=$e->GetMessage();
-                header("Location:../error.php");
-                exit();
-            }
-        }
+            $stmt->execute();
+            return $stmt;
+        } catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
+        } 
     }  
     
 	function getFechaMatriculacion($conexion, $oid_m){

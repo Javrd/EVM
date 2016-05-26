@@ -66,11 +66,19 @@
     }
         
     function consultaPaginadaInstrumentos($conexion,$pagina_seleccionada,$intervalo,$total,$constulta){
-        if ($constulta == 'instrumentosLibres')
-            $select = "SELECT * FROM INSTRUMENTOS WHERE LIBRE = 1 ORDER BY TIPO, NOMBRE";
-        else
-            $select = "SELECT * FROM INSTRUMENTOS ORDER BY TIPO, NOMBRE";
-        return consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
+        try{
+            if ($constulta == 'instrumentosLibres')
+                $select = "SELECT * FROM INSTRUMENTOS WHERE LIBRE = 1 ORDER BY TIPO, NOMBRE";
+            else
+                $select = "SELECT * FROM INSTRUMENTOS ORDER BY TIPO, NOMBRE";
+            $stmt = consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
+            $stmt->execute();
+            return $stmt;
+        } catch(PDOException $e){
+            $_SESSION['error']=$e->GetMessage();
+            header("Location:../error.php");
+            exit();
+        } 
     }  
     
     function consultarTotalInstrumentos($conexion)  {
