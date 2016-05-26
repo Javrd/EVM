@@ -98,19 +98,19 @@
                 <?php
                     $filas = consultaPaginadaPagos($conexion,$page_num,$page_size,$total,$consulta);
                     if ($total!=0){
-                        if ($total_pages>10){
-                            if($page_num>3){
+                        if ((int) $total_pages>10){
+                            if($page_num>5){
                                 echo "<button id='Primera' name='page_num' type='submit' class='pagina' value='1'>Primera</button>...";
                             }
-                            if($page_num>2 && $page_num<$total_pages-2){
-                                $inicio = $page_num-2;
-                                $fin = $page_num+2;
-                            } else if ($page_num>2){
-                                $inicio = (int) $total_pages-4;
+                            if($page_num>5 && $page_num<$total_pages-5){
+                                $inicio = $page_num-4;
+                                $fin = $page_num+5;
+                            } else if ($page_num>5){
+                                $inicio = (int) $total_pages-9;
                                 $fin = (int) $total_pages;
                             } else {
                                 $inicio = 1;
-                                $fin = 5;
+                                $fin = 10;
                             }
                         } else {
                             $inicio = 1;
@@ -123,7 +123,7 @@
                                 echo "<button id='".$page."' name='page_num' type='submit' class='pagina' value='".$page."'>".$page."</button>";
                             }
                         }
-                        if ($total_pages>10 && $page_num<$total_pages-3){
+                        if ((int) $total_pages>10 && $page_num<$total_pages-6){
                             echo "...<button id='ultima' name='page_num' type='submit' class='pagina' value='".(int) $total_pages."'>Última</button>";
                         }
                 ?>
