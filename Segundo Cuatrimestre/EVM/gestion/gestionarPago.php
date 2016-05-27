@@ -20,13 +20,13 @@
             if ($consulta==""){
                 $select = "SELECT NOMBRE, APELLIDOS, OID_PA, CANTIDAD, CONCEPTO, FECHA_PAGO, ESTADO 
                 FROM PAGOS NATURAL JOIN MATRICULAS NATURAL JOIN USUARIOS 
-                ORDER BY ESTADO DESC, FECHA_PAGO, CONCEPTO";
+                ORDER BY ESTADO DESC, FECHA_PAGO DESC, CONCEPTO";
                 $stmt = consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
             } else {
                 $select =  "SELECT NOMBRE, APELLIDOS, OID_PA, CANTIDAD, CONCEPTO, FECHA_PAGO, ESTADO 
                 FROM PAGOS NATURAL JOIN MATRICULAS NATURAL JOIN USUARIOS 
                 WHERE LOWER(NOMBRE) LIKE '%'||LOWER(:consulta)||'%' OR LOWER(APELLIDOS) LIKE '%'||LOWER(:consulta)||'%' 
-                ORDER BY APELLIDOS, NOMBRE, ESTADO DESC, FECHA_PAGO, CONCEPTO ";
+                ORDER BY APELLIDOS, NOMBRE, ESTADO DESC, FECHA_PAGO DESC, CONCEPTO ";
                 $stmt = consultaPaginada($conexion,$pagina_seleccionada,$intervalo,$total,$select);
                 $stmt->bindParam(':consulta', $consulta);
             }

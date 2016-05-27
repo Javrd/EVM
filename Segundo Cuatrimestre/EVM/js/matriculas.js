@@ -40,11 +40,17 @@ function validarMatriculas(){
     if (codigo == ""){
 		res= false;
         document.getElementById("errorCodigo").innerHTML = "Inscribe un codigo";
-        document.getElementById("input_codigo").className = "error";
+        document.getElementById("input_codigo").className += " error";
        }else{
        	document.getElementById("errorCodigo").innerHTML = "";
-        document.getElementById("input_codigo").className = "";
+        document.getElementById("input_codigo").className = document.getElementById("input_codigo").className.replace(" error", "");
        }
+    if (asignaturas.length == 0){
+    	res = false;
+    	document.getElementById("errorMatriculaAsignaturas").innerHTML = "Tiene que elegir asignaturas";
+    } else {
+    	document.getElementById("errorMatriculaAsignaturas").innerHTML = "";
+    }
     if (usuario == "-1"){
 		res= false;
         document.getElementById("errorMatriculaUsuario").innerHTML = "Elige un Usuario";
@@ -58,7 +64,7 @@ function validarMatriculas(){
 	        console.log(asignaturas.indexOf("Expresion Corporal y Danza") > -1);
 	        if ((parseInt(edadUsuario) <= 6) &&  (!(asignaturas.indexOf("Expresion Corporal y Danza") > -1))){
 	        	res= false;
-	        	document.getElementById("errorMatriculaAsignaturas").innerHTML = "El alumno es menor de 6 anos y tiene que elegir ECD";
+	        	document.getElementById("errorMatriculaAsignaturas").innerHTML = "El alumno es menor de 6 años y tiene que elegir Expreción Corporal y Danza";
 	        }
 	        else if ((parseInt(curso) >= 3) &&  (!(asignaturas.indexOf("Piano y guitarra") > -1))){
 	        	res= false;
@@ -70,10 +76,6 @@ function validarMatriculas(){
 	        }
 
        }
-    if (asignaturas.length == 0){
-    	res = false;
-    	document.getElementById("errorMatriculaAsignaturas").innerHTML = "Tiene que elegir asignaturas";
-    }
     console.log(res);
     return res;
 }

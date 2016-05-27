@@ -42,7 +42,7 @@ function validar($instrumento) {
         $errores["nombre"] = "El nombre no se puede dejar vacío.";
     }
 
-    if(($instrumento['tipo']) == -1){
+    if(empty($instrumento['tipo'])){
         $errores["tipo"] = "El tipo del instrumento no se puede dejar vacío.";
     }
 
