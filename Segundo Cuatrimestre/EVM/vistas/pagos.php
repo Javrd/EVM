@@ -155,7 +155,7 @@
                                 	
                                     <div class="col6"><span><?php echo $pago['NOMBRE']?></span></div>
                                     <div class="col15"><span><?php echo $pago['APELLIDOS']?></span></div>
-                                    <div class="col6"><span><?php echo $pago['CANTIDAD']?></span></div>
+                                    <div class="col6"><span><?php echo $pago['CANTIDAD']?>€</span></div>
                                     <div class="col6"><span><?php echo $pago['CONCEPTO']?></span></div>
                                     <div class="col6"><span><?php echo $fecha?></span></div>
                                     <div class="col6"><span><?php echo $pago['ESTADO']?></span></div>

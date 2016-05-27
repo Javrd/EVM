@@ -181,10 +181,9 @@ session_start();
                            
                         }
 
-                        ?>
-                        <span id="errorMatriculaAsignaturas" class="error"><?php if(isset($errores["asignaturas"])) echo $errores["asignaturas"]?></span>
+                        ?> 
                     </div>
-
+                    <span id="errorMatriculaAsignaturas" class="error"><?php if(isset($errores["asignaturas"])) echo $errores["asignaturas"]?></span>
                     <div id="div_submit">
                           <button id="button_enviar" class="submit" type="submit">Enviar</button>
                 	</div>

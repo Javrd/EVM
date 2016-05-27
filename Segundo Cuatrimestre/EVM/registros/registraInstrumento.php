@@ -16,7 +16,7 @@ session_start();
     } else{  // se inilizia las variables por defectos para nuevo instrumento
     	if (!isset($_SESSION['registroInstrumento'])){
     		$registroInstrumento["nombre"] = "";
-    		$registroInstrumento["tipo"] = "--Tipo--";
+    		$registroInstrumento["tipo"] = "";
     		$registroInstrumento["ESTADO_INSTRUMENTO"] = "";
             $registroInstrumento["libre"]=1;
     		$_SESSION["registroInstrumento"] = $registroInstrumento;
@@ -72,24 +72,13 @@ session_start();
     	  
                     <div id="div_nombre" class="lineaFormulario">  
                       <label id="label_nombre" for="input_nombre">Nombre:</label>
-                      <input id="input_nombre" class="box <?php if(isset($errores["nombre"])) echo "error"?>" name="nombre" value="<?php echo $registroInstrumento['nombre'] ?>" type="text"/>
+                      <input id="input_nombre" maxlength="50" class="box <?php if(isset($errores["nombre"])) echo "error"?>" name="nombre" value="<?php echo $registroInstrumento['nombre'] ?>" type="text"/>
                       <span id="errorNombre" class="error"><?php if(isset($errores["nombre"])) echo $errores["nombre"]?></span>
                     </div>
         
                     <div id="div_tipo" class="lineaFormulario">
-                        <label id="label_tipo" for="select_responsable">Tipo</label>
-                    	<select id="select_tipo" <?php if(isset($errores["tipo"])) echo 'class="error"'?> name="tipo" >
-                    	    <option value = -1 >--Tipos--</option>
-        	              	<?php
-        	              	$tipos = Array("cuerda", "viento");
-        	              	foreach ($tipos as $tipo) { 
-        						echo "<option value='".$tipo."' ";
-        						if ($registroInstrumento['tipo'] == $tipo ) echo "selected='selected'";
-        						echo ">";
-        						echo $tipo."</option>";
-        				  	}
-        					?>
-                      	</select>
+                        <label id="label_tipo" for="input_responsable">Tipo</label>
+                    	<input id="input_tipo" maxlength="50" class="box <?php if(isset($errores["tipo"])) echo ' error'?>" name="tipo"/>
                       	<span id="errorTipo" class="error" ><?php if(isset($errores["tipo"])) echo $errores["tipo"]?></span>
                     </div>
         

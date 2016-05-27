@@ -263,6 +263,11 @@ span.error{
     width:320px;
 }
 
+#errorMatriculaAsignaturas{
+    width:auto;
+	
+}
+
 span.error2{
     margin-bottom: 1em;
 }
@@ -414,19 +419,18 @@ div.consultas{
 
 
 	/* Color de las filas pares */
-.evenrow:not(.detallesRow){
+.evenrow{
 	background-color: #008CBA;
 }
 	
 	/* Color de las filas impares */
-.oddrow:not(.detallesRow){
+.oddrow{
 	background-color: #3DACEA;
 }
 
-.evenrow:hover, .oddrow:hover{
+body.vistaUsuarios .evenrow:hover, body.vistaUsuarios .oddrow:hover{
 	 /*font-style: italic;*/
 	 cursor: pointer; 
-	 background-color: #33FFFF;
 }
 
 	/* Cabecera de la tabla */
