@@ -11,8 +11,13 @@ if (isset($_SESSION["registroMatricula"]) ){
 	$matricula["mes"] = $_REQUEST["mes"];
 	$matricula["anio"] = $_REQUEST["anio"];
     $matricula["codigo"] = $_REQUEST["codigo"];
-    $matricula["usuario"] = $_REQUEST["usuario"];
-    $matricula["asignaturas"] = $_POST['check_list'];
+    $string = $_REQUEST["usuario"];
+    $matricula["usuario"] = explode(" ", $string)[0];
+    $checked = $_POST['check_list'];
+    $matricula["asignaturas"] = array();
+    foreach ($checked as $asignatura) {
+    	array_push($matricula["asignaturas"],explode("/", $asignatura)[0]);	
+    }
 	}
 else {Header("Location: ../registros/registraMatricula.php");}
 
@@ -46,10 +51,9 @@ function validar($matricula) {
 	    $hoy =  new DateTime();
 	    $nacimiento = DateTime::createFromFormat("d/m/Y",$usuario['FECHA_NACIMIENTO']);
 	    $edad = $nacimiento->diff($hoy);
-	    echo $edad->format('%y');
-	    if ((intval($edad->format('%y')) <+ 6) and (!in_array(13, $matricula['asignaturas']))){
-    	$errores['asignaturas'] = "Debe estar matriculado en Expresion Corporal y Danza, si es menor de 6 años";
-	    }else if (!(intval($edad->format('%y')) <+ 6) and (!in_array(12, $matricula['asignaturas']))){
+	    if ((intval($edad->format('%y')) <+ 6) and (!in_array("Expresion Corporal y Danza", $matricula['asignaturas']))){
+    		$errores['asignaturas'] = "Debe estar matriculado en Expresion Corporal y Danza, si es menor de 6 años";
+	    }else if (!(intval($edad->format('%y')) <+ 6) and (!in_array("Lenguaje Musical", $matricula['asignaturas']))){
 			$errores['asignaturas'] = "Debe estar matriculado en la asignatura Lenguaje musical si es mayor de 6 años";
 		}
 	    	
@@ -59,7 +63,7 @@ function validar($matricula) {
 	}
     
 
-	if ($matricula['curso'] >= 3 and (!in_array(11, $matricula['asignaturas']))){
+	if ($matricula['curso'] >= 3 and (!in_array("Piano y guitarra", $matricula['asignaturas']))){
 		$errores['asignaturas'] = "Debe estar matriculado en una asignatura de tercero";
 	}
 	if (empty($_POST['check_list'])){
