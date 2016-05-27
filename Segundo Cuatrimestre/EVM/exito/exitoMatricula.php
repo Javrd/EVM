@@ -10,10 +10,12 @@
 		$curso = $matricula["curso"];
         $codigo = $matricula['codigo'];
 		$fecha = DateTime::createFromFormat("d/m/Y", ($matricula["dia"]."/".$matricula["mes"]."/".$matricula["anio"]));
-        $oid_u = $matricula['usuario'];
+        $string = $matricula['usuario'];
+        $oid_u = explode(" ", $string)[0];
         $oid_m = guardaMatricula($conexion,$fecha,$curso,$codigo,$oid_u);
         foreach ($matricula['asignaturas'] as $asignatura) {
-             guardaPerteneceA($conexion, $oid_m, $asignatura);
+            $asignatura = explode("/", $asignatura)[1];
+            guardaPerteneceA($conexion, $oid_m, $asignatura);
         }
         Header("Location: ../vistas/matriculas.php");
     } else {

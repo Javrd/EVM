@@ -14,6 +14,7 @@ session_start();
     		$registroMatricula["curso"] = "-1";
             $registroMatricula["usuario"] = "-1";
 			$registroMatricula['codigo'] = "";
+            $registroMatricula["asignaturas"] = [];
     		$_SESSION["registroMatricula"] = $registroMatricula;
     	} else {
     		$registroMatricula = $_SESSION['registroMatricula'];
@@ -47,7 +48,7 @@ session_start();
 
 		<meta name="viewport" content="width=device-width; initial-scale=1.0">
         <script src="../js/evm.js"></script>
-        <script src="../js/faltasJS.js"></script>
+        <script src="../js/matriculas.js"></script>
         <script src="../js/jquery-1.12.3.min.js"></script>
         <link rel="shortcut icon" href="../img/favicon.png">
         <link rel="apple-touch-icon" href="../img/favicon.png">
@@ -62,7 +63,7 @@ session_start();
     		
     		<div id="content">
     		   <div id="formulario">
-    	       <form  action="../tratamientos/tratamientoMatriculas.php" method="post">
+    	       <form action="../tratamientos/tratamientoMatriculas.php" method="post" onsubmit="return validarMatriculas()">
 
                               
 
@@ -139,7 +140,7 @@ session_start();
                     <div id="div_codigo" class="lineaFormulario">   
                         <label id="label codigo" for="input_codigo">Codigo:</label>
                         <input id="input_codigo" maxlength="5" class="box <?php if(isset($errores["codigo"])) echo "error"?>" name="codigo" value="<?php echo $registroMatricula['codigo'] ?>" type="text"/>
-                        <span id="errorMatriculaUsuario" class="error"><?php if(isset($errores["codigo"])) echo $errores["codigo"]?></span>
+                        <span id="errorCodigo" class="error"><?php if(isset($errores["codigo"])) echo $errores["codigo"]?></span>
                     </div>
 
                    	                    
@@ -150,10 +151,17 @@ session_start();
         	              	<?php
         	              	$usuarios = listaUsuarios($conexion);
         	              	foreach ($usuarios as $usuario) { 
-        						echo "<option value='".$usuario['OID_U']."' ";
+
+                                $edadUsuario = edadDeUsuario($conexion,$usuario['OID_U']);
+                                $hoy =  new DateTime();
+                                $nacimiento = DateTime::createFromFormat("d/m/Y",$edadUsuario['FECHA_NACIMIENTO']);
+                                $edad = $nacimiento->diff($hoy);
+                                $edadStr = $edad->format('%y');
+        						echo "<option value='".$usuario['OID_U']." ".$edadStr."' ";
         						if ($usuario['OID_U'] == $registroMatricula['usuario'] ) echo "selected='selected'";
         						echo ">";
         						echo $usuario['NOMBRE']." ".$usuario['APELLIDOS']."</option>";
+
         				  	}
         					?>
                       	</select>
@@ -165,7 +173,12 @@ session_start();
                         <?php
                         $asignaturas = consultaAsignaturas($conexion);
                         foreach ($asignaturas as $asignatura) {
-                           echo '<label for="'.$asignatura["NOMBRE"].'">'.$asignatura["NOMBRE"].'</label>'.'<input type="checkbox" id="'.$asignatura["NOMBRE"].'" name="check_list[]" value="'.$asignatura["OID_A"].'"> ';
+                            if ((!$registroMatricula['asignaturas']==null) and (in_array($asignatura['NOMBRE'],$registroMatricula['asignaturas']))){
+                                echo '<label for="'.$asignatura["NOMBRE"].'">'.$asignatura["NOMBRE"].'</label>'.'<input checked class="checkItems" type="checkbox" id="'.$asignatura["NOMBRE"].'" name="check_list[]" value="'.$asignatura["NOMBRE"]."/".$asignatura["OID_A"].'"> ';
+                            }else{
+                                echo '<label for="'.$asignatura["NOMBRE"].'">'.$asignatura["NOMBRE"].'</label>'.'<input class="checkItems" type="checkbox" id="'.$asignatura["NOMBRE"].'" name="check_list[]" value="'.$asignatura["NOMBRE"]."/".$asignatura["OID_A"].'"> ';
+                            }
+                           
                         }
 
                         ?>
